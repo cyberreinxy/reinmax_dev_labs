@@ -254,7 +254,7 @@ Please see the `LICENSE.md` file for more detailed information.
 Let's connect and build something incredible!
 
 - **Reinhard Baraka**
-- **Email**: `reinhardbaraka@gmail.com` | `dev@reinmaxcreative.com`
+- **Email**: `reinhardbaraka@gmail.com` | `mail@reinmaxcreative.com`
 - **WhatsApp**: <a href="https://wa.me/message/O3LM6XGRY6O5L1">Message on WhatsApp</a>
 - **Project Link**: https://github.com/cyberreinxy/reinmax-dev-labs
 
