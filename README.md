@@ -87,7 +87,7 @@ This project is more than just a static site. It incorporates several key engine
 
 ### Quality, Testing & Automation
 
-- **Automated CI Pipeline**: The project uses GitHub Actions (`.github/workflow/node.js.yml`) to enforce quality. On every push to `main`, the pipeline automatically runs linting checks and the full test suite across multiple Node.js versions (18.x and 20.x).
+- **Automated CI Pipeline**: The project uses GitHub Actions to enforce quality. On every push to `main`, the pipeline automatically runs linting checks and the full test suite. See the **GitHub Actions Guide** for a detailed explanation.
 - **Comprehensive Testing**: The backend is tested using **Jest** and **Supertest**. The test suite (`server.test.js`) covers API endpoint integration tests, including error handling and successful responses. The `fetch` call to the Gemini API is mocked to ensure tests are fast and reliable.
 - **Code Consistency**: **ESLint** (`.eslintrc.json`) is configured to maintain a consistent code style across the entire project, reducing errors and improving readability.
 
