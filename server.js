@@ -1,12 +1,8 @@
 // 1. Import required packages
 const express = require("express");
-const dotenv = require("dotenv");
 const compression = require("compression"); // Import compression
 const helmet = require("helmet"); // Import helmet
 const rateLimit = require("express-rate-limit"); // Import express-rate-limit
-
-// 2. Load environment variables from the .env file
-dotenv.config();
 
 const app = express();
 const port = 3000;
@@ -50,22 +46,21 @@ const apiLimiter = rateLimit({
 });
 app.use("/api/chat", apiLimiter); // Apply rate limiting to the /api/chat endpoint
 
-// 4. Securely load API keys from the .env file
-const GEMINI_API_KEYS = process.env.GEMINI_API_KEYS
-  ? process.env.GEMINI_API_KEYS.split(",")
-  : [];
-
-if (GEMINI_API_KEYS.length === 0) {
-  console.error(
-    "FATAL ERROR: GEMINI_API_KEYS not found in .env file. Please create a .env file and add your keys."
-  );
-  process.exit(1); // Stop the server if keys are missing
-}
-
 let currentApiKeyIndex = 0;
 
 // 5. Create the secure API endpoint
 app.post("/api/chat", async (req, res) => {
+  // Securely load API keys at runtime
+  const GEMINI_API_KEYS = process.env.GEMINI_API_KEYS
+    ? process.env.GEMINI_API_KEYS.split(",")
+    : [];
+  if (GEMINI_API_KEYS.length === 0) {
+    console.error("Server Error: GEMINI_API_KEYS are not configured.");
+    return res
+      .status(500)
+      .json({ error: "The AI service is not configured on the server." });
+  }
+
   // Get the chat history from the frontend request body
   const { contents, systemInstruction } = req.body;
 
