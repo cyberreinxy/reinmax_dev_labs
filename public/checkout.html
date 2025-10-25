@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Checkout for Reinmax Creative Academy courses." />
+    <meta name="author" content="Reinmax Creative" />
+    <!-- Favicon Links for various devices -->
+    <link rel="icon" href="/assets/ico/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/assets/ico/favicon.ico" type="image/x-icon" />
+    <title>Checkout | Reinmax Creative</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Local Tailwind CSS -->
+    <link href="/styles/tailwind.css" rel="stylesheet">
+
+    <!-- Embedded Custom Styles -->
+    <style>
+        body {
+            background-color: #f0f4f4;
+            font-family: "Bricolage Grotesque", "Sora", "Space Grotesk", sans-serif;
+        }
+
+        /* Form Styling */
+        .form-input:focus,
+        .form-select:focus {
+            border-color: #99cccc;
+            box-shadow: 0 0 0 3px rgba(153, 204, 204, 0.4);
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .form-input.invalid {
+            border-color: #ef4444;
+        }
+
+        .form-input.invalid:focus {
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.4);
+        }
+
+        .form-input-container:focus-within .input-icon {
+            color: #002828;
+        }
+
+        .form-error {
+            color: #ef4444;
+            font-size: 0.75rem;
+            margin-top: 0.25rem;
+            height: 1rem;
+            /* Reserve space to prevent layout shifts */
+        }
+
+        /* Payment Option Styling */
+        .payment-option {
+            border: 2px solid #d1d5db;
+            /* border-gray-300 */
+            padding: 1rem;
+            border-radius: 0.5rem;
+            /* rounded-lg */
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .payment-option:hover {
+            border-color: #a0aec0;
+            /* border-gray-400 */
+        }
+
+        .payment-option.selected {
+            border-color: #002828;
+            /* primary */
+            background-color: #f7fafa;
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+        }
+
+        /* Loading Spinner Animation */
+        .loader {
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid #fff;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* "Add Course" Dropdown Styling */
+        #add-course-list {
+            transition: opacity 0.2s, transform 0.2s, visibility 0s;
+        }
+
+        #add-course-list.hidden {
+            opacity: 0;
+            transform: scale(0.95) translateY(10px);
+            visibility: hidden;
+            transition: opacity 0.2s, transform 0.2s, visibility 0s 0.2s;
+        }
+
+        /* Modal & General Animations */
+        .modal-enter,
+        .fade-in {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+
+        .modal-leave,
+        .fade-out {
+            animation: fadeOut 0.3s ease-in forwards;
+        }
+
+        .modal-content-enter {
+            animation: scaleIn 0.3s ease-out forwards;
+        }
+
+        .modal-content-leave {
+            animation: scaleOut 0.3s ease-in forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes scaleOut {
+            from {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            to {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+        }
+    </style>
+</head>
+
+<body class="antialiased text-gray-800 font-bricolage">
+
+    <main id="app-root" class="container mx-auto px-4 sm:px-6 py-12 md:py-16">
+        <!-- JavaScript will render the page content here -->
+    </main>
+
+    <div id="modal-container">
+        <!-- JavaScript will render modals here -->
+    </div>
+
+    <!-- TEMPLATES for Dynamic Content -->
+
+    <template id="template-checkout-page">
+        <div class="max-w-6xl mx-auto fade-in">
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16 items-start">
+                <div id="summary-container" class="order-1 lg:order-2 lg:col-span-2"></div>
+                <div id="form-receipt-container" class="lg:col-span-3 order-2 lg:order-1"></div>
+            </div>
+        </div>
+    </template>
+
+    <template id="template-order-summary">
+        <div id="order-summary-content" class="bg-white p-8 rounded-2xl shadow-lg h-fit lg:sticky lg:top-8">
+            <h2 class="text-xl font-bold text-primary mb-4 border-b border-gray-200 pb-4">Order Summary</h2>
+            <div id="cart-items" class="divide-y divide-gray-200"></div>
+            <div id="discount-info" class="mt-4 p-3 bg-green-50 text-green-700 text-sm text-center rounded-lg hidden">
+                Add another course for an <strong>8% discount!</strong></div>
+            <div id="add-course-container" class="mt-4 pt-4 border-t border-gray-200"></div>
+            <div class="mt-6 pt-6 border-t border-gray-200 space-y-3">
+                <div class="flex justify-between items-center text-gray-600"><span>Subtotal</span><span
+                        data-summary="subtotal" class="font-mono"></span></div>
+                <div data-summary="discount-row" class="flex justify-between items-center text-green-600 hidden">
+                    <span>Volume Discount (8%)</span><span data-summary="discount-amount" class="font-mono"></span>
+                </div>
+                <div class="flex justify-between items-center font-bold text-2xl"><span
+                        class="text-primary">Total</span><span data-summary="total"
+                        class="text-primary font-mono"></span></div>
+            </div>
+            <div class="text-center mt-6"><a href="index.html#plans"
+                    class="text-sm font-medium text-gray-600 hover:text-primary transition-colors inline-flex items-center space-x-2"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m12 19-7-7 7-7" />
+                        <path d="M19 12H5" />
+                    </svg><span>Not ready? Go back</span></a></div>
+        </div>
+    </template>
+
+    <template id="template-cart-item">
+        <div class="flex items-center justify-between py-3">
+            <div class="flex items-center space-x-4">
+                <img data-cart-item="image" alt="" class="w-12 h-12 object-contain bg-gray-100 p-1 rounded-md">
+                <div>
+                    <h4 data-cart-item="name" class="font-semibold text-primary"></h4>
+                    <p data-cart-item="price" class="text-sm text-gray-500"></p>
+                </div>
+            </div>
+            <button title="Remove Course" class="remove-item-btn text-gray-400 hover:text-red-500 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="m15 9-6 6" />
+                    <path d="m9 9 6 6" />
+                </svg>
+            </button>
+        </div>
+    </template>
+
+    <template id="template-checkout-form">
+        <div class="bg-white p-8 rounded-2xl shadow-lg">
+            <h1 class="text-3xl font-bold text-primary mb-2">Complete Your Enrollment</h1>
+            <p class="text-gray-500 mb-8">Fill in your details below to get started.</p>
+            <form id="checkout-form" novalidate>
+                <div class="space-y-6">
+                    <div>
+                        <h2 class="text-lg font-semibold text-primary mb-4 border-b pb-2 flex items-center"><span
+                                class="bg-primary text-white rounded-full h-6 w-6 text-sm flex items-center justify-center mr-3">1</span>
+                            Your Details</h2>
+                        <div class="space-y-5 pl-9">
+                            <div><label for="fullName" class="block text-sm font-medium text-gray-700 mb-1">Full
+                                    Name</label>
+                                <div class="relative form-input-container">
+                                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="input-icon text-gray-400 transition-colors">
+                                            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                                            <circle cx="12" cy="7" r="4" />
+                                        </svg>
+                                    </div><input type="text" id="fullName" name="fullName" required
+                                        class="form-input block w-full pl-11 pr-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 sm:text-sm">
+                                </div>
+                                <p data-error-for="fullName" class="form-error"></p>
+                            </div>
+                            <div><label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email
+                                    Address</label>
+                                <div class="relative form-input-container">
+                                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="input-icon text-gray-400 transition-colors">
+                                            <rect width="20" height="16" x="2" y="4" rx="2" />
+                                            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                                        </svg>
+                                    </div><input type="email" id="email" name="email" required
+                                        class="form-input block w-full pl-11 pr-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 sm:text-sm">
+                                </div>
+                                <p data-error-for="email" class="form-error"></p>
+                            </div>
+                            <div><label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone
+                                    Number</label>
+                                <div class="relative form-input-container">
+                                    <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="input-icon text-gray-400 transition-colors">
+                                            <path
+                                                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                                        </svg>
+                                    </div><input type="tel" id="phone" name="phone" required
+                                        class="form-input block w-full pl-11 pr-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 sm:text-sm">
+                                </div>
+                                <p data-error-for="phone" class="form-error"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h2 class="text-lg font-semibold text-primary mb-4 border-b pb-2 flex items-center"><span
+                                class="bg-primary text-white rounded-full h-6 w-6 text-sm flex items-center justify-center mr-3">2</span>
+                            Payment</h2>
+                        <div class="pl-9">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="payment-option" data-payment="mobile">
+                                    <div class="flex items-center space-x-3"><svg xmlns="http://www.w3.org/2000/svg"
+                                            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                            class="w-6 h-6 text-primary">
+                                            <rect width="14" height="20" x="5" y="2" rx="2" ry="2" />
+                                            <path d="M12 18h.01" />
+                                        </svg><span class="font-medium">Mobile Money</span></div>
+                                    <div class="payment-check"></div>
+                                </div>
+                                <div class="payment-option" data-payment="bank">
+                                    <div class="flex items-center space-x-3"><svg xmlns="http://www.w3.org/2000/svg"
+                                            width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                            class="w-6 h-6 text-primary">
+                                            <rect width="20" height="14" x="2" y="5" rx="2" />
+                                            <line x1="2" x2="22" y1="10" y2="10" />
+                                        </svg><span class="font-medium">Bank Transfer</span></div>
+                                    <div class="payment-check"></div>
+                                </div>
+                            </div>
+                            <div id="transaction-id-container" class="mt-6 hidden">
+                                <div><label for="transactionId"
+                                        class="block text-sm font-medium text-gray-700 mb-1">Payment Transaction
+                                        ID</label>
+                                    <div class="relative form-input-container">
+                                        <div
+                                            class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round"
+                                                class="input-icon text-gray-400 transition-colors">
+                                                <path d="M15 12h-5" />
+                                                <path d="M15 8h-5" />
+                                                <path d="M19 17V5a2 2 0 0 0-2-2H4" />
+                                                <path
+                                                    d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3" />
+                                            </svg>
+                                        </div><input type="text" id="transactionId" name="transactionId"
+                                            class="form-input block w-full pl-11 pr-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 sm:text-sm"
+                                            placeholder="e.g. 9TP3820PL1A">
+                                    </div>
+                                    <p data-error-for="transactionId" class="form-error"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-8 pt-6 border-t border-gray-200">
+                    <div id="h-captcha-container" class="h-captcha" data-sitekey="f4784f50-0b2c-4c52-ac6a-a61a4fd457fa">
+                    </div>
+                    <p data-error-for="captcha" class="form-error"></p>
+                </div>
+                <div class="mt-6">
+                    <p class="text-xs text-center text-gray-500 mb-4">By clicking 'Complete Enrollment', you agree to
+                        our <a href="#" class="text-tertiary hover:underline font-medium">Terms & Conditions</a>.</p>
+                    <button type="submit" id="submit-button"
+                        class="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-lg font-bold text-white bg-primary hover:bg-tertiary transition-all duration-300"><span>Complete
+                            Enrollment</span></button>
+                </div>
+                <p id="form-message" class="text-center text-sm mt-4 h-5"></p>
+            </form>
+        </div>
+    </template>
+
+    <template id="template-receipt">
+        <div id="receipt-wrapper" class="fade-in">
+            <div id="receipt-content" class="bg-white p-8 rounded-2xl border border-gray-200 shadow-lg">
+                <header
+                    class="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-6 border-b border-gray-200">
+                    <div><svg class="h-16 w-16 mb-4 sm:mb-0" viewBox="0 0 625.75 625.75"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill="#002828"
+                                d="M625.75 0H0v625.75h625.75V0ZM543.41 312.87h-230.54l230.54 230.54H82.33V82.33h461.08v230.54Z" />
+                        </svg></div>
+                    <div class="text-left sm:text-right">
+                        <h1 class="text-3xl font-bold text-primary">Enrollment Receipt</h1>
+                        <p class="text-gray-500 font-mono text-sm mt-1" data-receipt="enrollmentId"></p>
+                    </div>
+                </header>
+                <section class="grid grid-cols-1 sm:grid-cols-2 gap-8 my-8">
+                    <div>
+                        <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Billed To</h2>
+                        <p class="font-bold text-lg mt-1 text-gray-800" data-receipt="fullName"></p>
+                        <p class="text-gray-600" data-receipt="email"></p>
+                    </div>
+                    <div class="text-left sm:text-right">
+                        <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Payment Details</h2>
+                        <div class="mt-1" data-receipt="paymentStatus"></div>
+                        <div data-receipt="transactionIdWrapper"></div>
+                    </div>
+                </section>
+                <section>
+                    <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2">Order Summary</h2>
+                    <ul role="list" class="divide-y divide-gray-200 border-t border-b" data-receipt="itemsList"></ul>
+                </section>
+                <section class="mt-6 flex flex-col sm:flex-row justify-between items-start gap-6">
+                    <div id="qrcode-container" class="bg-white p-2 border rounded-lg"></div>
+                    <div class="w-full sm:w-auto text-right space-y-3 flex-grow">
+                        <div class="flex justify-between items-center text-gray-600"><span>Subtotal</span><span
+                                class="font-mono" data-receipt="subtotal"></span></div>
+                        <div class="flex justify-between items-center text-gray-600"><span>Discount</span><span
+                                class="font-mono" data-receipt="discount"></span></div>
+                        <div class="flex justify-between items-center font-bold text-2xl border-t pt-3 mt-2"><span
+                                class="text-primary">Total Paid</span><span class="font-mono text-primary"
+                                data-receipt="total"></span></div>
+                    </div>
+                </section>
+                <footer class="text-center mt-10 pt-6 border-t border-dashed">
+                    <p class="text-lg font-semibold text-primary">Thank You for Enrolling!</p>
+                    <p class="text-sm text-gray-500 mt-1">For support, contact us at support@reinmax.com</p>
+                </footer>
+            </div>
+            <div class="mt-8 text-center">
+                <button id="download-pdf-btn"
+                    class="w-full sm:w-auto inline-flex justify-center items-center py-3 px-6 border border-transparent rounded-lg shadow-sm text-md font-bold text-white bg-primary hover:bg-tertiary transition-colors"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="mr-2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="7 10 12 15 17 10" />
+                        <line x1="12" x2="12" y1="15" y2="3" />
+                    </svg><span>Download as PDF</span></button>
+            </div>
+        </div>
+    </template>
+
+    <template id="template-payment-modal">
+        <div class="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <div id="modal-backdrop" class="fixed inset-0 bg-black/50 backdrop-blur-sm"></div>
+            <div id="modal-content" class="relative bg-white w-full max-w-md p-8 rounded-2xl shadow-xl">
+                <h2 class="text-2xl font-bold text-primary mb-4" data-modal="title"></h2>
+                <div data-modal="details"></div>
+                <div class="mt-8 pt-6 border-t border-gray-200">
+                    <p class="text-center font-medium mb-4">After sending, confirm your payment status.</p>
+                    <div class="flex space-x-4">
+                        <button data-modal-action="paid"
+                            class="w-full py-2 px-4 rounded-lg bg-green-600 text-white font-semibold hover:bg-green-700 transition-colors">I
+                            Have Paid</button>
+                        <button data-modal-action="not-paid"
+                            class="w-full py-2 px-4 rounded-lg bg-gray-200 text-gray-800 font-semibold hover:bg-gray-300 transition-colors">I
+                            Will Pay Later</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="template-empty-cart">
+        <div class="text-center max-w-lg mx-auto bg-white p-12 rounded-2xl shadow-lg mt-16 fade-in">
+            <h1 class="text-3xl font-bold text-primary mb-4">Your Cart is Empty</h1>
+            <p class="text-gray-600 mb-8">Please select a course to begin the enrollment process.</p>
+            <a href="index.html#plans"
+                class="inline-block bg-primary text-white font-bold py-3 px-6 rounded-lg hover:bg-tertiary transition-colors">View
+                Courses</a>
+        </div>
+    </template>
+
+    <!-- External Libraries -->
+    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+    <!-- Application Script -->
+    <script src="/scripts/checkout.js"></script>
+</body>
+
+</html>
