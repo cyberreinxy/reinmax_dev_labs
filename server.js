@@ -116,28 +116,15 @@ app.post("/api/chat", async (req, res) => {
   });
 });
 
-// 6. Start the server and store the instance
-const server = app.listen(port, () => {
-  console.log(`Reinmax Dev Labs is running at http://localhost:${port}`);
-  console.log(`Loaded ${GEMINI_API_KEYS.length} API key(s) securely.`);
-});
-
-// Graceful shutdown on Ctrl+C or other termination signals
-process.on("SIGINT", () => {
-  console.log("\nSIGINT received. Shutting down gracefully...");
-  server.close(() => {
-    console.log("Server closed successfully.");
-    process.exit(0);
+let server;
+// Start the server only if not in a serverless environment (like Vercel)
+if (process.env.NODE_ENV !== "test" && !process.env.VERCEL) {
+  const port = process.env.PORT || 3000;
+  server = app.listen(port, () => {
+    console.log(`Reinmax Dev Labs is running at http://localhost:${port}`);
   });
-});
+}
 
-process.on("SIGTERM", () => {
-  console.log("\nSIGTERM received. Shutting down gracefully...");
-  server.close(() => {
-    console.log("Server closed successfully.");
-    process.exit(0);
-  });
-});
-
-// Export for testing purposes
-module.exports = { app, server };
+// For Vercel, export the app as the default.
+// For local development and testing, export both app and server.
+module.exports = process.env.VERCEL ? app : { app, server };

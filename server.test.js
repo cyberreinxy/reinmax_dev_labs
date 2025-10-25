@@ -1,8 +1,13 @@
 const request = require("supertest");
-const { app, server } = require("./server"); // Assuming you export app and server
+const { app } = require("./server"); // Import only the app
+
+let server;
 
 describe("Server Endpoints", () => {
-  // Close the server after all tests are done to prevent hanging
+  // Start the server before all tests and close it after
+  beforeAll((done) => {
+    server = app.listen(0, done); // Listen on a random available port
+  });
   afterAll((done) => {
     server.close(done);
   });
