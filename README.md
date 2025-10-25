@@ -17,26 +17,9 @@
 
   <!-- Badges -->
   <p>
-    <!-- CI/CD & Quality -->
-    <a href="https://github.com/cyberreinxy/reinmax_dev_labs/actions/workflows/node.js.yml">
-      <img alt="Node.js CI" src="https://img.shields.io/github/actions/workflow/status/cyberreinxy/reinmax_dev_labs/node.js.yml?branch=main&style=for-the-badge&logo=githubactions&logoColor=white&color=003333">
-    </a>
-    <a href="https://conventionalcommits.org">
-      <img alt="Conventional Commits" src="https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg?style=for-the-badge&logo=conventionalcommits&logoColor=white&color=003333">
-    </a>
-    <a href="https://github.com/cyberreinxy/reinmax_dev_labs/blob/main/LICENSE.md">
-      <img alt="License" src="https://img.shields.io/github/license/cyberreinxy/reinmax_dev_labs?style=for-the-badge&color=003333">
-    </a>
-    <br>
-    <!-- Repo Info -->
-    <a href="https://github.com/cyberreinxy/reinmax_dev_labs/stargazers">
-      <img alt="Stars" src="https://img.shields.io/github/stars/cyberreinxy/reinmax_dev_labs?style=for-the-badge&logo=github&color=003333&logoColor=white">
-    </a>
-     <a href="https://github.com/cyberreinxy/reinmax_dev_labs/network/members">
-      <img alt="Forks" src="https://img.shields.io/github/forks/cyberreinxy/reinmax_dev_labs?style=for-the-badge&logo=github&color=003333&logoColor=white">
-    </a>
-    <a href="https://github.com/cyberreinxy/reinmax_dev_labs/issues">
-      <img alt="Issues" src="https://img.shields.io/github/issues/cyberreinxy/reinmax_dev_labs?style=for-the-badge&logo=github&color=003333&logoColor=white">
+    <!-- Repo Activity -->
+    <a href="https://github.com/cyberreinxy/reinmax_dev_labs/graphs/commit-activity">
+      <img alt="Last Commit" src="https://img.shields.io/github/last-commit/cyberreinxy/reinmax_dev_labs?style=for-the-badge&logo=github&color=003333&logoColor=white">
     </a>
   </p>
 </div>
