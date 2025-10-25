@@ -116,15 +116,4 @@ app.post("/api/chat", async (req, res) => {
   });
 });
 
-let server;
-// Start the server only if not in a serverless environment (like Vercel)
-if (process.env.NODE_ENV !== "test" && !process.env.VERCEL) {
-  const port = process.env.PORT || 3000;
-  server = app.listen(port, () => {
-    console.log(`Reinmax Dev Labs is running at http://localhost:${port}`);
-  });
-}
-
-// For Vercel, export the app as the default.
-// For local development and testing, export both app and server.
-module.exports = process.env.VERCEL ? app : { app, server };
+module.exports = app;

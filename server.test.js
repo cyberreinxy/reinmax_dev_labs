@@ -1,5 +1,5 @@
 const request = require("supertest");
-const { app } = require("./server"); // Import only the app
+const app = require("./server"); // Import only the app
 
 let server;
 

@@ -14,11 +14,11 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint .",
-    "start": "node server.js",
+    "start": "node -r dotenv/config server.js",
     "build:css": "tailwindcss -i ./public/styles/input.css -o ./public/styles/tailwind.css --minify",
     "watch:css": "tailwindcss -i ./public/styles/input.css -o ./public/styles/tailwind.css --watch",
     "build": "npm run build:css",
-    "dev": "concurrently \"npm:watch:css\" \"nodemon server.js\""
+    "dev": "concurrently \"npm:watch:css\" \"nodemon -r dotenv/config server.js\""
   },
   "keywords": [],
   "author": "Reinhard Baraka <reinhardbaraka@gmail.com>",
