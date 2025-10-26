@@ -130,6 +130,8 @@ Make sure you have Node.js and npm installed on your machine.
 
     > **Note:** This project follows the Conventional Commits specification for commit messages. Please adhere to this standard when contributing.
 
+    > **Important for Vercel Deployment:** The `.env` file is for local development only and should be listed in your `.gitignore`. For deployment, you must set the `GEMINI_API_KEYS` environment variable directly in your Vercel project settings.
+
     For more detailed contribution guidelines, please see `CONTRIBUTING.md`.
 
     ```env

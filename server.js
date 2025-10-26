@@ -111,4 +111,13 @@ app.post("/api/chat", async (req, res) => {
   });
 });
 
+// This block will only run when the script is executed directly (e.g., `node server.js`)
+// It will not run when the file is imported by another script (e.g., for testing or Vercel deployment)
+if (require.main === module) {
+  const PORT = process.env.PORT || 3000;
+  const server = app.listen(PORT, () => {
+    console.log(`[server] Server is running on http://localhost:${PORT}`);
+  });
+}
+
 module.exports = app;
