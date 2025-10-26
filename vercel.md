@@ -40,11 +40,21 @@ If you haven't already, create a file named `vercel.json` with the following con
   "version": 2,
   "builds": [
     {
+      "src": "public/**",
+      "use": "@vercel/static"
+    },
+    {
       "src": "server.js",
       "use": "@vercel/node"
     }
   ],
-  "routes": [{ "src": "/(.*)", "dest": "server.js" }]
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "server.js"
+    },
+    { "src": "/(.*)", "dest": "public/$1" }
+  ]
 }
 ```
 
