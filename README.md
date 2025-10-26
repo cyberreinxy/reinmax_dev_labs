@@ -17,10 +17,6 @@
 
   <!-- Badges -->
   <p>
-    <!-- License -->
-    <a href="LICENSE.md">
-      <img alt="License" src="https://img.shields.io/github/license/cyberreinxy/reinmax_dev_labs?style=for-the-badge&logo=github&color=003333&logoColor=white">
-    </a>
     <!-- Repo Activity -->
     <a href="https://github.com/cyberreinxy/reinmax_dev_labs/graphs/commit-activity">
       <img alt="Last Commit" src="https://img.shields.io/github/last-commit/cyberreinxy/reinmax_dev_labs?style=for-the-badge&logo=github&color=003333&logoColor=white">
