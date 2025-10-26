@@ -17,6 +17,10 @@
 
   <!-- Badges -->
   <p>
+    <!-- License -->
+    <a href="LICENSE.md">
+      <img alt="License" src="https://img.shields.io/github/license/cyberreinxy/reinmax_dev_labs?style=for-the-badge&logo=github&color=003333&logoColor=white">
+    </a>
     <!-- Repo Activity -->
     <a href="https://github.com/cyberreinxy/reinmax_dev_labs/graphs/commit-activity">
       <img alt="Last Commit" src="https://img.shields.io/github/last-commit/cyberreinxy/reinmax_dev_labs?style=for-the-badge&logo=github&color=003333&logoColor=white">
@@ -228,7 +232,7 @@ This project uses a dual-license model to encourage open-source collaboration wh
 
 - **Source Code**: The code in this repository is licensed under the **MIT License**. You are free to use, modify, and distribute the code as a template for your own projects. See the `LICENSE` file for full details.
 
-- **Brand Assets**: All brand assets, including logos, images, and other media found in the `public/assets/` directory, are **All Rights Reserved**. They are the exclusive property of Reinmax Creative and may not be used or reproduced without explicit written permission.
+- **Brand Assets**: All brand assets, including logos, images, and other media found in the `public/assets/` directory, are **All Rights Reserved**. They are the exclusive property of Reinmax Creative and are not covered by the MIT license. They may not be used or reproduced without explicit written permission.
 
 Please see the `LICENSE.md` file for more detailed information.
 

@@ -10,7 +10,7 @@ GitHub Actions is an automation tool that allows you to run custom workflows dir
 
 ## ⚙️ Our Workflow: "Node.js CI"
 
-The workflow is defined in the file `.github/workflow/node.js.yml`. Here’s a breakdown of what it does:
+The workflow is defined in the file `.github/workflows/node.js.yml`. Here’s a breakdown of what it does:
 
 - **Name**: The workflow is named "Node.js CI", which is what you'll see in the "Actions" tab on GitHub.
 - **Triggers (`on`)**: The workflow automatically runs on two events:

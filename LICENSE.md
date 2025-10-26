@@ -10,7 +10,7 @@ The assets, including but not limited to images, logos, and other media files lo
 
 MIT License
 
-Copyright (c) 2025 Reinmax Creative and Design Agency
+Copyright (c) 2024 Reinmax Creative and Design Agency
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
