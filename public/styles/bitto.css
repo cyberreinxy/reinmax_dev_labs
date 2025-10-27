@@ -314,6 +314,7 @@ body {
 }
 
 .bitto-chat-input-form {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -323,7 +324,7 @@ body {
   flex-grow: 1;
   border: 1px solid var(--border-color);
   border-radius: 99px;
-  padding: 0.65rem 1.125rem;
+  padding: 0.65rem 2.5rem 0.65rem 1.125rem;
   font-family: "Bricolage Grotesque", "Sora", sans-serif;
   transition: all 0.15s var(--smooth-ease);
   font-size: 0.9rem;
@@ -346,11 +347,11 @@ body {
 }
 
 #bitto-send-btn {
-  background: linear-gradient(135deg, #99cccc 0%, #002828 100%);
+  background-color: var(--primary-color);
   border: none;
   color: var(--color-white);
-  width: 38px;
-  height: 38px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   cursor: pointer;
   transition: all 0.15s var(--smooth-ease);
@@ -358,18 +359,19 @@ body {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  position: relative;
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
   padding: 0;
 }
 
 #bitto-send-btn:hover:not(:disabled) {
-  background: linear-gradient(135deg, #b3d9d9 0%, #003d3d 100%);
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(0, 40, 40, 0.25);
+  background-color: var(--tertiary-color);
 }
 
 #bitto-send-btn:active:not(:disabled) {
-  transform: scale(0.95);
+  transform: translateY(-50%);
 }
 
 #bitto-send-btn:disabled {
@@ -481,8 +483,8 @@ body {
 
 .bitto-tip-message {
   position: fixed;
-  bottom: calc(var(--edge-margin) + 70px);
-  right: var(--edge-margin);
+  bottom: var(--edge-margin);
+  right: calc(var(--edge-margin) + 72px);
   background: var(--secondary-color);
   color: var(--primary-color);
   padding: 0.875rem;
@@ -493,8 +495,9 @@ body {
   box-shadow: 0 10px 30px -8px rgba(0, 40, 40, 0.15);
   z-index: 100;
   opacity: 0;
-  transform: translateX(100px) scale(0.8);
-  transition: opacity 0.5s var(--pop-ease), transform 0.5s var(--pop-ease);
+  transform: scale(0.8);
+  transform-origin: right center;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
   line-height: 1.4;
   display: flex;
@@ -504,7 +507,7 @@ body {
 
 .bitto-tip-message.show {
   opacity: 1;
-  transform: translateX(0) scale(1);
+  transform: scale(1);
   pointer-events: auto;
 }
 

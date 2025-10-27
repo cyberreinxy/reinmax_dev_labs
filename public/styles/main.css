@@ -1044,8 +1044,6 @@ section[id] {
 /*                                           */
 /* ----------------------------------------- */
 
-#desktop-nav-container,
-#mobile-nav-container,
 .logomark-text,
 .nav-link,
 .cta-text,
@@ -1076,7 +1074,7 @@ section[id] {
   background-color: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgb(229 229 229);
+  border-bottom: 0.5px solid rgb(229 229 229);
 }
 
 /* Mobile navigation styles */

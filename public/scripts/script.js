@@ -4,43 +4,60 @@
  * @version 1.0
  */
 
-// Handles dynamic phrase animation in hero area
-document.addEventListener("DOMContentLoaded", function () {
-  const phrases = [
-    "is widely recognized",
-    "earns loyal customers",
-    "influences perception",
-    "defines key trends",
-  ];
+/*-------------------------------------------*/
+/*    1. GLOBAL UTILITIES & CONFIGURATION    */
+/*-------------------------------------------*/
 
-  const dynamicWordElement = document.getElementById("dynamic-word");
-  if (!dynamicWordElement) return;
-  let phraseIndex = 0;
-  const animationDuration = 1500;
-  const intervalDuration = 6000;
+/**
+ * Sets CSS variable --vh to real viewport height for mobile browser compatibility.
+ */
+function setViewportHeight() {
+  const vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty("--vh", `${vh}px`);
+}
 
-  function changePhrase() {
-    dynamicWordElement.classList.remove("slide-in-up-anim");
-    dynamicWordElement.classList.add("slide-out-down-anim");
-
-    setTimeout(() => {
-      phraseIndex = (phraseIndex + 1) % phrases.length;
-      dynamicWordElement.textContent = phrases[phraseIndex];
-      dynamicWordElement.classList.remove("slide-out-down-anim");
-      dynamicWordElement.classList.add("slide-in-up-anim");
-    }, animationDuration);
-  }
-
-  dynamicWordElement.textContent = phrases[phraseIndex];
-  dynamicWordElement.classList.add("slide-in-up-anim");
-
-  setInterval(changePhrase, intervalDuration);
+window.addEventListener("resize", setViewportHeight);
+setViewportHeight();
+window.addEventListener("orientationchange", () => {
+  setTimeout(setViewportHeight, 250);
 });
+
+/**
+ * Sets CSS variable for scrollbar width to prevent layout shifts.
+ */
+const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+document.documentElement.style.setProperty(
+  "--scrollbar-width",
+  `${scrollbarWidth}px`
+);
+
+/*------------------------------------*/
+/*    2. MAIN APPLICATION OBJECT      */
+/*------------------------------------*/
 
 // Main App object for all application logic
 const App = {
   isLoaded: false,
   popupHasBeenDismissed: false,
+
+  // Initializes all modules and features
+  init() {
+    try {
+      if (window.lucide && typeof lucide.createIcons === "function") {
+        lucide.createIcons();
+      }
+    } catch (err) {
+      console.warn("lucide.createIcons() failed in App.init:", err);
+    }
+    this.initWorkflowSection();
+    this.keepHeroImageInMemory();
+    this.initFooter();
+    this.initPillarGridObserver();
+    this.initWorkflowGridObserver();
+    this.initCoursePopup();
+    this.triggerCoursePopup();
+    this.initGenericAnimators();
+  },
 
   // Ensures hero image stays in memory
   keepHeroImageInMemory() {
@@ -60,25 +77,6 @@ const App = {
     heroImage.complete
       ? keepAlive()
       : heroImage.addEventListener("load", keepAlive);
-  },
-
-  // Initializes all modules and features
-  init() {
-    try {
-      if (window.lucide && typeof lucide.createIcons === "function") {
-        lucide.createIcons();
-      }
-    } catch (err) {
-      console.warn("lucide.createIcons() failed in App.init:", err);
-    }
-    this.initWorkflowSection();
-    this.keepHeroImageInMemory();
-    this.initFooter();
-    this.initPillarGridObserver();
-    this.initWorkflowGridObserver();
-    this.initCoursePopup();
-    this.triggerCoursePopup(); // MODIFICATION: Added this line to activate the popup trigger.
-    this.initGenericAnimators();
   },
 
   // Handles the interactive workflow section
@@ -176,129 +174,6 @@ const App = {
     });
   },
 
-  // Footer scripts (copyright year)
-  initFooter() {
-    this.updateCopyrightYear();
-  },
-
-  // Updates copyright year in footer
-  updateCopyrightYear() {
-    const yearElement = document.getElementById("copyright-year");
-    if (yearElement) yearElement.textContent = new Date().getFullYear();
-  },
-
-  // Triggers animations for pillar grid
-  initPillarGridObserver() {
-    const grid = document.querySelector(".pillar-grid");
-    if (!grid) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
-    observer.observe(grid);
-  },
-
-  // Triggers workflow grid animations
-  initWorkflowGridObserver() {
-    const wrapper = document.querySelector(".workflow-section-wrapper");
-    if (!wrapper) return;
-
-    const observer = new IntersectionObserver(
-      (entries, obs) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            obs.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
-    observer.observe(wrapper);
-  },
-
-  // Generic intersection observer for animation on scroll
-  initGenericAnimators() {
-    const elements = document.querySelectorAll(".animate-on-scroll");
-    if (!elements.length) return;
-
-    const observer = new IntersectionObserver(
-      (entries, obs) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            obs.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.15 }
-    );
-    elements.forEach((el) => observer.observe(el));
-  },
-
-  // Shows course popup based on scroll position (between hero and footer)
-  triggerCoursePopup() {
-    const popup = document.getElementById("ai-course-popup");
-    const hero = document.getElementById("home");
-    const footer = document.getElementById("footer");
-
-    if (!popup || !hero || !footer || this.popupHasBeenDismissed) return;
-
-    let popupTimer = null;
-    let isHeroVisible = true;
-    let isFooterVisible = false;
-
-    const checkAndManageTimer = () => {
-      if (
-        !popup.classList.contains("visible") &&
-        !this.popupHasBeenDismissed &&
-        !isHeroVisible &&
-        !isFooterVisible
-      ) {
-        if (!popupTimer) {
-          popupTimer = setTimeout(() => {
-            popup.togglePopupVisibility(true);
-          }, 5500);
-        }
-      } else {
-        if (popupTimer) {
-          clearTimeout(popupTimer);
-          popupTimer = null;
-        }
-        if (
-          popup.classList.contains("visible") &&
-          (isHeroVisible || isFooterVisible)
-        ) {
-          popup.togglePopupVisibility(false);
-        }
-      }
-    };
-
-    const zoneObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.target === hero)
-            isHeroVisible = entry.intersectionRatio > 0;
-          if (entry.target === footer)
-            isFooterVisible = entry.intersectionRatio > 0;
-        });
-        checkAndManageTimer();
-      },
-      { threshold: [0, 0.3] }
-    );
-
-    zoneObserver.observe(hero);
-    zoneObserver.observe(footer);
-  },
-
   // Handles all logic for the AI (Adobe Illustrator) course popup (form, validation, visibility)
   initCoursePopup() {
     const popup = document.getElementById("ai-course-popup");
@@ -377,81 +252,173 @@ const App = {
 
     elements.emailInput.addEventListener("focus", resetForm);
   },
+
+  // Shows course popup based on scroll position (between hero and footer)
+  triggerCoursePopup() {
+    const popup = document.getElementById("ai-course-popup");
+    const hero = document.getElementById("home");
+    const footer = document.getElementById("footer");
+
+    if (!popup || !hero || !footer || this.popupHasBeenDismissed) return;
+
+    let popupTimer = null;
+    let isHeroVisible = true;
+    let isFooterVisible = false;
+
+    const checkAndManageTimer = () => {
+      if (
+        !popup.classList.contains("visible") &&
+        !this.popupHasBeenDismissed &&
+        !isHeroVisible &&
+        !isFooterVisible
+      ) {
+        if (!popupTimer) {
+          popupTimer = setTimeout(() => {
+            popup.togglePopupVisibility(true);
+          }, 5500);
+        }
+      } else {
+        if (popupTimer) {
+          clearTimeout(popupTimer);
+          popupTimer = null;
+        }
+        if (
+          popup.classList.contains("visible") &&
+          (isHeroVisible || isFooterVisible)
+        ) {
+          popup.togglePopupVisibility(false);
+        }
+      }
+    };
+
+    const zoneObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.target === hero)
+            isHeroVisible = entry.intersectionRatio > 0;
+          if (entry.target === footer)
+            isFooterVisible = entry.intersectionRatio > 0;
+        });
+        checkAndManageTimer();
+      },
+      { threshold: [0, 0.3] }
+    );
+
+    zoneObserver.observe(hero);
+    zoneObserver.observe(footer);
+  },
+
+  // Footer scripts (copyright year)
+  initFooter() {
+    this.updateCopyrightYear();
+  },
+
+  // Updates copyright year in footer
+  updateCopyrightYear() {
+    const yearElement = document.getElementById("copyright-year");
+    if (yearElement) yearElement.textContent = new Date().getFullYear();
+  },
+
+  // Triggers animations for pillar grid
+  initPillarGridObserver() {
+    const grid = document.querySelector(".pillar-grid");
+    if (!grid) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+    observer.observe(grid);
+  },
+
+  // Triggers workflow grid animations
+  initWorkflowGridObserver() {
+    const wrapper = document.querySelector(".workflow-section-wrapper");
+    if (!wrapper) return;
+
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+    observer.observe(wrapper);
+  },
+
+  // Generic intersection observer for animation on scroll
+  initGenericAnimators() {
+    const elements = document.querySelectorAll(".animate-on-scroll");
+    if (!elements.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    elements.forEach((el) => observer.observe(el));
+  },
 };
 
-// Application entry point
-document.addEventListener("DOMContentLoaded", () => App.init());
+/*--------------------------------------------------*/
+/*    3. STANDALONE UI MODULES & EVENT LISTENERS    */
+/*--------------------------------------------------*/
 
-// Render lucide icons for any dynamic markup after init
-document.addEventListener("DOMContentLoaded", () => {
-  try {
-    if (window.lucide && typeof lucide.createIcons === "function") {
-      lucide.createIcons();
-    }
-  } catch (err) {}
+// Handles dynamic phrase animation in hero area
+document.addEventListener("DOMContentLoaded", function () {
+  const phrases = [
+    "is widely recognized",
+    "earns loyal customers",
+    "influences perception",
+    "defines key trends",
+  ];
+
+  const dynamicWordElement = document.getElementById("dynamic-word");
+  if (!dynamicWordElement) return;
+  let phraseIndex = 0;
+  const animationDuration = 1500;
+  const intervalDuration = 6000;
+
+  function changePhrase() {
+    dynamicWordElement.classList.remove("slide-in-up-anim");
+    dynamicWordElement.classList.add("slide-out-down-anim");
+
+    setTimeout(() => {
+      phraseIndex = (phraseIndex + 1) % phrases.length;
+      dynamicWordElement.textContent = phrases[phraseIndex];
+      dynamicWordElement.classList.remove("slide-out-down-anim");
+      dynamicWordElement.classList.add("slide-in-up-anim");
+    }, animationDuration);
+  }
+
+  dynamicWordElement.textContent = phrases[phraseIndex];
+  dynamicWordElement.classList.add("slide-in-up-anim");
+
+  setInterval(changePhrase, intervalDuration);
 });
 
-/**
- * Sets CSS variable --vh to real viewport height for mobile browser compatibility.
- */
-function setViewportHeight() {
-  const vh = window.innerHeight * 0.01;
-  document.documentElement.style.setProperty("--vh", `${vh}px`);
-}
-
-window.addEventListener("resize", setViewportHeight);
-setViewportHeight();
-window.addEventListener("orientationchange", () => {
-  setTimeout(setViewportHeight, 250);
-});
-
-/**
- * Sets CSS variable for scrollbar width to prevent layout shifts.
- */
-const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-document.documentElement.style.setProperty(
-  "--scrollbar-width",
-  `${scrollbarWidth}px`
-);
-
+//================================================
+// Desktop and mobile navigation scroll effect
+//================================================
 /*-- --*/
 document.addEventListener("DOMContentLoaded", () => {
-  // --- Desktop Scroll Logic ---
-  const navContainer = document.getElementById("desktop-nav-container");
-  const mainNav = document.getElementById("main-nav");
-  const heroSection = document.getElementById("home");
-  let lastScrollY = window.scrollY;
-
-  if (navContainer && mainNav && heroSection) {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-
-      // Glassy background effect
-      if (scrollY > 50) {
-        mainNav.classList.add("bg-white/80", "backdrop-blur-sm", "shadow-lg");
-      } else {
-        mainNav.classList.remove(
-          "bg-white/80",
-          "backdrop-blur-sm",
-          "shadow-lg"
-        );
-      }
-
-      // Auto-hide effect
-      const heroBottom = heroSection.getBoundingClientRect().bottom;
-
-      if (scrollY > lastScrollY && heroBottom < 0) {
-        // Scrolling down & past hero
-        navContainer.classList.add("-translate-y-32");
-      } else {
-        // Scrolling up or in hero view
-        navContainer.classList.remove("-translate-y-32");
-      }
-
-      lastScrollY = scrollY <= 0 ? 0 : scrollY;
-    };
-    window.addEventListener("scroll", handleScroll);
-  }
 
   // --- Mobile Menu Logic ---
   const mobileMenuButton = document.getElementById("mobile-menu-button");
@@ -495,21 +462,32 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-//================================================
-// Desktop and mobile navigation scroll effect
-//================================================
-
 const desktopNavContainer = document.getElementById("desktop-nav-container");
 const mobileNavContainer = document.getElementById("mobile-nav-container");
+const heroSection = document.getElementById("home");
 const scrollThreshold = 10;
 
 window.addEventListener("scroll", () => {
-  if (window.scrollY > scrollThreshold) {
+  const heroBottom = heroSection.getBoundingClientRect().bottom;
+  if (window.scrollY > scrollThreshold || heroBottom < 0) {
     desktopNavContainer.classList.add("scrolled");
     mobileNavContainer.classList.add("scrolled");
   } else {
     desktopNavContainer.classList.remove("scrolled");
     mobileNavContainer.classList.remove("scrolled");
+  }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const heroSection = document.getElementById("home");
+  const desktopNavContainer = document.getElementById("desktop-nav-container");
+  const mobileNavContainer = document.getElementById("mobile-nav-container");
+  const scrollThreshold = 10;
+
+  const heroBottom = heroSection.getBoundingClientRect().bottom;
+  if (window.scrollY > scrollThreshold || heroBottom < 0) {
+    desktopNavContainer.classList.add("scrolled");
+    mobileNavContainer.classList.add("scrolled");
   }
 });
 
@@ -527,4 +505,44 @@ mobileLinks.forEach((link) => {
   link.addEventListener("click", () => {
     mobileMenu.classList.remove("open");
   });
+});
+
+//Directs to checkout page on plans buttons click
+document.addEventListener("DOMContentLoaded", () => {
+  const planButtons = document.querySelectorAll("[branding-plan]");
+  const courseButtons = document.querySelectorAll("[courses-plan]");
+
+  planButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const branding = button.getAttribute("branding-plan");
+      if (branding) {
+        window.location.href = `/checkout.html?branding=${branding}`;
+      }
+    });
+  });
+
+  courseButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const course = button.getAttribute("courses-plan");
+      if (course) {
+        window.location.href = `/checkout.html?course=${course}`;
+      }
+    });
+  });
+});
+
+/*-----------------------------------*/
+/*    4. APPLICATION ENTRY POINT     */
+/*-----------------------------------*/
+
+// Application entry point
+document.addEventListener("DOMContentLoaded", () => App.init());
+
+// Render lucide icons for any dynamic markup after init
+document.addEventListener("DOMContentLoaded", () => {
+  try {
+    if (window.lucide && typeof lucide.createIcons === "function") {
+      lucide.createIcons();
+    }
+  } catch (err) {}
 });
