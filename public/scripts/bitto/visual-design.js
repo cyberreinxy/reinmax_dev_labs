@@ -6,7 +6,7 @@ import { getAIResponseFromServer } from "./api-endpoint.js";
 const elements = {
   wrapper: document.getElementById("bitto-popup-wrapper"),
   fab: document.getElementById("bitto-chat-fab"),
-  backToTopBtn: document.getElementById("back-to-top-btn"), // New button element
+  backToTopBtn: document.getElementById("back-to-top-btn"), // Button to scroll to the top of the page
   closeBtn: document.getElementById("bitto-close-btn"),
   overlay: document.querySelector(".bitto-popup-overlay"),
   chat: {
@@ -78,15 +78,10 @@ async function getAIResponse() {
     tier = "Server-Side API (Primary)";
   } catch (error) {
     // Tier 2: Fallback to local model
-    console.warn(
-      "Server API failed, falling back to local model:",
-      error.message
-    );
+    console.error("Server API failed, falling back to local model:", error);
     aiResponse = getLocalResponse(lastUserMessage, state);
     tier = "Local Trained Model (Fallback)";
   }
-
-  console.log(`Response from: ${tier}`);
 
   setTimeout(() => {
     removeTypingIndicator();
@@ -258,9 +253,10 @@ function executeTool(toolName, toolData) {
 
 function sendBookingEmail(bookingData) {
   // This is a simulation. In a real app, this would be an API call.
-  console.log("Booking Email Sent:", {
+  console.log("--- Booking Email Simulation ---", {
+    to: bookingData.email,
     subject: `New Call Booking - ${bookingData.name}`,
-    body: `Name: ${bookingData.name}\nEmail: ${bookingData.email}\nDay: ${bookingData.day}\nTime: ${bookingData.time}`,
+    body: `Name: ${bookingData.name}\nDay: ${bookingData.day}\nTime: ${bookingData.time}`,
   });
 }
 
@@ -333,7 +329,6 @@ function finishLoading() {
 }
 
 function showCard() {
-  console.log("showCard called, hiding back-to-top");
   elements.wrapper.classList.add("is-card-visible");
   elements.wrapper.classList.remove("is-fab-visible");
   elements.backToTopBtn.classList.remove("show"); // Hide back-to-top button
@@ -357,7 +352,6 @@ function showCard() {
 }
 
 function showFab() {
-  console.log("showFab called, re-evaluating back-to-top");
   elements.wrapper.classList.remove("is-card-visible");
   elements.wrapper.classList.add("is-fab-visible");
   state.cardIsVisible = false;
@@ -365,7 +359,6 @@ function showFab() {
 }
 
 function handleScroll() {
-  console.log("handleScroll called, cardIsVisible:", state.cardIsVisible);
   // Do not show the back-to-top button if the chat card is visible.
   if (state.cardIsVisible) return;
 
@@ -385,7 +378,7 @@ function handleScroll() {
 // --- Event Listeners ---
 
 elements.fab.addEventListener("click", () => {
-  // Simplified: FAB only opens the chat card now
+  // Toggles the chat card visibility.
   if (state.cardIsVisible) {
     showFab();
   } else {
@@ -419,14 +412,66 @@ elements.chat.quickActions.addEventListener("click", (e) => {
 elements.chat.deleteBtn.addEventListener("click", clearChat);
 window.addEventListener("scroll", handleScroll, { passive: true });
 
+// --- Keyboard Handling ---
+
+function initKeyboardAdjust() {
+  const isTouchDevice = () => {
+    return "ontouchstart" in window || navigator.maxTouchPoints > 0;
+  };
+
+  if (!isTouchDevice()) {
+    return;
+  }
+
+  const bittoChatInput = document.getElementById("bitto-chat-input");
+  const bittoPopupCard = document.querySelector(".bitto-popup-card");
+
+  if (!bittoChatInput || !bittoPopupCard) {
+    return;
+  }
+
+  const handleFocus = () => {
+    // Add a class to the body to indicate keyboard is active
+    document.body.classList.add("bitto-keyboard-active");
+    // Scroll the chat input into view
+    setTimeout(() => {
+      bittoPopupCard.scrollIntoView({ behavior: "smooth", block: "end" });
+    }, 300);
+  };
+
+  const handleBlur = () => {
+    document.body.classList.remove("bitto-keyboard-active");
+  };
+
+  bittoChatInput.addEventListener("focus", handleFocus);
+  bittoChatInput.addEventListener("blur", handleBlur);
+
+  // More reliable keyboard detection using visualViewport
+  if (window.visualViewport) {
+    let initialViewportHeight = window.visualViewport.height;
+
+    window.visualViewport.addEventListener("resize", () => {
+      const newViewportHeight = window.visualViewport.height;
+      // If viewport height is significantly smaller, keyboard is likely open
+      if (newViewportHeight < initialViewportHeight * 0.9) {
+        document.body.classList.add("bitto-keyboard-active");
+      } else {
+        // Keyboard is likely closed
+        document.body.classList.remove("bitto-keyboard-active");
+      }
+    });
+  }
+}
+
 // --- Initialization ---
 
 showFab();
 handleScroll();
-console.log("🤖 Bitto Assistant Initialized");
-console.log("⚙️ Modular System Active: UI <> API Endpoint <> Knowledge Base");
+initKeyboardAdjust(); // Initialize keyboard handling
 
 // Bind the close button click event.
 tipMessage
   .querySelector(".bitto-tip-close-btn")
   .addEventListener("click", closeTip);
+
+console.log("Bitto Assistant Initialized");

@@ -5,8 +5,10 @@
  */
 
 /*-------------------------------------------*/
-/*    1. GLOBAL UTILITIES & CONFIGURATION    */
+/* 1. GLOBAL UTILITIES & CONFIGURATION     */
 /*-------------------------------------------*/
+
+console.log("Reinmax Creative script loading...");
 
 /**
  * Sets CSS variable --vh to real viewport height for mobile browser compatibility.
@@ -32,23 +34,30 @@ document.documentElement.style.setProperty(
 );
 
 /*------------------------------------*/
-/*    2. MAIN APPLICATION OBJECT      */
+/* 2. MAIN APPLICATION OBJECT       */
 /*------------------------------------*/
 
 // Main App object for all application logic
 const App = {
   isLoaded: false,
   popupHasBeenDismissed: false,
+  elements: {}, // Cached DOM elements
 
-  // Initializes all modules and features
+  /**
+   * Main initialization function.
+   * Runs all setup methods in order.
+   */
   init() {
-    try {
-      if (window.lucide && typeof lucide.createIcons === "function") {
-        lucide.createIcons();
-      }
-    } catch (err) {
-      console.warn("lucide.createIcons() failed in App.init:", err);
-    }
+    console.log("App.init() called.");
+
+    this.cacheElements();
+
+    // Run all initializers
+    this.initLucideIcons();
+    this.initHeroAnimation();
+    this.initMobileMenu();
+    this.initNavScroll();
+    this.initPlanButtons();
     this.initWorkflowSection();
     this.keepHeroImageInMemory();
     this.initFooter();
@@ -57,9 +66,191 @@ const App = {
     this.initCoursePopup();
     this.triggerCoursePopup();
     this.initGenericAnimators();
+
+    console.log("App.init() finished.");
   },
 
-  // Ensures hero image stays in memory
+  /**
+   * Caches frequently used DOM elements.
+   */
+  cacheElements() {
+    console.log("Caching elements.");
+    this.elements.desktopNavContainer = document.getElementById(
+      "desktop-nav-container"
+    );
+    this.elements.mobileNavContainer = document.getElementById(
+      "mobile-nav-container"
+    );
+    this.elements.heroSection = document.getElementById("home");
+  },
+
+  /**
+   * Renders Lucide icons.
+   */
+  initLucideIcons() {
+    try {
+      if (window.lucide && typeof lucide.createIcons === "function") {
+        lucide.createIcons();
+        console.log("lucide.createIcons() run successfully in App.init.");
+      }
+    } catch (err) {
+      console.warn("lucide.createIcons() failed in App.init:", err);
+    }
+  },
+
+  /**
+   * Handles dynamic phrase animation in hero area.
+   */
+  initHeroAnimation() {
+    console.log("Initializing dynamic phrase animation.");
+    const phrases = [
+      "is widely recognized",
+      "earns loyal customers",
+      "influences perception",
+      "defines key trends",
+    ];
+
+    const dynamicWordElement = document.getElementById("dynamic-word");
+    if (!dynamicWordElement) {
+      console.warn("Dynamic word element not found.");
+      return;
+    }
+    let phraseIndex = 0;
+    const animationDuration = 1500;
+    const intervalDuration = 6000;
+
+    function changePhrase() {
+      dynamicWordElement.classList.remove("slide-in-up-anim");
+      dynamicWordElement.classList.add("slide-out-down-anim");
+
+      setTimeout(() => {
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        dynamicWordElement.textContent = phrases[phraseIndex];
+        dynamicWordElement.classList.remove("slide-out-down-anim");
+        dynamicWordElement.classList.add("slide-in-up-anim");
+      }, animationDuration);
+    }
+
+    dynamicWordElement.textContent = phrases[phraseIndex];
+    dynamicWordElement.classList.add("slide-in-up-anim");
+
+    setInterval(changePhrase, intervalDuration);
+  },
+
+  /**
+   * Initializes mobile menu toggle and panel logic.
+   */
+  initMobileMenu() {
+    console.log("Initializing mobile menu logic.");
+    const mobileMenuButton = document.getElementById("mobile-menu-button");
+    const mobileMenuPanel = document.getElementById("mobile-menu-panel");
+    const hamburgerIcon = document.getElementById("hamburger-icon");
+    const closeIcon = document.getElementById("close-icon");
+
+    if (mobileMenuButton && mobileMenuPanel && hamburgerIcon && closeIcon) {
+      mobileMenuButton.addEventListener("click", () => {
+        const isExpanded =
+          mobileMenuButton.getAttribute("aria-expanded") === "true";
+        console.log(`Mobile menu button clicked. Was expanded: ${isExpanded}`);
+        mobileMenuButton.setAttribute("aria-expanded", !isExpanded);
+
+        hamburgerIcon.classList.toggle("hidden");
+        closeIcon.classList.toggle("hidden");
+
+        if (!isExpanded) {
+          mobileMenuPanel.classList.remove(
+            "opacity-0",
+            "scale-95",
+            "pointer-events-none"
+          );
+          mobileMenuPanel.classList.add(
+            "opacity-100",
+            "scale-100",
+            "pointer-events-auto"
+          );
+        } else {
+          mobileMenuPanel.classList.remove(
+            "opacity-100",
+            "scale-100",
+            "pointer-events-auto"
+          );
+          mobileMenuPanel.classList.add(
+            "opacity-0",
+            "scale-95",
+            "pointer-events-none"
+          );
+        }
+      });
+    } else {
+      console.warn("Mobile menu elements not found.");
+    }
+  },
+
+  /**
+   * Handles desktop and mobile navigation scroll effects.
+   */
+  initNavScroll() {
+    console.log("Initializing nav scroll effects.");
+    const { desktopNavContainer, mobileNavContainer, heroSection } =
+      this.elements;
+    const scrollThreshold = 10;
+
+    if (!desktopNavContainer || !mobileNavContainer || !heroSection) {
+      console.warn("Nav scroll elements not found.");
+      return;
+    }
+
+    const updateNavState = () => {
+      const heroBottom = heroSection.getBoundingClientRect().bottom;
+      if (window.scrollY > scrollThreshold || heroBottom < 0) {
+        desktopNavContainer.classList.add("scrolled");
+        mobileNavContainer.classList.add("scrolled");
+      } else {
+        desktopNavContainer.classList.remove("scrolled");
+        mobileNavContainer.classList.remove("scrolled");
+      }
+    };
+
+    // Set initial state on load
+    updateNavState();
+
+    // Update state on scroll
+    window.addEventListener("scroll", updateNavState);
+  },
+
+  /**
+   * Directs to checkout page on plan/course button clicks.
+   */
+  initPlanButtons() {
+    console.log("Initializing plan and course button click handlers.");
+    const planButtons = document.querySelectorAll("[branding-plan]");
+    const courseButtons = document.querySelectorAll("[courses-plan]");
+
+    planButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const branding = button.getAttribute("branding-plan");
+        console.log(`Branding plan button clicked: ${branding}`);
+        if (branding) {
+          window.location.href = `/checkout.html?branding=${branding}`;
+        }
+      });
+    });
+
+    courseButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const course = button.getAttribute("courses-plan");
+        console.log(`Course button clicked: ${course}`);
+        if (course) {
+          window.location.href = `/checkout.html?course=${course}`;
+        }
+      });
+    });
+  },
+
+  /**
+   * Ensures high-priority hero image stays in memory
+   * by drawing it to a 1x1 canvas.
+   */
   keepHeroImageInMemory() {
     const heroImage = document.querySelector('#home img[priority="high"]');
     if (!heroImage) return;
@@ -79,12 +270,17 @@ const App = {
       : heroImage.addEventListener("load", keepAlive);
   },
 
-  // Handles the interactive workflow section
+  /**
+   * Handles the interactive workflow section UI.
+   */
   initWorkflowSection() {
+    console.log("Initializing workflow section.");
     const section = document.getElementById("workflow");
-    if (!section) return;
+    if (!section) {
+      console.warn("Workflow section not found.");
+      return;
+    }
 
-    // Get all interactive elements
     const allSteps = Array.from(section.querySelectorAll(".process-step"));
     const desktopImages = Array.from(
       section.querySelectorAll(".visual-preview-area .preview-image")
@@ -164,7 +360,7 @@ const App = {
     window.addEventListener("resize", () => {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => {
-        updateUI(); // This will re-evaluate everything on resize end
+        updateUI(); // Re-evaluate UI on resize end
       }, 100);
     });
 
@@ -174,10 +370,17 @@ const App = {
     });
   },
 
-  // Handles all logic for the AI (Adobe Illustrator) course popup (form, validation, visibility)
+  /**
+   * Handles all logic for the AI course popup
+   * (form, validation, visibility).
+   */
   initCoursePopup() {
+    console.log("Initializing course popup.");
     const popup = document.getElementById("ai-course-popup");
-    if (!popup) return;
+    if (!popup) {
+      console.warn("Course popup not found.");
+      return;
+    }
 
     const elements = {
       closeBtn: document.getElementById("ai-course-popup-close-btn"),
@@ -253,13 +456,24 @@ const App = {
     elements.emailInput.addEventListener("focus", resetForm);
   },
 
-  // Shows course popup based on scroll position (between hero and footer)
+  /**
+   * Shows course popup based on scroll position (between hero and footer).
+   */
   triggerCoursePopup() {
+    console.log("Initializing course popup trigger.");
     const popup = document.getElementById("ai-course-popup");
     const hero = document.getElementById("home");
     const footer = document.getElementById("footer");
 
-    if (!popup || !hero || !footer || this.popupHasBeenDismissed) return;
+    if (!popup || !hero || !footer) {
+      console.warn("Required elements for popup trigger not found.");
+      return;
+    }
+
+    if (this.popupHasBeenDismissed) {
+      console.log("Popup has been dismissed, not initializing trigger.");
+      return;
+    }
 
     let popupTimer = null;
     let isHeroVisible = true;
@@ -308,21 +522,32 @@ const App = {
     zoneObserver.observe(footer);
   },
 
-  // Footer scripts (copyright year)
+  /**
+   * Initializes footer logic.
+   */
   initFooter() {
+    console.log("Initializing footer.");
     this.updateCopyrightYear();
   },
 
-  // Updates copyright year in footer
+  /**
+   * Updates copyright year in footer.
+   */
   updateCopyrightYear() {
     const yearElement = document.getElementById("copyright-year");
     if (yearElement) yearElement.textContent = new Date().getFullYear();
   },
 
-  // Triggers animations for pillar grid
+  /**
+   * Triggers animations for pillar grid via IntersectionObserver.
+   */
   initPillarGridObserver() {
+    console.log("Initializing pillar grid observer.");
     const grid = document.querySelector(".pillar-grid");
-    if (!grid) return;
+    if (!grid) {
+      console.warn("Pillar grid not found for observer.");
+      return;
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -338,10 +563,16 @@ const App = {
     observer.observe(grid);
   },
 
-  // Triggers workflow grid animations
+  /**
+   * Triggers workflow grid animations via IntersectionObserver.
+   */
   initWorkflowGridObserver() {
+    console.log("Initializing workflow grid observer.");
     const wrapper = document.querySelector(".workflow-section-wrapper");
-    if (!wrapper) return;
+    if (!wrapper) {
+      console.warn("Workflow section wrapper not found for observer.");
+      return;
+    }
 
     const observer = new IntersectionObserver(
       (entries, obs) => {
@@ -357,10 +588,16 @@ const App = {
     observer.observe(wrapper);
   },
 
-  // Generic intersection observer for animation on scroll
+  /**
+   * Generic intersection observer for 'animate-on-scroll' elements.
+   */
   initGenericAnimators() {
+    console.log("Initializing generic animators.");
     const elements = document.querySelectorAll(".animate-on-scroll");
-    if (!elements.length) return;
+    if (!elements.length) {
+      console.log("No elements found for generic animators.");
+      return;
+    }
 
     const observer = new IntersectionObserver(
       (entries, obs) => {
@@ -377,172 +614,17 @@ const App = {
   },
 };
 
-/*--------------------------------------------------*/
-/*    3. STANDALONE UI MODULES & EVENT LISTENERS    */
-/*--------------------------------------------------*/
-
-// Handles dynamic phrase animation in hero area
-document.addEventListener("DOMContentLoaded", function () {
-  const phrases = [
-    "is widely recognized",
-    "earns loyal customers",
-    "influences perception",
-    "defines key trends",
-  ];
-
-  const dynamicWordElement = document.getElementById("dynamic-word");
-  if (!dynamicWordElement) return;
-  let phraseIndex = 0;
-  const animationDuration = 1500;
-  const intervalDuration = 6000;
-
-  function changePhrase() {
-    dynamicWordElement.classList.remove("slide-in-up-anim");
-    dynamicWordElement.classList.add("slide-out-down-anim");
-
-    setTimeout(() => {
-      phraseIndex = (phraseIndex + 1) % phrases.length;
-      dynamicWordElement.textContent = phrases[phraseIndex];
-      dynamicWordElement.classList.remove("slide-out-down-anim");
-      dynamicWordElement.classList.add("slide-in-up-anim");
-    }, animationDuration);
-  }
-
-  dynamicWordElement.textContent = phrases[phraseIndex];
-  dynamicWordElement.classList.add("slide-in-up-anim");
-
-  setInterval(changePhrase, intervalDuration);
-});
-
-//================================================
-// Desktop and mobile navigation scroll effect
-//================================================
-/*-- --*/
-document.addEventListener("DOMContentLoaded", () => {
-
-  // --- Mobile Menu Logic ---
-  const mobileMenuButton = document.getElementById("mobile-menu-button");
-  const mobileMenuPanel = document.getElementById("mobile-menu-panel");
-  const hamburgerIcon = document.getElementById("hamburger-icon");
-  const closeIcon = document.getElementById("close-icon");
-
-  if (mobileMenuButton) {
-    mobileMenuButton.addEventListener("click", () => {
-      const isExpanded =
-        mobileMenuButton.getAttribute("aria-expanded") === "true";
-      mobileMenuButton.setAttribute("aria-expanded", !isExpanded);
-
-      hamburgerIcon.classList.toggle("hidden");
-      closeIcon.classList.toggle("hidden");
-
-      if (!isExpanded) {
-        mobileMenuPanel.classList.remove(
-          "opacity-0",
-          "scale-95",
-          "pointer-events-none"
-        );
-        mobileMenuPanel.classList.add(
-          "opacity-100",
-          "scale-100",
-          "pointer-events-auto"
-        );
-      } else {
-        mobileMenuPanel.classList.remove(
-          "opacity-100",
-          "scale-100",
-          "pointer-events-auto"
-        );
-        mobileMenuPanel.classList.add(
-          "opacity-0",
-          "scale-95",
-          "pointer-events-none"
-        );
-      }
-    });
-  }
-});
-
-const desktopNavContainer = document.getElementById("desktop-nav-container");
-const mobileNavContainer = document.getElementById("mobile-nav-container");
-const heroSection = document.getElementById("home");
-const scrollThreshold = 10;
-
-window.addEventListener("scroll", () => {
-  const heroBottom = heroSection.getBoundingClientRect().bottom;
-  if (window.scrollY > scrollThreshold || heroBottom < 0) {
-    desktopNavContainer.classList.add("scrolled");
-    mobileNavContainer.classList.add("scrolled");
-  } else {
-    desktopNavContainer.classList.remove("scrolled");
-    mobileNavContainer.classList.remove("scrolled");
-  }
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  const heroSection = document.getElementById("home");
-  const desktopNavContainer = document.getElementById("desktop-nav-container");
-  const mobileNavContainer = document.getElementById("mobile-nav-container");
-  const scrollThreshold = 10;
-
-  const heroBottom = heroSection.getBoundingClientRect().bottom;
-  if (window.scrollY > scrollThreshold || heroBottom < 0) {
-    desktopNavContainer.classList.add("scrolled");
-    mobileNavContainer.classList.add("scrolled");
-  }
-});
-
-// Mobile menu toggle
-const menuToggle = document.getElementById("menu-toggle");
-const mobileMenu = document.getElementById("mobile-menu");
-
-menuToggle.addEventListener("click", () => {
-  mobileMenu.classList.toggle("open");
-});
-
-// Close mobile menu when clicking on a link
-const mobileLinks = document.querySelectorAll("#mobile-menu a");
-mobileLinks.forEach((link) => {
-  link.addEventListener("click", () => {
-    mobileMenu.classList.remove("open");
-  });
-});
-
-//Directs to checkout page on plans buttons click
-document.addEventListener("DOMContentLoaded", () => {
-  const planButtons = document.querySelectorAll("[branding-plan]");
-  const courseButtons = document.querySelectorAll("[courses-plan]");
-
-  planButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const branding = button.getAttribute("branding-plan");
-      if (branding) {
-        window.location.href = `/checkout.html?branding=${branding}`;
-      }
-    });
-  });
-
-  courseButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const course = button.getAttribute("courses-plan");
-      if (course) {
-        window.location.href = `/checkout.html?course=${course}`;
-      }
-    });
-  });
-});
-
 /*-----------------------------------*/
-/*    4. APPLICATION ENTRY POINT     */
+/* 3. APPLICATION ENTRY POINT      */
 /*-----------------------------------*/
 
-// Application entry point
-document.addEventListener("DOMContentLoaded", () => App.init());
-
-// Render lucide icons for any dynamic markup after init
+/**
+ * Single entry point for the application.
+ * Waits for the DOM to be ready, then initializes the App.
+ */
 document.addEventListener("DOMContentLoaded", () => {
-  try {
-    if (window.lucide && typeof lucide.createIcons === "function") {
-      lucide.createIcons();
-    }
-  } catch (err) {}
+  console.log("DOM fully loaded and parsed. Initializing App.");
+  App.init();
 });
+
+console.log("Reinmax Creative script finished loading.");

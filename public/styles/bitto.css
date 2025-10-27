@@ -673,3 +673,9 @@ body.bitto-chat-open {
     height: 48px;
   }
 }
+
+/* Hides the footer and the AI course popup when the Bitto keyboard is active */
+.bitto-keyboard-active #footer,
+.bitto-keyboard-active #ai-course-popup {
+  display: none;
+}
