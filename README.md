@@ -19,7 +19,7 @@
   <p>
     <!-- Live Site -->
     <a href="https://reinmax-dev-labs.vercel.app/" target="_blank" rel="noopener noreferrer">
-      <img alt="Live Site" src="https://img.shields.io/badge/Live%20Site-Coming%20Soon...-003333?style=for-the-badge&logo=vercel&logoColor=white">
+      <img alt="Live Site" src="https://img.shields.io/badge/vercel-visit%20site-003333?style=for-the-badge&logo=vercel&logoColor=white">
     </a>
     <!-- Repo Size -->
     <a href="https://github.com/cyberreinxy/reinmax_dev_labs">
