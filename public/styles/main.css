@@ -44,28 +44,30 @@
   }
 }
 
+/*-- Scrollbar --*/
 body {
   font-family: "Bricolage Grotesque", "Sora", "Space Grotesk", sans-serif;
   background-color: var(--background-color, #fff);
   color: var(--primary-color, #000);
   position: relative;
   overflow-y: scroll;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+  /* Use 'overlay' to prevent the scrollbar from taking up space */
+  scrollbar-gutter: stable overlay;
 }
 
-/*-- Scrollbar --*/
+/* Webkit (Chrome, Safari, Edge) scrollbar styling */
 body::-webkit-scrollbar {
   width: 6px;
   background: transparent;
 }
 
 body::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 40, 40, 0.35); /* A color that matches your theme */
   border-radius: 10px;
   transition: all 0.3s ease;
 }
 
+/* On hover, make the scrollbar slightly more prominent */
 body::-webkit-scrollbar-thumb:hover {
   width: 12px;
   background-color: rgba(0, 0, 0, 0.5);
@@ -73,7 +75,8 @@ body::-webkit-scrollbar-thumb:hover {
 
 @supports (scrollbar-color: auto) {
   body:hover {
-    scrollbar-color: rgba(0, 0, 0, 0.5) transparent;
+    /* Firefox scrollbar styling */
+    scrollbar-color: rgba(0, 40, 40, 0.5) transparent;
   }
 }
 
@@ -1044,6 +1047,8 @@ section[id] {
 /*                                           */
 /* ----------------------------------------- */
 
+#desktop-nav-container,
+#mobile-nav-container,
 .logomark-text,
 .nav-link,
 .cta-text,
@@ -1074,7 +1079,7 @@ section[id] {
   background-color: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border-bottom: 0.5px solid rgb(229 229 229);
+  border-bottom: 1px solid rgb(229 229 229);
 }
 
 /* Mobile navigation styles */

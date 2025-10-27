@@ -248,9 +248,13 @@
                     <path d="M14.5 9h.01"></path>
                     <path d="M9.5 13a3.5 3.5 0 0 0 5 0"></path>
                 </svg>
+            </button>
+
+            <!-- New, separate Back to Top button -->
+            <button class="back-to-top-btn" id="back-to-top-btn" aria-label="Back to Top">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="bitto-fab-icon bitto-fab-icon-top">
+                    class="bitto-fab-icon">
                     <path d="m18 15-6-6-6 6" />
                 </svg>
             </button>
@@ -398,8 +402,8 @@
                                     <div class="w-full h-full rounded-full p-1 gradient-ring">
                                         <img class="w-full h-full rounded-full object-cover border-2 border-white"
                                             loading="lazy" src="/assets/people/reinhard.jpg" decoding="async"
-                                            alt="Profile picture of Reinhard Baraka"
-                                            onerror="this.onerror=null;this.src='/assets/people/placeholder.jpg';" />
+                                            alt="Profile picture of Reinhard Baraka" data-fallback-src="/assets/people/placeholder.jpg" />
+
                                     </div>
                                 </div>
                             </div>
@@ -474,8 +478,8 @@
                                     <div class="w-full h-full rounded-full p-1 gradient-ring">
                                         <img class="w-full h-full rounded-full object-cover border-2 border-white"
                                             loading="lazy" src="/assets/people/henry.webp" decoding="async"
-                                            alt="Profile picture of Henry Binamungu"
-                                            onerror="this.onerror=null;this.src='/assets/people/placeholder.jpg';" />
+                                            alt="Profile picture of Henry Binamungu" data-fallback-src="/assets/people/placeholder.jpg" />
+
                                     </div>
                                 </div>
                             </div>
@@ -550,8 +554,8 @@
                                     <div class="w-full h-full rounded-full p-1 gradient-ring">
                                         <img class="w-full h-full rounded-full object-cover border-2 border-white"
                                             loading="lazy" src="/assets/people/klerry.jpg" decoding="async"
-                                            alt="Profile picture of Klerry Tumsiime"
-                                            onerror="this.onerror=null;this.src='/assets/people/placeholder.jpg';" />
+                                            alt="Profile picture of Klerry Tumsiime" data-fallback-src="/assets/people/placeholder.jpg" />
+
                                     </div>
                                 </div>
                             </div>
@@ -626,8 +630,8 @@
                                     <div class="w-full h-full rounded-full p-1 gradient-ring">
                                         <img class="w-full h-full rounded-full object-cover border-2 border-white"
                                             loading="lazy" src="/assets/people/maggie.webp" decoding="async"
-                                            alt="Profile picture of Maggie Shayo"
-                                            onerror="this.onerror=null;this.src='/assets/people/placeholder.jpg';" />
+                                            alt="Profile picture of Maggie Shayo" data-fallback-src="/assets/people/placeholder.jpg" />
+
                                     </div>
                                 </div>
                             </div>
@@ -1966,6 +1970,7 @@
     <!-- ============================================= -->
 
     <script src="/scripts/script.js"></script>
+    <script src="/scripts/image-fallback.js"></script>
     <script type="module" src="/scripts/bitto/visual-design.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 

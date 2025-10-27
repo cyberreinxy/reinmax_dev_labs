@@ -6,6 +6,7 @@ import { getAIResponseFromServer } from "./api-endpoint.js";
 const elements = {
   wrapper: document.getElementById("bitto-popup-wrapper"),
   fab: document.getElementById("bitto-chat-fab"),
+  backToTopBtn: document.getElementById("back-to-top-btn"), // New button element
   closeBtn: document.getElementById("bitto-close-btn"),
   overlay: document.querySelector(".bitto-popup-overlay"),
   chat: {
@@ -18,11 +19,44 @@ const elements = {
   },
 };
 
+// --- Dynamic Help Tip ---
+
+// Create the tip element; CSS handles all styling and animation.
+const tipMessage = document.createElement("div");
+tipMessage.className = "bitto-tip-message";
+
+// Define tip layout: [Content] [Separator] [Close Button]
+tipMessage.innerHTML = `<div class="bitto-tip-content"><strong>Need help?</strong><br>Let Bitto assist you!</div><div class="bitto-tip-separator"></div><button class="bitto-tip-close-btn" aria-label="Close tip"><svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button>`;
+
+// Inject the tip into the DOM.
+document.body.appendChild(tipMessage);
+
+// --- Tip State & Handlers ---
+
+let tipTimeout; // Timer for auto-hiding the tip.
+
+/**
+ * Hides tip and clears the auto-hide timer.
+ */
+function closeTip() {
+  tipMessage.classList.remove("show");
+  if (tipTimeout) clearTimeout(tipTimeout); // Ensure auto-hide doesn't fire after manual close.
+}
+
+// --- Tip Initialization ---
+
+// Show tip after a 1.5s delay.
+setTimeout(() => {
+  tipMessage.classList.add("show");
+
+  // Set timer to auto-dismiss after 10s.
+  tipTimeout = setTimeout(closeTip, 10000);
+}, 1500);
+
 let state = {
   cardIsVisible: false,
   fabIsVisible: false,
   chatHistory: [],
-  hasStartedConversation: false,
   isLoading: false,
   conversationContext: { askedAbout: [], userInterest: null },
   bookingState: {
@@ -112,8 +146,6 @@ function removeTypingIndicator() {
 }
 
 function startBittoConversation() {
-  if (state.hasStartedConversation) return;
-  state.hasStartedConversation = true;
   showTypingIndicator();
   setTimeout(() => {
     removeTypingIndicator();
@@ -127,7 +159,6 @@ function startBittoConversation() {
 function clearChat() {
   state.chatHistory = [];
   elements.chat.history.innerHTML = "";
-  state.hasStartedConversation = false;
   state.conversationContext = { askedAbout: [], userInterest: null };
   state.bookingState = {
     isActive: false,
@@ -302,41 +333,69 @@ function finishLoading() {
 }
 
 function showCard() {
+  console.log("showCard called, hiding back-to-top");
   elements.wrapper.classList.add("is-card-visible");
   elements.wrapper.classList.remove("is-fab-visible");
+  elements.backToTopBtn.classList.remove("show"); // Hide back-to-top button
+  closeTip(); // Hide the tip message as well
   state.cardIsVisible = true;
-  if (!state.hasStartedConversation) {
-    setTimeout(() => startBittoConversation(), 300);
+
+  // Clear current chat display and render messages from state.chatHistory
+  elements.chat.history.innerHTML = "";
+  state.chatHistory.forEach((msg) => {
+    addMessageToChat(msg.role === "user" ? "user" : "ai", msg.parts[0].text, {
+      transient: true,
+    });
+  });
+
+  // If chat history is still empty (e.g., first open or after clearChat), display the starter message
+  if (state.chatHistory.length === 0) {
+    setTimeout(() => startBittoConversation(), 300); // Add a slight delay for better UX
   }
+  // Ensure scroll is at the bottom
+  elements.chat.history.scrollTop = elements.chat.history.scrollHeight;
 }
 
 function showFab() {
+  console.log("showFab called, re-evaluating back-to-top");
   elements.wrapper.classList.remove("is-card-visible");
   elements.wrapper.classList.add("is-fab-visible");
   state.cardIsVisible = false;
+  handleScroll(); // Re-evaluate scroll position to show/hide back-to-top button
 }
 
 function handleScroll() {
+  console.log("handleScroll called, cardIsVisible:", state.cardIsVisible);
+  // Do not show the back-to-top button if the chat card is visible.
+  if (state.cardIsVisible) return;
+
   const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-  if (scrollTop > 10) {
-    elements.fab.classList.add("is-back-to-top");
+  if (scrollTop > 200) {
+    // Show button after scrolling 200px
+    elements.backToTopBtn.classList.add("show");
+    elements.fab.classList.add("is-shifted-up");
+    tipMessage.classList.add("is-shifted-up");
   } else {
-    elements.fab.classList.remove("is-back-to-top");
+    elements.backToTopBtn.classList.remove("show");
+    elements.fab.classList.remove("is-shifted-up");
+    tipMessage.classList.remove("is-shifted-up");
   }
 }
 
 // --- Event Listeners ---
 
 elements.fab.addEventListener("click", () => {
-  if (elements.fab.classList.contains("is-back-to-top")) {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+  // Simplified: FAB only opens the chat card now
+  if (state.cardIsVisible) {
+    showFab();
   } else {
-    if (state.cardIsVisible) {
-      showFab();
-    } else {
-      showCard();
-    }
+    showCard();
   }
+});
+
+// New listener for the separate back-to-top button
+elements.backToTopBtn.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
 elements.closeBtn.addEventListener("click", showFab);
@@ -364,57 +423,8 @@ window.addEventListener("scroll", handleScroll, { passive: true });
 
 showFab();
 handleScroll();
-console.log("🤖 Bitto AI Assistant Initialized");
-console.log("✓ Modular System Active: UI <> API Endpoint <> Knowledge Base");
-
-// --- Dynamic Help Tip ---
-
-// Create the tip element; CSS handles all styling and animation.
-const tipMessage = document.createElement("div");
-tipMessage.className = "bitto-tip-message";
-
-// Define tip layout: [Content] [Separator] [Close Button]
-tipMessage.innerHTML = `<div class="bitto-tip-content"><strong>Need help?</strong><br>Let Bitto assist you!</div><div class="bitto-tip-separator"></div><button class="bitto-tip-close-btn" aria-label="Close tip"><svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg></button>`;
-
-// Inject the tip into the DOM.
-document.body.appendChild(tipMessage);
-
-// --- Tip State & Handlers ---
-
-let tipTimeout; // Timer for auto-hiding the tip.
-let hasScrolled = false; // Scroll flag to prevent redundant handler calls.
-
-/**
- * Hides tip and clears the auto-hide timer.
- */
-function closeTip() {
-  tipMessage.classList.remove("show");
-  if (tipTimeout) clearTimeout(tipTimeout); // Ensure auto-hide doesn't fire after manual close.
-}
-
-/**
- * Closes the tip on the first scroll action for a non-intrusive UX.
- */
-function onScroll() {
-  if (!hasScrolled) {
-    hasScrolled = true;
-    closeTip();
-    window.removeEventListener("scroll", onScroll); // Self-remove listener for performance.
-  }
-}
-
-// --- Tip Initialization ---
-
-// Show tip after a 1.5s delay.
-setTimeout(() => {
-  tipMessage.classList.add("show");
-
-  // Set timer to auto-dismiss after 10s.
-  tipTimeout = setTimeout(closeTip, 10000);
-
-  // Close tip immediately on any scroll interaction.
-  window.addEventListener("scroll", onScroll);
-}, 1500);
+console.log("🤖 Bitto Assistant Initialized");
+console.log("⚙️ Modular System Active: UI <> API Endpoint <> Knowledge Base");
 
 // Bind the close button click event.
 tipMessage

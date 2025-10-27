@@ -33,7 +33,7 @@ body {
 .bitto-popup-wrapper {
   position: fixed;
   inset: 0;
-  z-index: 110;
+  z-index: 102;
   pointer-events: none;
 }
 
@@ -431,11 +431,16 @@ body {
   opacity: 0;
   transform: translateY(calc(100% + var(--edge-margin))) scale(1);
   transition: transform 0.4s var(--smooth-ease), opacity 0.3s var(--smooth-ease),
-    background-color 0.15s ease, box-shadow 0.15s ease;
+    background-color 0.15s ease, box-shadow 0.15s ease,
+    bottom 0.4s var(--smooth-ease);
   pointer-events: none;
   z-index: 101;
   color: var(--primary-color);
   padding: 0;
+}
+
+.bitto-popup-fab.is-shifted-up {
+  bottom: calc(var(--edge-margin) + 56px); /* 48px height + 8px margin */
 }
 
 .bitto-popup-wrapper.is-fab-visible .bitto-popup-fab {
@@ -455,6 +460,10 @@ body {
   transform: translateY(0) scale(0.95);
 }
 
+.bitto-popup-fab:hover .bitto-fab-icon {
+  color: var(--color-white);
+}
+
 .bitto-fab-icon {
   width: 24px;
   height: 24px;
@@ -463,22 +472,59 @@ body {
 }
 
 .bitto-fab-icon-chat {
-  opacity: 1;
   transition: opacity 0.2s ease;
 }
 
-.bitto-fab-icon-top {
+/* Remove styles for the old, combined back-to-top state */
+
+/* New styles for the separate Back to Top button */
+.back-to-top-btn {
+  position: fixed;
+  bottom: var(--edge-margin);
+  right: var(--edge-margin);
+  width: 48px;
+  height: 48px;
+  background-color: var(--secondary-color);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 25px -5px var(--shadow-color);
+  outline: none;
+  z-index: 101;
+  color: var(--primary-color);
+  padding: 0;
   opacity: 0;
-  transition: opacity 0.2s ease;
-  position: absolute;
+  transform: translateY(20px) scale(0.9);
+  pointer-events: none;
+  transition: opacity 0.3s var(--smooth-ease), transform 0.3s var(--smooth-ease);
 }
 
-.bitto-popup-fab.is-back-to-top .bitto-fab-icon-chat {
-  opacity: 0;
-}
-
-.bitto-popup-fab.is-back-to-top .bitto-fab-icon-top {
+.back-to-top-btn.show {
   opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.back-to-top-btn:hover {
+  background-color: var(--tertiary-color);
+  color: var(--color-white);
+}
+
+.back-to-top-btn:active {
+  transform: scale(0.95);
+}
+
+body.bitto-chat-open .back-to-top-btn {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px) scale(0.9);
+}
+
+body.bitto-chat-open {
+  overflow: hidden;
 }
 
 .bitto-tip-message {
@@ -493,11 +539,14 @@ body {
   font-weight: 500;
   max-width: 240px;
   box-shadow: 0 10px 30px -8px rgba(0, 40, 40, 0.15);
-  z-index: 100;
+  z-index: 101;
   opacity: 0;
-  transform: scale(0.8);
+  /* Start with a slight offset for the pop-in animation */
+  transform: translateX(20px) scale(0.8);
   transform-origin: right center;
-  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.3s ease-out,
+    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+    bottom 0.4s var(--smooth-ease);
   pointer-events: none;
   line-height: 1.4;
   display: flex;
@@ -505,10 +554,27 @@ body {
   gap: 0;
 }
 
+.bitto-tip-message.is-shifted-up {
+  /* When the FAB shifts up, the tip message should also shift up by the same amount. */
+  bottom: calc(var(--edge-margin) + 56px); /* 48px FAB height + 8px margin */
+}
+
+@keyframes tip-pop {
+  from {
+    opacity: 0;
+    transform: translateX(20px) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
 .bitto-tip-message.show {
   opacity: 1;
-  transform: scale(1);
+  transform: translateX(0) scale(1);
   pointer-events: auto;
+  animation: tip-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
 .bitto-tip-close-btn {
