@@ -17,6 +17,14 @@
 
   <!-- Badges -->
   <p>
+    <!-- Live Site -->
+    <a href="https://reinmax-dev-labs.vercel.app/" target="_blank" rel="noopener noreferrer">
+      <img alt="Live Site" src="https://img.shields.io/badge/Live%20Site-Coming%20Soon...-003333?style=for-the-badge&logo=vercel&logoColor=white">
+    </a>
+    <!-- Repo Size -->
+    <a href="https://github.com/cyberreinxy/reinmax_dev_labs">
+      <img alt="Repo Size" src="https://img.shields.io/github/repo-size/cyberreinxy/reinmax_dev_labs?style=for-the-badge&logo=github&color=003333&logoColor=white">
+    </a>
     <!-- Repo Activity -->
     <a href="https://github.com/cyberreinxy/reinmax_dev_labs/graphs/commit-activity">
       <img alt="Last Commit" src="https://img.shields.io/github/last-commit/cyberreinxy/reinmax_dev_labs?style=for-the-badge&logo=github&color=003333&logoColor=white">
