@@ -17,7 +17,7 @@ module.exports = {
         secondary: "#99cccc",
         tertiary: "#003333",
         background: "#f2f4f4",
-        soft: "#E0F2F2",
+        soft: "#DBEDED",
         danger: "#ef4444",
         dangerHover: "#dc2626",
       },
