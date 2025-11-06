@@ -1,279 +1,370 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sitemap | Reinmax Creative</title>
     <!-- Load Local Tailwind CSS -->
-    <link href="/styles/tailwind.css" rel="stylesheet">
+    <link href="/styles/tailwind.css" rel="stylesheet" />
     <!-- Load Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <!-- Load Sora Font (User preference) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        /* --- Light Mode (Default) --- */
-        :root {
-            --bg-color: #ffffff;
-            --text-color: #002828;
-            /* Main dark teal text */
-            --text-muted-color: rgb(79, 111, 111);
-            /* Slightly lighter dark text for contrast */
-            --secondary-color: #99cccc;
-            /* Light teal highlight */
-            --border-color: rgba(0, 0, 0, 0.1);
-            /* Light border */
-            --card-glass-bg: rgba(255, 255, 255, 0.7);
-            /* Frosted white glass base */
-            --card-glass-hover-bg: rgba(255, 255, 255, 0.9);
-            --shadow-color: rgba(0, 0, 0, 0.05);
-        }
+      /* --- Light Mode (Default) --- */
+      :root {
+        --bg-color: #ffffff;
+        --text-color: #002828;
+        /* Main dark teal text */
+        --text-muted-color: rgb(79, 111, 111);
+        /* Slightly lighter dark text for contrast */
+        --secondary-color: #99cccc;
+        /* Light teal highlight */
+        --border-color: rgba(0, 0, 0, 0.1);
+        /* Light border */
+        --card-glass-bg: rgba(255, 255, 255, 0.7);
+        /* Frosted white glass base */
+        --card-glass-hover-bg: rgba(255, 255, 255, 0.9);
+        --shadow-color: rgba(0, 0, 0, 0.05);
+      }
 
-        /* --- Dark Mode Overrides (Applied when <html> has class="dark") --- */
-        .dark {
-            --bg-color: #0d1117;
-            --text-color: #e5e5e5;
-            --text-muted-color: #94a3a3;
-            --secondary-color: #8ab4f8;
-            /* Google Blue-ish highlight */
-            --border-color: rgba(255, 255, 255, 0.1);
-            --card-glass-bg: rgba(30, 41, 59, 0.5);
-            /* Semi-transparent dark blue glass base */
-            --card-glass-hover-bg: rgba(30, 41, 59, 0.7);
-            --shadow-color: rgba(0, 0, 0, 0.4);
-        }
+      /* --- Dark Mode Overrides (Applied when <html> has class="dark") --- */
+      .dark {
+        --bg-color: #0d1117;
+        --text-color: #e5e5e5;
+        --text-muted-color: #94a3a3;
+        --secondary-color: #8ab4f8;
+        /* Google Blue-ish highlight */
+        --border-color: rgba(255, 255, 255, 0.1);
+        --card-glass-bg: rgba(30, 41, 59, 0.5);
+        /* Semi-transparent dark blue glass base */
+        --card-glass-hover-bg: rgba(30, 41, 59, 0.7);
+        --shadow-color: rgba(0, 0, 0, 0.4);
+      }
 
-        body {
-            font-family: 'Sora', sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            transition: background-color 0.3s ease;
-        }
+      body {
+        font-family: 'Sora', sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        transition: background-color 0.3s ease;
+      }
 
-        /* Glassmorphism applied to cards */
-        .sitemap-card {
-            background-color: var(--card-glass-bg);
-            border: 1px solid var(--border-color);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 0.75rem;
-            padding: 1.5rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px var(--shadow-color);
-        }
+      /* Glassmorphism applied to cards */
+      .sitemap-card {
+        background-color: var(--card-glass-bg);
+        border: 1px solid var(--border-color);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px var(--shadow-color);
+      }
 
-        .sitemap-card:hover {
-            background-color: var(--card-glass-hover-bg);
-            border-color: var(--secondary-color);
-        }
+      .sitemap-card:hover {
+        background-color: var(--card-glass-hover-bg);
+        border-color: var(--secondary-color);
+      }
 
-        .sitemap-link {
-            color: var(--text-muted-color);
-            transition: color 0.2s ease, background-color 0.2s ease;
-            display: flex;
-            align-items: center;
-            padding: 0.5rem 0.75rem;
-            border-radius: 0.375rem;
-        }
+      .sitemap-link {
+        color: var(--text-muted-color);
+        transition:
+          color 0.2s ease,
+          background-color 0.2s ease;
+        display: flex;
+        align-items: center;
+        padding: 0.5rem 0.75rem;
+        border-radius: 0.375rem;
+      }
 
-        .sitemap-link:hover {
-            color: var(--text-color);
-            background-color: color-mix(in srgb, var(--secondary-color) 15%, transparent);
-        }
+      .sitemap-link:hover {
+        color: var(--text-color);
+        background-color: color-mix(
+          in srgb,
+          var(--secondary-color) 15%,
+          transparent
+        );
+      }
 
-        .sitemap-heading {
-            color: var(--text-color);
-            border-bottom: 1px solid var(--border-color);
-        }
+      .sitemap-heading {
+        color: var(--text-color);
+        border-bottom: 1px solid var(--border-color);
+      }
 
-        .sitemap-link .lucide {
-            margin-right: 0.75rem;
-            width: 1rem;
-            height: 1rem;
-            flex-shrink: 0;
-            color: var(--text-color);
-            transition: color 0.2s ease;
-        }
+      .sitemap-link .lucide {
+        margin-right: 0.75rem;
+        width: 1rem;
+        height: 1rem;
+        flex-shrink: 0;
+        color: var(--text-color);
+        transition: color 0.2s ease;
+      }
 
-        .sitemap-link:hover .lucide {
-            color: var(--secondary-color);
-        }
+      .sitemap-link:hover .lucide {
+        color: var(--secondary-color);
+      }
 
-        /* Styling for the floating buttons (Glassmorphism) */
-        .floating-home-btn {
-            background-color: color-mix(in srgb, var(--bg-color) 80%, transparent);
-            /* Match frosted background */
-            border: 1px solid var(--border-color);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            box-shadow: 0 4px 8px var(--shadow-color);
-            transition: all 0.3s ease;
-        }
+      /* Styling for the floating buttons (Glassmorphism) */
+      .floating-home-btn {
+        background-color: color-mix(in srgb, var(--bg-color) 80%, transparent);
+        /* Match frosted background */
+        border: 1px solid var(--border-color);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        box-shadow: 0 4px 8px var(--shadow-color);
+        transition: all 0.3s ease;
+      }
 
-        .floating-home-btn:hover {
-            background-color: color-mix(in srgb, var(--secondary-color) 20%, transparent);
-            border-color: var(--secondary-color);
-        }
+      .floating-home-btn:hover {
+        background-color: color-mix(
+          in srgb,
+          var(--secondary-color) 20%,
+          transparent
+        );
+        border-color: var(--secondary-color);
+      }
 
-        .floating-home-btn .lucide {
-            color: var(--text-color);
-        }
+      .floating-home-btn .lucide {
+        color: var(--text-color);
+      }
 
-        .floating-home-btn:hover .lucide {
-            color: var(--secondary-color);
-        }
+      .floating-home-btn:hover .lucide {
+        color: var(--secondary-color);
+      }
     </style>
-</head>
+  </head>
 
-<body class="antialiased">
+  <body class="antialiased">
     <!-- Floating Button Container (Fixed to Middle Bottom) -->
-    <div class="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50 flex space-x-4">
-        <!-- Theme Toggle Button -->
-        <button id="theme-toggle"
-            class="p-3 border rounded-xl shadow-2xl transition-all duration-300 focus:outline-none floating-home-btn group"
-            aria-label="Toggle Theme">
-            <!-- The <i> element is now defined here, but will be re-inserted by JS on theme change -->
-            <i data-lucide="sun" class="w-6 h-6 transition-colors duration-300"></i>
-        </button>
+    <div
+      class="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50 flex space-x-4"
+    >
+      <!-- Theme Toggle Button -->
+      <button
+        id="theme-toggle"
+        class="p-3 border rounded-xl shadow-2xl transition-all duration-300 focus:outline-none floating-home-btn group"
+        aria-label="Toggle Theme"
+      >
+        <!-- The <i> element is now defined here, but will be re-inserted by JS on theme change -->
+        <i data-lucide="sun" class="w-6 h-6 transition-colors duration-300"></i>
+      </button>
 
-        <!-- Home Icon -->
-        <a href="index.html"
-            class="p-3 border rounded-xl shadow-2xl transition-all duration-300 focus:outline-none floating-home-btn group"
-            aria-label="Back to Home">
-            <i data-lucide="home" class="w-6 h-6 transition-colors duration-300"></i>
-        </a>
+      <!-- Home Icon -->
+      <a
+        href="index.html"
+        class="p-3 border rounded-xl shadow-2xl transition-all duration-300 focus:outline-none floating-home-btn group"
+        aria-label="Back to Home"
+      >
+        <i
+          data-lucide="home"
+          class="w-6 h-6 transition-colors duration-300"
+        ></i>
+      </a>
     </div>
 
     <div class="container mx-auto px-6 py-16 sm:py-24 max-w-4xl">
-        <div class="text-center mb-16">
-            <h1 class="text-4xl md:text-5xl font-bold mt-4" style="color:var(--text-color)">Sitemap</h1>
-            <p class="text-lg mt-2" style="color:var(--text-muted-color)">An overview of the Reinmax Creative website
-                structure.</p>
+      <div class="text-center mb-16">
+        <h1
+          class="text-4xl md:text-5xl font-bold mt-4"
+          style="color: var(--text-color)"
+        >
+          Sitemap
+        </h1>
+        <p class="text-lg mt-2" style="color: var(--text-muted-color)">
+          An overview of the Reinmax Creative website structure.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Main Pages -->
+        <div class="sitemap-card">
+          <h2 class="text-lg font-semibold sitemap-heading pb-2 mb-4">
+            Main Pages
+          </h2>
+          <ul class="space-y-1">
+            <li>
+              <a href="index.html" class="sitemap-link"
+                ><i data-lucide="home"></i>Home</a
+              >
+            </li>
+            <li>
+              <a href="portfolio.html" class="sitemap-link"
+                ><i data-lucide="briefcase"></i>Portfolio</a
+              >
+            </li>
+            <li>
+              <a href="quote.html" class="sitemap-link"
+                ><i data-lucide="file-text"></i>Request a Quote</a
+              >
+            </li>
+          </ul>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- Main Pages -->
-            <div class="sitemap-card">
-                <h2 class="text-lg font-semibold sitemap-heading pb-2 mb-4">Main Pages </h2>
-                <ul class="space-y-1">
-                    <li><a href="index.html" class="sitemap-link"><i data-lucide="home"></i>Home</a></li>
-                    <li><a href="portfolio.html" class="sitemap-link"><i data-lucide="briefcase"></i>Portfolio</a></li>
-                    <li><a href="quote.html" class="sitemap-link"><i data-lucide="file-text"></i>Request a Quote</a>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Projects & Tools -->
-            <div class="sitemap-card">
-                <h2 class="text-lg font-semibold sitemap-heading pb-2 mb-4">Projects & Tools</h2>
-                <ul class="space-y-1">
-                    <li><a href="projects/timescript.html" class="sitemap-link"><i data-lucide="clock"></i>TimeScript
-                            World Clock</a></li>
-                    <li><a href="projects/megascale.html" class="sitemap-link"><i data-lucide="image-plus"></i>MegaScale
-                            Image Editor</a></li>
-                </ul>
-            </div>
-
-            <!-- Home Page Sections (Full Width) -->
-            <div class="sitemap-card md:col-span-2">
-                <h2 class="text-lg font-semibold sitemap-heading pb-2 mb-4">Homepage Sections</h2>
-                <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1">
-                    <li><a href="index.html#cores" class="sitemap-link"><i data-lucide="gem"></i>Our Philosophy</a></li>
-                    <li><a href="index.html#services" class="sitemap-link"><i data-lucide="box"></i>Creative
-                            Solutions</a></li>
-                    <li><a href="index.html#workflow" class="sitemap-link"><i data-lucide="workflow"></i>Creative
-                            Workflow</a></li>
-                    <li><a href="index.html#team" class="sitemap-link"><i data-lucide="users"></i>Our Team</a></li>
-                    <li><a href="index.html#projects" class="sitemap-link"><i data-lucide="layout-grid"></i>Creative
-                            Work</a></li>
-                    <li><a href="index.html#pricing" class="sitemap-link"><i data-lucide="credit-card"></i>Branding &
-                            Academy Plans</a></li>
-                    <!-- Added consistent link for the Quote form section -->
-                    <li><a href="quote.html#form" class="sitemap-link"><i data-lucide="send"></i>Quote Request Form</a>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Legal & Other -->
-            <div class="sitemap-card md:col-span-2">
-                <h2 class="text-lg font-semibold sitemap-heading pb-2 mb-4">Legal</h2>
-                <ul class="grid grid-cols-1 sm:grid-cols-3 gap-x-4 gap-y-1">
-                    <!-- Corrected placeholder href="#" to mock file paths -->
-                    <li><a href="privacy.html" class="sitemap-link"><i data-lucide="shield"></i>Privacy Policy</a></li>
-                    <li><a href="terms.html" class="sitemap-link"><i data-lucide="file-check-2"></i>Terms of Service</a>
-                    </li>
-                    <li><a href="cookie-policy.html" class="sitemap-link"><i data-lucide="cookie"></i>Cookie Policy</a>
-                    </li>
-                </ul>
-            </div>
+        <!-- Projects & Tools -->
+        <div class="sitemap-card">
+          <h2 class="text-lg font-semibold sitemap-heading pb-2 mb-4">
+            Projects & Tools
+          </h2>
+          <ul class="space-y-1">
+            <li>
+              <a href="projects/timescript.html" class="sitemap-link"
+                ><i data-lucide="clock"></i>TimeScript World Clock</a
+              >
+            </li>
+            <li>
+              <a href="projects/megascale.html" class="sitemap-link"
+                ><i data-lucide="image-plus"></i>MegaScale Image Editor</a
+              >
+            </li>
+          </ul>
         </div>
 
-        <footer class="text-center mt-20 text-sm" style="color:var(--text-muted-color)">
-            <p>&copy; <span id="copyright-year"></span> Reinmax Creative. All Rights Reserved.</p>
-        </footer>
+        <!-- Home Page Sections (Full Width) -->
+        <div class="sitemap-card md:col-span-2">
+          <h2 class="text-lg font-semibold sitemap-heading pb-2 mb-4">
+            Homepage Sections
+          </h2>
+          <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1">
+            <li>
+              <a href="index.html#cores" class="sitemap-link"
+                ><i data-lucide="gem"></i>Our Philosophy</a
+              >
+            </li>
+            <li>
+              <a href="index.html#services" class="sitemap-link"
+                ><i data-lucide="box"></i>Creative Solutions</a
+              >
+            </li>
+            <li>
+              <a href="index.html#workflow" class="sitemap-link"
+                ><i data-lucide="workflow"></i>Creative Workflow</a
+              >
+            </li>
+            <li>
+              <a href="index.html#team" class="sitemap-link"
+                ><i data-lucide="users"></i>Our Team</a
+              >
+            </li>
+            <li>
+              <a href="index.html#projects" class="sitemap-link"
+                ><i data-lucide="layout-grid"></i>Creative Work</a
+              >
+            </li>
+            <li>
+              <a href="index.html#pricing" class="sitemap-link"
+                ><i data-lucide="credit-card"></i>Branding & Academy Plans</a
+              >
+            </li>
+            <!-- Added consistent link for the Quote form section -->
+            <li>
+              <a href="quote.html#form" class="sitemap-link"
+                ><i data-lucide="send"></i>Quote Request Form</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <!-- Legal & Other -->
+        <div class="sitemap-card md:col-span-2">
+          <h2 class="text-lg font-semibold sitemap-heading pb-2 mb-4">Legal</h2>
+          <ul class="grid grid-cols-1 sm:grid-cols-3 gap-x-4 gap-y-1">
+            <!-- Corrected placeholder href="#" to mock file paths -->
+            <li>
+              <a href="privacy.html" class="sitemap-link"
+                ><i data-lucide="shield"></i>Privacy Policy</a
+              >
+            </li>
+            <li>
+              <a href="terms.html" class="sitemap-link"
+                ><i data-lucide="file-check-2"></i>Terms of Service</a
+              >
+            </li>
+            <li>
+              <a href="cookie-policy.html" class="sitemap-link"
+                ><i data-lucide="cookie"></i>Cookie Policy</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <footer
+        class="text-center mt-20 text-sm"
+        style="color: var(--text-muted-color)"
+      >
+        <p>
+          &copy; <span id="copyright-year"></span> Reinmax Creative. All Rights
+          Reserved.
+        </p>
+      </footer>
     </div>
     <script>
-        // Use an IIFE for scope isolation and a tiny bit of clean code vibe
-        (() => {
-            const html = document.documentElement;
-            const toggleButton = document.getElementById('theme-toggle');
-            const themeKey = 'reinmax-theme';
+      // Use an IIFE for scope isolation and a tiny bit of clean code vibe
+      (() => {
+        const html = document.documentElement;
+        const toggleButton = document.getElementById('theme-toggle');
+        const themeKey = 'reinmax-theme';
 
-            /**
-             * Sets the application theme (light or dark) and updates the toggle icon.
-             * It forces the re-render of the Lucide icon by recreating the <i> element.
-             * @param {string} theme - 'light' or 'dark'.
-             */
-            const setTheme = (theme) => {
-                const iconName = theme === 'dark' ? 'sun' : 'moon';
+        /**
+         * Sets the application theme (light or dark) and updates the toggle icon.
+         * It forces the re-render of the Lucide icon by recreating the <i> element.
+         * @param {string} theme - 'light' or 'dark'.
+         */
+        const setTheme = (theme) => {
+          const iconName = theme === 'dark' ? 'sun' : 'moon';
 
-                // 1. Set the theme class on the HTML element
-                if (theme === 'dark') {
-                    html.classList.add('dark');
-                } else {
-                    html.classList.remove('dark');
-                }
+          // 1. Set the theme class on the HTML element
+          if (theme === 'dark') {
+            html.classList.add('dark');
+          } else {
+            html.classList.remove('dark');
+          }
 
-                // 2. Force Lucide icon update by replacing the button's content
-                // This reliably works because the old SVG is removed and a new <i> tag is ready for processing.
-                toggleButton.innerHTML = '';
-                const newIcon = document.createElement('i');
-                newIcon.setAttribute('data-lucide', iconName);
-                newIcon.className = 'w-6 h-6 transition-colors duration-300';
-                toggleButton.appendChild(newIcon);
+          // 2. Force Lucide icon update by replacing the button's content
+          // This reliably works because the old SVG is removed and a new <i> tag is ready for processing.
+          toggleButton.innerHTML = '';
+          const newIcon = document.createElement('i');
+          newIcon.setAttribute('data-lucide', iconName);
+          newIcon.className = 'w-6 h-6 transition-colors duration-300';
+          toggleButton.appendChild(newIcon);
 
-                // 3. Render all Lucide icons on the page
-                lucide.createIcons();
+          // 3. Render all Lucide icons on the page
+          lucide.createIcons();
 
-                // 4. Store the preference
-                localStorage.setItem(themeKey, theme);
-            };
+          // 4. Store the preference
+          localStorage.setItem(themeKey, theme);
+        };
 
-            document.addEventListener('DOMContentLoaded', () => {
-                // 1. Initialize Theme on Load
-                const storedTheme = localStorage.getItem(themeKey);
+        document.addEventListener('DOMContentLoaded', () => {
+          // 1. Initialize Theme on Load
+          const storedTheme = localStorage.getItem(themeKey);
 
-                // Initial theme: Use stored theme, otherwise default to 'light'
-                const initialTheme = storedTheme || 'light';
+          // Initial theme: Use stored theme, otherwise default to 'light'
+          const initialTheme = storedTheme || 'light';
 
-                // Apply initial theme
-                setTheme(initialTheme);
+          // Apply initial theme
+          setTheme(initialTheme);
 
-                // 2. Add Toggle Functionality
-                toggleButton.addEventListener('click', () => {
-                    // Determine current state based on class list
-                    const currentTheme = html.classList.contains('dark') ? 'dark' : 'light';
-                    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-                    setTheme(newTheme);
-                });
+          // 2. Add Toggle Functionality
+          toggleButton.addEventListener('click', () => {
+            // Determine current state based on class list
+            const currentTheme = html.classList.contains('dark')
+              ? 'dark'
+              : 'light';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+          });
 
-                // Set copyright year
-                document.getElementById('copyright-year').textContent = new Date().getFullYear();
-            });
-        })(); // End of IIFE
+          // Set copyright year
+          document.getElementById('copyright-year').textContent =
+            new Date().getFullYear();
+        });
+      })(); // End of IIFE
     </script>
-</body>
-
+  </body>
 </html>

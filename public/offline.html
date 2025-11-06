@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>You Are Offline | Reinmax Creative</title>
+    <link rel="icon" href="/assets/ico/favicon.svg" type="image/svg+xml" />
+    <!-- Stylesheets -->
+
+    <link rel="stylesheet" href="/styles/tailwind.css" />
+    <style>
+      body {
+        --primary-color: #002828;
+        --secondary-color: #99cccc;
+        --background-color: #f2f4f4;
+      }
+      .content-wrapper {
+        animation: fadeIn 0.8s ease-out forwards;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body
+    class="bg-background text-primary flex min-h-screen items-center justify-center p-6 font-bricolage">
+    <div class="content-wrapper max-w-md text-center">
+      <img
+        src="/assets/svg/disconnected.svg"
+        alt="Disconnected Icon"
+        class="mx-auto mb-6 h-16 w-16 text-primary" />
+      <h1 class="mb-2 text-3xl font-bold">Connection Lost</h1>
+      <p class="text-gray-600 mb-8">
+        It seems you're offline. Please check your internet connection. Some
+        pages may still be available from the cache.
+      </p>
+      <button
+        onclick="window.location.reload()"
+        class="rounded-lg bg-[var(--primary-color)] px-6 py-3 font-semibold text-white transition-colors hover:bg-[var(--secondary-color)] hover:text-[var(--primary-color)]">
+        Try Again
+      </button>
+    </div>
+  </body>
+</html>

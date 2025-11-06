@@ -10,7 +10,7 @@
   --shadow-color: rgba(0, 0, 0, 0.2);
   --danger-color: #ef4444;
   --text-muted: #5a7070;
-  --edge-margin: 1.5rem;
+  --edge-margin: 1.25rem;
   --cool-ease: cubic-bezier(0.65, 0, 0.35, 1);
   --smooth-ease: cubic-bezier(0.4, 0, 0.2, 1);
   --pop-ease: cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -27,7 +27,7 @@ html {
 }
 
 body {
-  font-family: "Bricolage Grotesque", "Sora", sans-serif;
+  font-family: 'Bricolage Grotesque', sans-serif;
 }
 
 .bitto-popup-wrapper {
@@ -42,7 +42,8 @@ body {
   inset: 0;
   background-color: rgba(0, 26, 26, 0.4);
   opacity: 0;
-  transition: opacity 0.3s var(--smooth-ease),
+  transition:
+    opacity 0.3s var(--smooth-ease),
     backdrop-filter 0.3s var(--smooth-ease);
   pointer-events: none;
   backdrop-filter: blur(0px);
@@ -67,7 +68,9 @@ body {
   box-shadow: 0 25px 50px -12px var(--shadow-color);
   opacity: 0;
   transform: translateY(20px) scale(0.95);
-  transition: transform 0.25s var(--pop-ease), opacity 0.25s var(--smooth-ease);
+  transition:
+    transform 0.25s var(--pop-ease),
+    opacity 0.25s var(--smooth-ease);
   pointer-events: none;
   display: flex;
   flex-direction: column;
@@ -137,7 +140,10 @@ body {
 
 /* Close button with red circle and rotating icon */
 #bitto-close-btn {
-  transition: background-color 0s, border-radius 0s, color 0s;
+  transition:
+    background-color 0s,
+    border-radius 0s,
+    color 0s;
 }
 
 #bitto-close-btn svg {
@@ -281,7 +287,7 @@ body {
 }
 
 .bitto-quick-action-btn {
-  font-family: "Bricolage Grotesque", "Sora", sans-serif;
+  font-family: 'Bricolage Grotesque', sans-serif;
   background: none;
   border: 1px solid var(--border-color);
   border-radius: 99px;
@@ -325,7 +331,7 @@ body {
   border: 1px solid var(--border-color);
   border-radius: 99px;
   padding: 0.65rem 2.5rem 0.65rem 1.125rem;
-  font-family: "Bricolage Grotesque", "Sora", sans-serif;
+  font-family: 'Bricolage Grotesque', sans-serif;
   transition: all 0.15s var(--smooth-ease);
   font-size: 0.9rem;
   color: var(--primary-color);
@@ -430,8 +436,11 @@ body {
   outline: none;
   opacity: 0;
   transform: translateY(calc(100% + var(--edge-margin))) scale(1);
-  transition: transform 0.4s var(--smooth-ease), opacity 0.3s var(--smooth-ease),
-    background-color 0.15s ease, box-shadow 0.15s ease,
+  transition:
+    transform 0.4s var(--smooth-ease),
+    opacity 0.3s var(--smooth-ease),
+    background-color 0.15s ease,
+    box-shadow 0.15s ease,
     bottom 0.4s var(--smooth-ease);
   pointer-events: none;
   z-index: 101;
@@ -499,7 +508,9 @@ body {
   opacity: 0;
   transform: translateY(20px) scale(0.9);
   pointer-events: none;
-  transition: opacity 0.3s var(--smooth-ease), transform 0.3s var(--smooth-ease);
+  transition:
+    opacity 0.3s var(--smooth-ease),
+    transform 0.3s var(--smooth-ease);
 }
 
 .back-to-top-btn.show {
@@ -527,97 +538,6 @@ body.bitto-chat-open {
   overflow: hidden;
 }
 
-.bitto-tip-message {
-  position: fixed;
-  bottom: var(--edge-margin);
-  right: calc(var(--edge-margin) + 72px);
-  background: var(--secondary-color);
-  color: var(--primary-color);
-  padding: 0.875rem;
-  border-radius: 0.75rem;
-  font-size: 0.85rem;
-  font-weight: 500;
-  max-width: 240px;
-  box-shadow: 0 10px 30px -8px rgba(0, 40, 40, 0.15);
-  z-index: 101;
-  opacity: 0;
-  /* Start with a slight offset for the pop-in animation */
-  transform: translateX(20px) scale(0.8);
-  transform-origin: right center;
-  transition: opacity 0.3s ease-out,
-    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
-    bottom 0.4s var(--smooth-ease);
-  pointer-events: none;
-  line-height: 1.4;
-  display: flex;
-  align-items: center;
-  gap: 0;
-}
-
-.bitto-tip-message.is-shifted-up {
-  /* When the FAB shifts up, the tip message should also shift up by the same amount. */
-  bottom: calc(var(--edge-margin) + 56px); /* 48px FAB height + 8px margin */
-}
-
-@keyframes tip-pop {
-  from {
-    opacity: 0;
-    transform: translateX(20px) scale(0.8);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0) scale(1);
-  }
-}
-
-.bitto-tip-message.show {
-  opacity: 1;
-  transform: translateX(0) scale(1);
-  pointer-events: auto;
-  animation: tip-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-
-.bitto-tip-close-btn {
-  background: none;
-  border: none;
-  color: var(--primary-color);
-  cursor: pointer;
-  padding: 0.5rem;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  transition: opacity 0.2s ease;
-}
-
-.bitto-tip-close-btn:hover {
-  opacity: 0.6;
-}
-
-.bitto-tip-close-btn svg {
-  width: 16px;
-  height: 16px;
-  stroke-width: 2.5;
-  /* This is the fix we discussed, moved here from visual-design.js */
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.bitto-tip-separator {
-  width: 1px;
-  height: 24px;
-  background: rgba(0, 40, 40, 0.2);
-  flex-shrink: 0;
-}
-
-.bitto-tip-content {
-  flex-grow: 1;
-  padding: 0 0.75rem;
-  text-align: left;
-}
-
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -633,6 +553,20 @@ body.bitto-chat-open {
 
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(148, 163, 163, 0.4);
+}
+
+@media (min-width: 769px) {
+  .bitto-popup-fab,
+  .back-to-top-btn {
+    right: 1.5rem;
+  }
+}
+
+@media (min-width: 1281px) {
+  .bitto-popup-fab,
+  .back-to-top-btn {
+    right: calc((100vw - 1280px) / 2 + 1.5rem);
+  }
 }
 
 @media (max-width: 640px) {

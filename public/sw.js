@@ -1,45 +1,80 @@
-const CACHE_STATIC_NAME = "static-v1";
-const CACHE_DYNAMIC_NAME = "dynamic-v1";
+if (self.location.hostname === "localhost") {
+  console.log(
+    "[Service Worker] Development mode: Service Worker not activated."
+  );
+  return;
+}
+
+const CACHE_STATIC_NAME = "static-v2";
+const CACHE_DYNAMIC_NAME = "dynamic-v2";
 
 const staticAssets = [
+  // Core
   "/",
   "/index.html",
-  "/styles/main.css",
+
+  // Styles
   "/styles/bitto.css",
+  "/styles/main.css",
   "/styles/tailwind.css",
-  "/scripts/script.js",
-  "/scripts/main.js",
-  "/scripts/image-fallback.js",
-  "/scripts/register-sw.js",
-  "/scripts/bitto/visual-design.js",
+
+  // Scripts
   "/scripts/bitto/api-endpoint.js",
   "/scripts/bitto/knowledge-base.js",
-  "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js", // Cache critical third-party script
-  "/assets/webp/hero.webp",
-  "/assets/people/reinhard.jpg",
-  "/assets/people/placeholder.jpg",
+  "/scripts/bitto/visual-design.js",
+  "/scripts/image-fallback.js",
+  "/scripts/main.js",
+  "/scripts/register-sw.js",
+  "/scripts/script.js",
+  "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js",
+
+  // Fonts
+  "/fonts/Bricolage-Grotesque/bricolage-grotesque-latin-200-normal.woff2",
+  "/fonts/Bricolage-Grotesque/bricolage-grotesque-latin-300-normal.woff2",
+  "/fonts/Bricolage-Grotesque/bricolage-grotesque-latin-400-normal.woff2",
+  "/fonts/Bricolage-Grotesque/bricolage-grotesque-latin-500-normal.woff2",
+  "/fonts/Bricolage-Grotesque/bricolage-grotesque-latin-600-normal.woff2",
+  "/fonts/Bricolage-Grotesque/bricolage-grotesque-latin-700-normal.woff2",
+  "/fonts/Bricolage-Grotesque/bricolage-grotesque-latin-800-normal.woff2",
+  "/fonts/Space-Grotesk/space-grotesk-latin-300-normal.woff2",
+  "/fonts/Space-Grotesk/space-grotesk-latin-400-normal.woff2",
+  "/fonts/Space-Grotesk/space-grotesk-latin-500-normal.woff2",
+  "/assets/fonts/Space-Grotesk/space-grotesk-latin-600-normal.woff2",
+  "/fonts/Space-Grotesk/space-grotesk-latin-700-normal.woff2",
+
+  // Images
+  "/assets/gif/motion-graphics.gif",
   "/assets/people/henry.webp",
   "/assets/people/klerry.jpg",
   "/assets/people/maggie.webp",
-  "/assets/webp/accordion/note-taking.webp",
-  "/assets/webp/accordion/discovery.webp",
+  "/assets/people/placeholder.jpg",
+  "/assets/people/reinhard.jpg",
   "/assets/webp/accordion/brainstorming.webp",
-  "/assets/webp/accordion/sketching.webp",
+  "/assets/webp/accordion/discovery.webp",
+  "/assets/webp/accordion/note-taking.webp",
   "/assets/webp/accordion/satisfaction.webp",
+  "/assets/webp/accordion/sketching.webp",
   "/assets/webp/accordion/work-delivery.webp",
   "/assets/webp/branding.webp",
-  "/assets/webp/ui.webp",
-  "/assets/webp/illustration.webp",
-  "/assets/gif/motion-graphics.gif",
-  "/assets/webp/logomark.webp",
   "/assets/webp/design.webp",
+  "/assets/webp/draw.webp",
+  "/assets/webp/hero.webp",
+  "/assets/webp/illustration.webp",
+  "/assets/webp/logomark.webp",
+  "/assets/webp/ui.webp",
+
+  // Icons
+  "/assets/ico/favicon.ico",
+  "/assets/ico/favicon.svg",
+  "/assets/svg/404.svg",
+  "/assets/svg/disconnected.svg",
+  "/assets/svg/figma.svg",
   "/assets/svg/illustrator.svg",
   "/assets/svg/photoshop.svg",
-  "/assets/svg/figma.svg",
-  "/assets/ico/favicon.svg",
-  "/assets/ico/favicon.ico",
-  "/assets/webp/draw.webp",
-  // Add an offline fallback page if desired (e.g., '/offline.html')
+
+  // Fallback Pages
+  "/404.html",
+  "/offline.html",
 ];
 
 // Cache static assets on install
@@ -56,18 +91,23 @@ self.addEventListener("install", (event) => {
         console.error("[Service Worker] Pre-caching failed:", err)
       )
   );
+  self.skipWaiting(); // Force the new service worker to activate immediately
 });
 
 // Clear old caches on activate
 self.addEventListener("activate", (event) => {
   console.log("[Service Worker] Activating Service Worker ....", event);
   event.waitUntil(
-    caches.keys().then((keyList) => {
+    caches.keys().then((cacheNames) => {
+      const expectedCacheNames = new Set([
+        CACHE_STATIC_NAME,
+        CACHE_DYNAMIC_NAME,
+      ]);
       return Promise.all(
-        keyList.map((key) => {
-          if (key !== CACHE_STATIC_NAME && key !== CACHE_DYNAMIC_NAME) {
-            console.log("[Service Worker] Removing old cache", key);
-            return caches.delete(key);
+        cacheNames.map((cacheName) => {
+          if (!expectedCacheNames.has(cacheName)) {
+            console.log("[Service Worker] Removing old cache:", cacheName);
+            return caches.delete(cacheName);
           }
         })
       );
@@ -76,57 +116,54 @@ self.addEventListener("activate", (event) => {
   return self.clients.claim(); // Ensures the service worker takes control immediately
 });
 
-// Serve from Cache, then fetch from Network (Cache-First strategy)
+// Network-first, falling back to cache for navigation. Stale-while-revalidate for other assets.
 self.addEventListener("fetch", (event) => {
-  // Only handle GET requests
-  if (event.request.method !== "GET") return;
-
-  const url = new URL(event.request.url);
-  if (url.origin !== self.location.origin) {
-    return; // Let the browser handle it directly
+  // For HTML pages (navigation requests), try the network first.
+  if (event.request.mode === "navigate") {
+    event.respondWith(
+      fetch(event.request).catch(async () => {
+        const cachedResponse = await caches.match(event.request);
+        if (cachedResponse) {
+          return cachedResponse;
+        }
+        return await caches.match("/offline.html");
+      })
+    );
+    return;
   }
 
-  event.respondWith(
-    caches.match(event.request).then((response) => {
-      if (response) {
-        return response; // Found in cache (static or dynamic)
-      } else {
-        // Not in cache, go to network
-        return fetch(event.request)
-          .then((networkResponse) => {
-            // Check if we received a valid response before caching
-            if (!networkResponse || networkResponse.status !== 200) {
-              return networkResponse;
-            }
-
-            // Clone the response because a response can only be consumed once
-            const responseToCache = networkResponse.clone();
-            caches.open(CACHE_DYNAMIC_NAME).then((cache) => {
-              cache.put(event.request, responseToCache);
-            });
-            return networkResponse;
-          })
-          .catch(() => {
-            // Network request failed. Try to find a fallback.
-            // If it's a navigation request (for an HTML page), serve an offline page.
-            if (event.request.mode === "navigate") {
-              // return caches.match('/offline.html'); // Uncomment if you create an offline.html
-              // For now, a simple offline message
-              return new Response(
-                "<h1>You are offline!</h1><p>Please check your internet connection.</p>",
-                {
-                  headers: { "Content-Type": "text/html" },
-                }
-              );
-            }
-            // For other types of requests (images, scripts, etc.), if network fails
-            // and it wasn't in cache, we can't do much. The browser will show its default error.
-            return new Response(null, {
-              status: 503,
-              statusText: "Service Unavailable",
-            });
+  // For font files, use a cache-first strategy.
+  if (event.request.url.endsWith(".woff2")) {
+    event.respondWith(
+      caches.match(event.request).then((cachedResponse) => {
+        if (cachedResponse) {
+          return cachedResponse;
+        }
+        return fetch(event.request).then((networkResponse) => {
+          caches.open(CACHE_DYNAMIC_NAME).then((cache) => {
+            cache.put(event.request, networkResponse.clone());
           });
-      }
+          return networkResponse;
+        });
+      })
+    );
+    return;
+  }
+
+  // For all other assets, use Stale-While-Revalidate.
+  event.respondWith(
+    caches.match(event.request).then((cachedResponse) => {
+      const fetchPromise = fetch(
+        event.request.url.startsWith(self.location.origin)
+          ? event.request
+          : new Request(event.request.url, { mode: "cors" })
+      ).then((networkResponse) => {
+        caches.open(CACHE_DYNAMIC_NAME).then((cache) => {
+          cache.put(event.request, networkResponse.clone());
+        });
+        return networkResponse;
+      });
+      return cachedResponse || fetchPromise;
     })
   );
 });

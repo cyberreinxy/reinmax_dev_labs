@@ -11,3 +11,9 @@ yarn-error.log*
 
 # Test coverage
 coverage/
+
+# vs code extensions
+.vscode
+
+# Gemini file
+GEMINI.md

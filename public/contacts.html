@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <!-- ============================================= -->
+    <!-- =                META & SEO                 = -->
+    <!-- ============================================= -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Contact Reinmax Creative for branding, design, and digital experience projects. Let's build something incredible together." />
+    <meta name="author" content="Reinhard Baraka, Reinmax Creative" />
+
+    <!-- Favicon Links -->
+    <link rel="icon" href="/assets/ico/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/assets/ico/favicon.ico" type="image/x-icon" />
+
+    <!-- Page Title -->
+    <title>Contact Us | Reinmax Creative</title>
+
+    <!-- ============================================= -->
+    <!-- =             FONTS & STYLESHEETS           = -->
+    <!-- ============================================= -->
+
+    <link rel="stylesheet" href="/styles/tailwind.css">
+    <link rel="stylesheet" href="/styles/main.css">
+
+    <style>
+        .content-wrapper {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .contact-card {
+            background-color: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .form-input {
+            background-color: rgba(255, 255, 255, 0.5);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            background-color: white;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px color-mix(in srgb, var(--secondary-color) 20%, transparent);
+            outline: none;
+        }
+    </style>
+</head>
+
+<body class="antialiased font-bricolage bg-background">
+
+<!-- Development Warning Banner -->
+<div id="dev-warning-banner" class="sticky top-0 z-50 bg-red-50 border-b border-red-200 p-4 text-sm text-red-800 relative">
+    <!-- Left back arrow -->
+    <button onclick="history.back()" title="Go back" class="absolute left-4 top-1/2 -translate-y-1/2 p-1 rounded-full hover:bg-red-100 transition-colors" aria-label="Go back">
+        <i data-lucide="arrow-left" class="w-5 h-5 text-red-800"></i>
+    </button>
+
+
+        <!-- Message -->
+        <p class="text-center">
+            <strong>Maintenance alert:</strong> This page is a work in progress. The form is temporarily disabled.
+        </p>
+        <!-- Right close button -->
+        <button id="close-warning-btn" class="absolute right-4 top-1/2 -translate-y-1/2 p-1 rounded-full hover:bg-red-100 transition-colors" aria-label="Dismiss warning">
+            <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+    </div>
+</div>
+
+    <main id="page-content" class="min-h-screen flex items-center justify-center py-24 px-6">
+
+        <div class="content-wrapper w-full max-w-4xl">
+            <!-- Header -->
+            <div class="text-center mb-12">
+                <h1 class="text-3xl md:text-4xl font-bold text-primary">Get in Touch</h1>
+                <p class="mt-3 text-lg text-gray-600 max-w-xl mx-auto">
+                    Have a project in mind or just want to say hello? We'd love to hear from you.
+                </p>
+            </div>
+
+            <!-- Single Contact Card -->
+            <div class="contact-card border border-slate-200 rounded-2xl p-6 lg:p-8 w-full max-w-lg mx-auto">
+                <!-- Contact Form -->
+                <form action="mailto:mail@reinmaxcreative.com" method="POST" enctype="text/plain" class="space-y-6">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-primary mb-1">Full Name</label>
+                        <input type="text" id="name" name="name" required class="form-input w-full rounded-md p-3" placeholder="Your Name">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-primary mb-1">Email Address</label>
+                        <input type="email" id="email" name="email" required class="form-input w-full rounded-md p-3" placeholder="you@example.com">
+                    </div>
+                    <div>
+                        <label for="subject" class="block text-sm font-medium text-primary mb-1">Subject</label>
+                        <input type="text" id="subject" name="subject" required class="form-input w-full rounded-md p-3" placeholder="What can we help with?">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-primary mb-1">Message</label>
+                        <textarea id="message" name="message" rows="4" required class="form-input w-full rounded-md p-3" placeholder="Tell us more about your project..."></textarea>
+                    </div>
+                    <div class="text-center my-8">
+                        <p class="text-gray-600">Or, reach us directly by email:</p>
+                        <div class="flex items-center justify-center gap-2 mt-2">
+                            <a href="mailto:mail@reinmaxcreative.com" class="text-lg font-semibold text-primary hover:underline">mail@reinmaxcreative.com</a>
+                            <button id="copy-email-btn" class="p-2 rounded-md hover:bg-gray-200 transition-colors" title="Copy email address">
+                                <i data-lucide="copy" class="w-5 h-5 text-gray-500"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <button type="submit" class="w-full py-3 px-6 rounded-lg bg-primary text-white font-semibold hover:bg-tertiary transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed" disabled>
+                            Send Message
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        lucide.createIcons();
+
+        // Handle the dismissal of the development warning banner
+        const warningBanner = document.getElementById('dev-warning-banner');
+        const closeWarningBtn = document.getElementById('close-warning-btn');
+
+        if (warningBanner && closeWarningBtn) {
+            closeWarningBtn.addEventListener('click', () => {
+                warningBanner.style.display = 'none';
+            });
+        }
+
+        // Copy to clipboard functionality
+        const copyEmailBtn = document.getElementById('copy-email-btn');
+        if (copyEmailBtn) {
+            copyEmailBtn.addEventListener('click', () => {
+                const email = 'mail@reinmaxcreative.com';
+                navigator.clipboard.writeText(email).then(() => {
+                    const icon = copyEmailBtn.querySelector('i');
+                    icon.setAttribute('data-lucide', 'check');
+                    lucide.createIcons();
+                    copyEmailBtn.title = 'Copied!';
+
+                    setTimeout(() => {
+                        icon.setAttribute('data-lucide', 'copy');
+                        lucide.createIcons();
+                        copyEmailBtn.title = 'Copy email address';
+                    }, 2000);
+                });
+            });
+        }
+    </script>
+</body>
+
+</html>

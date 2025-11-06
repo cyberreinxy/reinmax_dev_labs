@@ -1,6 +1,6 @@
 // Handles all communication with the server-side API endpoint.
 
-import { siteKnowledge } from "./knowledge-base.js";
+import { siteKnowledge } from './knowledge-base.js';
 
 function getPageContext() {
   return `You are Bitto, a friendly, professional, and helpful AI assistant created by Reinmax Creative. Your sole purpose is to assist users by providing information exclusively about Reinmax Creative's services, team, pricing, and processes, based ONLY on the context provided below.
@@ -58,32 +58,32 @@ Contact: ${siteKnowledge.company.email} | ${siteKnowledge.company.phone}
 OUR TEAM:
 ${siteKnowledge.team
   .map((t) => `<strong>${t.name}</strong> (${t.role}): ${t.description}`)
-  .join("\n\n")}
+  .join('\n\n')}
 
 OUR PHILOSOPHY:
 ${siteKnowledge.philosophy
   .map((p) => `<strong>${p.name}</strong>: ${p.description}`)
-  .join("\n\n")}
+  .join('\n\n')}
 
 OUR SERVICES:
 ${siteKnowledge.services
   .map((s) => `<strong>${s.name}</strong>: ${s.description}`)
-  .join("\n\n")}
+  .join('\n\n')}
 
 BRANDING PLANS:
 ${siteKnowledge.brandingPlans
   .map((p) => `<strong>${p.name}</strong> (${p.price}): ${p.target}`)
-  .join("\n\n")}
+  .join('\n\n')}
 
 ACADEMY COURSES:
 ${siteKnowledge.academyCourses
   .map((c) => `<strong>${c.name}</strong> (${c.price}): ${c.description}`)
-  .join("\n\n")}
+  .join('\n\n')}
 
 WORKFLOW:
 ${siteKnowledge.workflow
   .map((w) => `<strong>Step ${w.step}: ${w.name}</strong> - ${w.description}`)
-  .join("\n\n")}
+  .join('\n\n')}
 
 *** TOOL INSTRUCTIONS ***
 BOOKING: When user wants to book, ask for: NAME → EMAIL → DAY (Mon-Fri) → TIME (8 AM-5 PM) → Confirmation
@@ -100,20 +100,20 @@ export async function getAIResponseFromServer(state) {
   };
 
   // NOTE: This assumes '/api/chat' is a proxy to the actual AI endpoint.
-  const response = await fetch("/api/chat", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
+  const response = await fetch('/api/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
   });
 
   if (!response.ok) {
     const errorData = await response.json();
-    throw new Error(errorData.error || "Failed to get response from server");
+    throw new Error(errorData.error || 'Failed to get response from server');
   }
 
   const data = await response.json();
   if (!data.candidates?.[0]) {
-    throw new Error("No response content from AI");
+    throw new Error('No response content from AI');
   }
   return data.candidates[0].content.parts[0].text;
 }

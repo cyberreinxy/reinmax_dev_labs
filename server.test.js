@@ -17,6 +17,12 @@ describe("Server Endpoints", () => {
     expect(response.statusCode).toBe(200);
   });
 
+  it("should respond with a 200 status and a status of ok for the status path", async () => {
+    const response = await request(app).get("/status");
+    expect(response.statusCode).toBe(200);
+    expect(response.body).toEqual({ status: "ok" });
+  });
+
   describe("POST /api/chat", () => {
     it("should return 400 if 'contents' is missing", async () => {
       const response = await request(app)

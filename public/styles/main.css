@@ -1,10 +1,92 @@
-/*=============================================
-=            1. SETUP & CORE STYLES           =
-=============================================*/
+/* 1. SETUP & CORE STYLES */
 
-/*-- Variables --*/
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  src: url('/assets/fonts/Bricolage-Grotesque/bricolage-grotesque-latin-200-normal.woff2') format('woff2');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  src: url('/assets/fonts/Bricolage-Grotesque/bricolage-grotesque-latin-300-normal.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  src: url('/assets/fonts/Bricolage-Grotesque/bricolage-grotesque-latin-400-normal.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  src: url('/assets/fonts/Bricolage-Grotesque/bricolage-grotesque-latin-500-normal.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  src: url('/assets/fonts/Bricolage-Grotesque/bricolage-grotesque-latin-600-normal.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  src: url('/assets/fonts/Bricolage-Grotesque/bricolage-grotesque-latin-700-normal.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  src: url('/assets/fonts/Bricolage-Grotesque/bricolage-grotesque-latin-800-normal.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('/assets/fonts/Space-Grotesk/space-grotesk-latin-300-normal.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('/assets/fonts/Space-Grotesk/space-grotesk-latin-400-normal.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('/assets/fonts/Space-Grotesk/space-grotesk-latin-500-normal.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('/assets/fonts/Space-Grotesk/space-grotesk-latin-600-normal.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('/assets/fonts/Space-Grotesk/space-grotesk-latin-700-normal.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+
+/* Variables */
 :root {
-  /* Colors */
+  /* Color Palette */
   --primary-color: #002828;
   --secondary-color: #99cccc;
   --tertiary-color: #003333;
@@ -15,19 +97,14 @@
   --background-color: #f2f4f4;
   --background-footer: #001a1a;
   --border-color: rgba(148, 163, 163, 0.2);
-  --error-color: #ff7b7b;
-  --dark-bg: #111111;
 
   /* Typography */
-  --text-color: #333333;
   --text-light: #e0eaea;
   --text-muted: #94a3a3;
-  --links-color: #3b82f6;
   --text-muted-2: #6b7e7e;
 
   /* UI States */
   --hover-color: #e6f5f5;
-  --muted-bg: #fafafa;
   --icons-bg-color: #ebeeee;
   --menu-hover-bg: var(--hover-color);
   --card-glass-bg: rgba(255, 255, 255, 0.95);
@@ -37,22 +114,22 @@
   --header-height: 4rem;
 }
 
-/*-- Base & Body --*/
+/* Base & Body */
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
   }
 }
 
-/*-- Scrollbar --*/
+/* Scrollbar */
 body {
-  font-family: "Bricolage Grotesque", "Sora", "Space Grotesk", sans-serif;
+  font-family: "Bricolage Grotesque", "Space Grotesk", sans-serif;
   background-color: var(--background-color, #fff);
   color: var(--primary-color, #000);
   position: relative;
   overflow-y: scroll;
-  /* Use 'overlay' to prevent the scrollbar from taking up space */
-  scrollbar-gutter: stable overlay;
+  /* Reserve space for the scrollbar to prevent layout shift */
+  scrollbar-gutter: stable;
 }
 
 /* Webkit (Chrome, Safari, Edge) scrollbar styling */
@@ -62,7 +139,7 @@ body::-webkit-scrollbar {
 }
 
 body::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 40, 40, 0.35); /* A color that matches your theme */
+  background-color: rgba(0, 40, 40, 0.35);
   border-radius: 10px;
   transition: all 0.3s ease;
 }
@@ -80,16 +157,18 @@ body::-webkit-scrollbar-thumb:hover {
   }
 }
 
-/*=============================================
-=          2. LAYOUT & UTILITIES              =
-=============================================*/
+/* 2. LAYOUT & UTILITIES */
 
-/*-- Layout --*/
+/* Layout */
 section[id] {
   scroll-margin-top: var(--header-height);
 }
 
-/*-- Utilities --*/
+/* Utilities */
+.is-hidden {
+  visibility: hidden;
+}
+
 .text-secondary {
   color: var(--secondary-color);
 }
@@ -100,11 +179,9 @@ section[id] {
   background-color: var(--secondary-color);
 }
 
-/*=============================================
-=            3. GLOBAL COMPONENTS             =
-=============================================*/
+/* 3. GLOBAL COMPONENTS */
 
-/*-- Footer --*/
+/* Footer */
 .footer-link {
   position: relative;
   display: inline-block;
@@ -113,7 +190,7 @@ section[id] {
 }
 
 .footer-link:hover {
-  color: var(--secondary);
+  color: var(--secondary-color);
 }
 .footer-link::after {
   display: none;
@@ -142,19 +219,14 @@ section[id] {
   }
 }
 
-/*=============================================
-=      4. SECTION-SPECIFIC COMPONENTS         =
-=============================================*/
+/* 4. SECTION-SPECIFIC COMPONENTS */
 
-:root {
+/* Home Section */
+#home {
   --grid-opacity: 0.035;
-}
-
-.rotating-word-wrapper {
-  display: inline-block;
-  height: 1.4em;
+  background-color: var(--hero-bg);
+  position: relative;
   overflow: hidden;
-  vertical-align: bottom;
 }
 
 #dynamic-word {
@@ -166,19 +238,6 @@ section[id] {
   animation-duration: 950ms;
   animation-fill-mode: forwards;
   transition: color 0.4s;
-}
-
-.slide-in-up-anim {
-  animation-name: slideInUp;
-}
-
-.slide-out-up-anim {
-  animation-name: slideOutUp;
-}
-
-/* New: slide-out-down animation so outgoing words move down and disappear */
-.slide-out-down-anim {
-  animation-name: slideOutDown;
 }
 
 @keyframes slideInUp {
@@ -217,24 +276,20 @@ section[id] {
   }
 }
 
-/* Keep left alignment on large screens, centered on small screens via existing container classes.
-         Ensure the wrapper doesn't force left alignment itself. */
-@media (min-width: 1024px) {
-  .rotating-word-wrapper {
-    text-align: left;
-  }
+/* Animation classes used by script.js */
+.slide-in-up-anim {
+  animation-name: slideInUp;
 }
 
-@media (max-width: 1023px) {
-  .rotating-word-wrapper {
-    text-align: center;
-  }
+.slide-out-down-anim {
+  animation-name: slideOutDown;
+  animation-duration: 750ms; /* A slightly faster exit feels better */
 }
 
 /* Rotating hero word styles */
 .rotating-word-wrapper {
-  display: inline-block; /* keep wrapper inline and aligned with text */
-  vertical-align: baseline; /* ensure wrapper baseline matches surrounding text */
+  display: inline-block;
+  vertical-align: baseline;
   width: auto; /* JS may set a ch-based width based on longest phrase */
   max-width: 100%;
   overflow: visible; /* allow ascenders/descenders to be visible during animation */
@@ -242,7 +297,7 @@ section[id] {
   text-align: left;
   position: relative;
   font-size: inherit; /* match surrounding text */
-  line-height: inherit;
+  line-height: inherit; /* match surrounding text */
 }
 
 /* Accessibility helper to visually hide elements but keep them for screen readers */
@@ -258,7 +313,7 @@ section[id] {
   border: 0 !important;
 }
 
-/* This new inner wrapper will hold the words and be animated */
+/* Inner wrapper for rotating words animation */
 .rotating-word-inner {
   display: block;
   transition: transform 0.6s ease-in-out;
@@ -266,7 +321,7 @@ section[id] {
 }
 
 .rotating-word {
-  display: block; /* Each word is a block inside the inner wrapper */
+  display: block;
   text-align: left;
   opacity: 1; /* Words are always visible, the wrapper moves them */
   height: 1em; /* Ensure each word has a consistent height */
@@ -277,13 +332,6 @@ section[id] {
 .rotating-word-wrapper:focus-within,
 .rotating-word-wrapper:hover {
   outline: none;
-}
-
-/* Prevent the second line of the hero from breaking anywhere */
-.no-wrap-line {
-  display: inline-block; /* keep whole phrase on the same line */
-  white-space: nowrap; /* prevent any wrapping */
-  overflow: visible;
 }
 
 /* Static safety styles for rotating phrases (used before JS injects runtime styles) */
@@ -443,12 +491,6 @@ section[id] {
   ); /* a touch larger for readability */
 }
 
-#home {
-  background-color: var(--hero-bg);
-  position: relative;
-  overflow: hidden;
-}
-
 #home::before {
   content: "";
   position: absolute;
@@ -462,7 +504,6 @@ section[id] {
   opacity: var(--grid-opacity);
   /* Disable animation for performance: keep the grid fixed */
   background-attachment: fixed;
-  will-change: auto; /* avoid forcing compositor animations */
 }
 
 #home > * {
@@ -470,7 +511,41 @@ section[id] {
   z-index: 1;
 }
 
-/*-- Service Cards --*/
+/* Hero Badge */
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 0.25px solid #10b981;
+  padding: 0.5rem 1rem;
+  border-radius: 100px;
+  color: #10b981;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  letter-spacing: 0.05em;
+}
+
+.badge-dot {
+  width: 6px;
+  height: 6px;
+  background: #10b981;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Services Section */
 .service-card-wrapper {
   display: flex;
   flex-direction: column;
@@ -549,20 +624,12 @@ section[id] {
 /* Prevent icons from scaling when their parent card is hovered. Only images should scale. */
 .service-card-wrapper:hover .service-card-icon,
 .service-card-wrapper:focus-within .service-card-icon {
-  transform: translate(-50%, -50%); /* keep icon centered and unchanged */
+  transform: translate3d(-50%, -50%, 0); /* keep icon centered and unchanged */
   transition: none !important; /* ensure no transition/animation runs on the icon */
-  will-change: transform; /* hint for stable rendering */
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
   z-index: 5; /* keep icon above the image */
 }
 
 /* More strict locking to avoid subpixel or rotation artifacts: use 3D translate and a higher z-index */
-.service-card-wrapper:hover .service-card-icon,
-.service-card-wrapper:focus-within .service-card-icon {
-  transform: translate3d(-50%, -50%, 0) !important;
-  z-index: 999; /* ensure icon sits above any scaled image */
-}
 
 /* Scale only the image on hover/focus of the card */
 .service-card-wrapper:hover .service-card-image-container img,
@@ -574,7 +641,7 @@ section[id] {
   transform: translateY(0);
 }
 
-/*-- Workflow Styling --*/
+/* Workflow Section */
 #workflow {
   --card-bg-active: #e5f0f0;
   --border-color-active: #c0d8d8;
@@ -585,7 +652,7 @@ section[id] {
   --text-color-light: #4a5568;
 }
 
-/* --- Main Layout --- */
+/* Workflow Layout */
 .workflow-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -600,7 +667,7 @@ section[id] {
   }
 }
 
-/* --- Process Steps Column --- */
+/* Workflow Process Steps */
 .process-steps-list {
   display: grid;
   gap: 1rem;
@@ -710,13 +777,13 @@ section[id] {
 
 .cta-arrow {
   color: var(--primary-color);
-  transition: all 0.3s ease; /* This line is updated */
+  transition: all 0.3s ease;
 }
 .process-step-header.group:hover .cta-arrow {
   color: var(--secondary-color-hover);
 }
 
-/* --- Visual Preview Column (Desktop) --- */
+/* Workflow Visual Preview (Desktop) */
 .visual-preview-area {
   display: none; /* Hidden on mobile */
   width: 100%;
@@ -795,7 +862,7 @@ section[id] {
   display: none;
 }
 
-/* --- Mobile Accordion --- */
+/* Workflow Mobile Accordion */
 .step-toggle-icon {
   flex-shrink: 0;
   position: relative;
@@ -880,7 +947,7 @@ section[id] {
   }
 }
 
-/*-- Course Popup --*/
+/* AI Course Popup */
 #ai-course-popup {
   opacity: 0;
   pointer-events: none;
@@ -914,11 +981,35 @@ section[id] {
   color: #ef4444;
 }
 
-/*=============================================
-=           5. ANIMATIONS & EFFECTS           =
-=============================================*/
+.ai-course-popup-form-shake {
+  animation: ai-course-popup-form-shake 0.6s ease-out;
+}
 
-/*-- Global Fade-in --*/
+@keyframes ai-course-popup-form-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  15% {
+    transform: translateX(-7px) rotate(-1deg);
+  }
+  30% {
+    transform: translateX(5px) rotate(1deg);
+  }
+  45% {
+    transform: translateX(-4px) rotate(-1deg);
+  }
+  60% {
+    transform: translateX(2px) rotate(1deg);
+  }
+  75% {
+    transform: translateX(-1px) rotate(0);
+  }
+}
+
+/* 5. ANIMATIONS & EFFECTS */
+
+/* Global Fade-in */
 .fade-in {
   opacity: 0;
   transform: translateY(20px);
@@ -930,7 +1021,7 @@ section[id] {
   transform: translateY(0);
 }
 
-/* Staggered fade-in for workflow items */
+/* Staggered Fade-in (for workflow items) */
 .workflow-fade-in {
   opacity: 0;
   transform: translateY(15px);
@@ -958,7 +1049,7 @@ section[id] {
   transition-delay: 0.7s;
 }
 
-/* Image fade-in */
+/* Image Fade-in */
 .animate-on-scroll img,
 .pillar-grid img {
   opacity: 0;
@@ -980,80 +1071,19 @@ section[id] {
   }
 }
 
-.ai-course-popup-form-shake {
-  animation: ai-course-popup-form-shake 0.6s ease-out;
-}
-
-@keyframes ai-course-popup-form-shake {
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-  15% {
-    transform: translateX(-7px) rotate(-1deg);
-  }
-  30% {
-    transform: translateX(5px) rotate(1deg);
-  }
-  45% {
-    transform: translateX(-4px) rotate(-1deg);
-  }
-  60% {
-    transform: translateX(2px) rotate(1deg);
-  }
-  75% {
-    transform: translateX(-1px) rotate(0);
-  }
-}
-
+/* Cores Section */
 #cores {
   position: relative;
 }
 
-.hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  border: 0.25px solid #10b981;
-  padding: 0.5rem 1rem;
-  border-radius: 100px;
-  color: #10b981;
-  font-size: 0.8rem;
-  font-weight: 500;
-  margin-bottom: 2rem;
-  letter-spacing: 0.05em;
-}
-
-.badge-dot {
-  width: 6px;
-  height: 6px;
-  background: #10b981;
-  border-radius: 50%;
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%,
-  100% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0.5;
-  }
-}
-
-/* ----------------------------------------- */
-/*                                           */
-/* ----------------------------------------- */
-
+/* 6. NAVIGATION */
 #desktop-nav-container,
 #mobile-nav-container,
 .logomark-text,
 .nav-link,
 .cta-text,
 .logo-path {
-  transition: all 0.5s ease-in-out;
+
 }
 
 #desktop-nav-container {
@@ -1075,32 +1105,53 @@ section[id] {
 }
 
 #desktop-nav-container.scrolled,
-#mobile-nav-container.scrolled {
-  background-color: rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+#mobile-nav-container.scrolled,
+#mobile-nav-container.menu-is-open {
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid rgb(229 229 229);
 }
 
 /* Mobile navigation styles */
 #mobile-menu {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.5s ease-in-out;
+  padding-top: var(--header-height);
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
 }
 
 #mobile-menu.open {
-  max-height: 500px;
-  /* Adjust based on your content */
+  transform: translateY(0);
+  opacity: 1;
 }
 
-/* --- HOVER STATES --- */
+#mobile-menu .nav-link {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
 
-/* Logo and Logomark hover */
-.flex-1.justify-start > a:hover .logomark-text,
-.flex-1.justify-start > a:hover .logo-path {
+#mobile-menu.open .nav-link {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered transitions for nav links */
+#mobile-menu.is-opening .nav-link:nth-child(1) { transition-delay: 0.1s; }
+#mobile-menu.is-opening .nav-link:nth-child(2) { transition-delay: 0.15s; }
+#mobile-menu.is-opening .nav-link:nth-child(3) { transition-delay: 0.2s; }
+#mobile-menu.is-opening .nav-link:nth-child(4) { transition-delay: 0.25s; }
+#mobile-menu.is-opening .nav-link:nth-child(5) { transition-delay: 0.3s; }
+#mobile-menu.is-opening .nav-link:nth-child(6) { transition-delay: 0.35s; }
+
+.nav-link.active {
   color: var(--secondary-color);
-  fill: var(--secondary-color);
 }
 
 /* Navigation links hover */
@@ -1113,20 +1164,34 @@ section[id] {
   color: var(--secondary-color);
 }
 
-/* Mobile menu toggle - removed rotation animation */
-.menu-toggle {
-  transition: opacity 0.3s ease-in-out;
+/* On click (active), scale down the width even more */
+.menu-toggle:active svg rect {
+  transform: scaleX(0.5);
+  transition-duration: 0.015s;
 }
 
-.menu-toggle:hover {
-  opacity: 0.7;
+/* 7. MISCELLANEOUS STYLES */
+@keyframes subtle-gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
-/* Hero section for demonstration */
-.hero {
-  height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.animate-subtle-gradient {
+  background-size: 200% 200%;
+  background-image: linear-gradient(
+    -45deg,
+    #f0fdf4,
+    /* Tailwind's green-50 */ #dcfce7,
+    /* Tailwind's green-100 */ #f0fdf4 /* Tailwind's green-50 */
+  );
+  animation: subtle-gradient 6s ease infinite;
 }
