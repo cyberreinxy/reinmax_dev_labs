@@ -1,9 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./public/**/*.html", // Scan all HTML files in the public directory
-    "./public/**/*.js", // Scan all JS files for dynamic classes
-  ],
+  content: ["./public/**/*.html", "./public/**/*.js"],
   safelist: [
     "bg-green-50",
     "text-green-800",
@@ -20,11 +17,11 @@ module.exports = {
         secondary: "#99cccc",
         tertiary: "#003333",
         background: "#f2f4f4",
+        soft: "#E0F2F2",
         danger: "#ef4444",
         dangerHover: "#dc2626",
       },
       fontFamily: {
-        sora: ["Sora", "sans-serif"],
         bricolage: ['"Bricolage Grotesque"', "sans-serif"],
       },
     },
