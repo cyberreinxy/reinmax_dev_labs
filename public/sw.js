@@ -1,10 +1,3 @@
-if (self.location.hostname === "localhost") {
-  console.log(
-    "[Service Worker] Development mode: Service Worker not activated."
-  );
-  return;
-}
-
 const CACHE_STATIC_NAME = "static-v2";
 const CACHE_DYNAMIC_NAME = "dynamic-v2";
 
@@ -79,6 +72,13 @@ const staticAssets = [
 
 // Cache static assets on install
 self.addEventListener("install", (event) => {
+  if (self.location.hostname === "localhost") {
+    console.log(
+      "[Service Worker] Development mode: Service Worker not activated."
+    );
+    return;
+  }
+
   console.log("[Service Worker] Installing Service Worker ...", event);
   event.waitUntil(
     caches
