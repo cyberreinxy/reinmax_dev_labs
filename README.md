@@ -18,7 +18,7 @@
   <!-- Badges -->
   <p>
     <!-- Live Site -->
-    <a href="https://reinmax-dev-labs.vercel.app/" target="_blank" rel="noopener noreferrer">
+    <a href="https://reinmax.vercel.app/" target="_blank" rel="noopener noreferrer">
       <img alt="Live Site" src="https://img.shields.io/badge/vercel-visit%20site-003333?style=for-the-badge&logo=vercel&logoColor=white">
     </a>
     <!-- Repo Size -->
