@@ -118,6 +118,8 @@ self.addEventListener("activate", (event) => {
 
 // Network-first, falling back to cache for navigation. Stale-while-revalidate for other assets.
 self.addEventListener("fetch", (event) => {
+  const requestUrl = new URL(event.request.url);
+
   // For HTML pages (navigation requests), try the network first.
   if (event.request.mode === "navigate") {
     event.respondWith(
@@ -126,44 +128,34 @@ self.addEventListener("fetch", (event) => {
         if (cachedResponse) {
           return cachedResponse;
         }
+        // Ensure offline.html is returned if no other match is found.
         return await caches.match("/offline.html");
       })
     );
     return;
   }
 
-  // For font files, use a cache-first strategy.
-  if (event.request.url.endsWith(".woff2")) {
+  // For same-origin assets (CSS, JS, images, etc.), use Stale-While-Revalidate.
+  if (requestUrl.origin === self.location.origin) {
     event.respondWith(
       caches.match(event.request).then((cachedResponse) => {
-        if (cachedResponse) {
-          return cachedResponse;
-        }
-        return fetch(event.request).then((networkResponse) => {
+        const fetchPromise = fetch(event.request).then((networkResponse) => {
           caches.open(CACHE_DYNAMIC_NAME).then((cache) => {
-            cache.put(event.request, networkResponse.clone());
+            // Check for a valid response before caching
+            if (networkResponse && networkResponse.status === 200) {
+              cache.put(event.request, networkResponse.clone());
+            }
           });
           return networkResponse;
         });
+        // Return cached response if available, otherwise wait for the network
+        return cachedResponse || fetchPromise;
       })
     );
     return;
   }
 
-  // For all other assets, use Stale-While-Revalidate.
-  event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      const fetchPromise = fetch(
-        event.request.url.startsWith(self.location.origin)
-          ? event.request
-          : new Request(event.request.url, { mode: "cors" })
-      ).then((networkResponse) => {
-        caches.open(CACHE_DYNAMIC_NAME).then((cache) => {
-          cache.put(event.request, networkResponse.clone());
-        });
-        return networkResponse;
-      });
-      return cachedResponse || fetchPromise;
-    })
-  );
+  // For all other cross-origin requests (like CDNs), just fetch from the network.
+  // Do not attempt to cache them as it can lead to CORS issues and opaque responses.
+  event.respondWith(fetch(event.request));
 });
