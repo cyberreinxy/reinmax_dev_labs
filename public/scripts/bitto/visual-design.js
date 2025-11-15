@@ -202,6 +202,17 @@ function executeTool(toolName, toolData) {
     state.bookingState.isActive = false;
     state.bookingState.step = null;
     state.bookingState.data = { name: '', email: '', day: '', time: '' };
+
+    // Redirect to booking page with pre-filled data
+    const queryParams = new URLSearchParams({
+        name: toolData.name,
+        email: toolData.email,
+        date: toolData.day, // Assuming 'day' can be used for the date input
+        message: `Booking for ${toolData.time}`
+    }).toString();
+
+    window.location.href = `/booking.html?${queryParams}`;
+
   } else if (toolName === 'schedule_call') {
     addMessageToChat(
       'ai',

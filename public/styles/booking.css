@@ -1,0 +1,18 @@
+.booking-card {
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.form-input {
+    background-color: rgba(255, 255, 255, 0.6);
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.form-input:focus {
+    background-color: white;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--secondary-color) 20%, transparent);
+    outline: none;
+}

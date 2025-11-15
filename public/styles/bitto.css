@@ -27,7 +27,7 @@ html {
 }
 
 body {
-  font-family: 'Bricolage Grotesque', sans-serif;
+  font-family: "Bricolage Grotesque", sans-serif;
 }
 
 .bitto-popup-wrapper {
@@ -42,8 +42,7 @@ body {
   inset: 0;
   background-color: rgba(0, 26, 26, 0.4);
   opacity: 0;
-  transition:
-    opacity 0.3s var(--smooth-ease),
+  transition: opacity 0.3s var(--smooth-ease),
     backdrop-filter 0.3s var(--smooth-ease);
   pointer-events: none;
   backdrop-filter: blur(0px);
@@ -68,9 +67,7 @@ body {
   box-shadow: 0 25px 50px -12px var(--shadow-color);
   opacity: 0;
   transform: translateY(20px) scale(0.95);
-  transition:
-    transform 0.25s var(--pop-ease),
-    opacity 0.25s var(--smooth-ease);
+  transition: transform 0.25s var(--pop-ease), opacity 0.25s var(--smooth-ease);
   pointer-events: none;
   display: flex;
   flex-direction: column;
@@ -140,10 +137,7 @@ body {
 
 /* Close button with red circle and rotating icon */
 #bitto-close-btn {
-  transition:
-    background-color 0s,
-    border-radius 0s,
-    color 0s;
+  transition: background-color 0s, border-radius 0s, color 0s;
 }
 
 #bitto-close-btn svg {
@@ -287,7 +281,7 @@ body {
 }
 
 .bitto-quick-action-btn {
-  font-family: 'Bricolage Grotesque', sans-serif;
+  font-family: "Bricolage Grotesque", sans-serif;
   background: none;
   border: 1px solid var(--border-color);
   border-radius: 99px;
@@ -331,7 +325,7 @@ body {
   border: 1px solid var(--border-color);
   border-radius: 99px;
   padding: 0.65rem 2.5rem 0.65rem 1.125rem;
-  font-family: 'Bricolage Grotesque', sans-serif;
+  font-family: "Bricolage Grotesque", sans-serif;
   transition: all 0.15s var(--smooth-ease);
   font-size: 0.9rem;
   color: var(--primary-color);
@@ -436,11 +430,8 @@ body {
   outline: none;
   opacity: 0;
   transform: translateY(calc(100% + var(--edge-margin))) scale(1);
-  transition:
-    transform 0.4s var(--smooth-ease),
-    opacity 0.3s var(--smooth-ease),
-    background-color 0.15s ease,
-    box-shadow 0.15s ease,
+  transition: transform 0.4s var(--smooth-ease), opacity 0.3s var(--smooth-ease),
+    background-color 0.15s ease, box-shadow 0.15s ease,
     bottom 0.4s var(--smooth-ease);
   pointer-events: none;
   z-index: 101;
@@ -449,7 +440,7 @@ body {
 }
 
 .bitto-popup-fab.is-shifted-up {
-  bottom: calc(var(--edge-margin) + 56px); /* 48px height + 8px margin */
+  bottom: calc(var(--edge-margin) + 56px);
 }
 
 .bitto-popup-wrapper.is-fab-visible .bitto-popup-fab {
@@ -484,9 +475,7 @@ body {
   transition: opacity 0.2s ease;
 }
 
-/* Remove styles for the old, combined back-to-top state */
-
-/* New styles for the separate Back to Top button */
+/* Styles for the separate Back to Top button */
 .back-to-top-btn {
   position: fixed;
   bottom: var(--edge-margin);
@@ -508,9 +497,7 @@ body {
   opacity: 0;
   transform: translateY(20px) scale(0.9);
   pointer-events: none;
-  transition:
-    opacity 0.3s var(--smooth-ease),
-    transform 0.3s var(--smooth-ease);
+  transition: opacity 0.3s var(--smooth-ease), transform 0.3s var(--smooth-ease);
 }
 
 .back-to-top-btn.show {
@@ -558,14 +545,14 @@ body.bitto-chat-open {
 @media (min-width: 769px) {
   .bitto-popup-fab,
   .back-to-top-btn {
-    right: 1.5rem;
+    right: 0.5rem;
   }
 }
 
 @media (min-width: 1281px) {
   .bitto-popup-fab,
   .back-to-top-btn {
-    right: calc((100vw - 1280px) / 2 + 1.5rem);
+    right: 0.5rem;
   }
 }
 
@@ -605,6 +592,11 @@ body.bitto-chat-open {
   .bitto-popup-fab {
     width: 48px;
     height: 48px;
+  }
+
+  .bitto-popup-fab,
+  .back-to-top-btn {
+    right: 1.5rem;
   }
 }
 
