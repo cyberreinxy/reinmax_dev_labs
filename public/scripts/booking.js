@@ -61,7 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
 
-        console.log('Booking request submitted:', data);
         // Here you would typically send the data to a server
         alert('Your booking request has been submitted! We will get back to you shortly.');
         form.reset();

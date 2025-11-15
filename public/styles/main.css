@@ -1294,3 +1294,19 @@ a.animate-subtle-gradient {
   background-image: none !important;
   animation: none !important;
 }
+
+/*
+ * 8. PERFORMANCE & BROWSER HINTS
+ *
+ * Provides hints to the browser for optimizing rendering performance.
+ */
+
+/**
+ * Hint to the browser that the hero image's transform property is expected to change.
+ * This can help prevent the image from being discarded on memory-constrained
+ * devices or when switching tabs by promoting it to its own layer.
+ * This is a replacement for the old 'keepHeroImageInMemory' JavaScript hack.
+ */
+#home img[priority="high"] {
+  will-change: transform;
+}

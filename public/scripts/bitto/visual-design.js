@@ -44,7 +44,6 @@ async function getAIResponse() {
     tier = 'Server-Side API (Primary)';
   } catch (error) {
     // Tier 2: Fallback to local model
-    console.error('Server API failed, falling back to local model:', error);
     aiResponse = getLocalResponse(lastUserMessage, state);
     tier = 'Local Trained Model (Fallback)';
   }
@@ -230,11 +229,6 @@ function executeTool(toolName, toolData) {
 
 function sendBookingEmail(bookingData) {
   // This is a simulation. In a real app, this would be an API call.
-  console.log('--- Booking Email Simulation ---', {
-    to: bookingData.email,
-    subject: `New Call Booking - ${bookingData.name}`,
-    body: `Name: ${bookingData.name}\nDay: ${bookingData.day}\nTime: ${bookingData.time}`,
-  });
 }
 
 function handleUserInput(prompt) {
@@ -443,4 +437,3 @@ showFab();
 handleScroll();
 initKeyboardAdjust(); // Initialize keyboard handling
 
-console.log('Bitto Assistant Initialized');

@@ -6,7 +6,7 @@
 
 // --- 1. GLOBAL UTILITIES & CONFIGURATION ---
 
-console.log("Reinmax Creative script loading..."); // Script entry point log
+
 
 /**
  * Sets CSS variable --vh to real viewport height for mobile browser compatibility.
@@ -44,7 +44,7 @@ const App = {
    * Runs all setup methods in order.
    */
   init() {
-    console.log("App.init() called.");
+
 
     this.cacheDOMElements();
 
@@ -55,7 +55,6 @@ const App = {
     this.initNavScroll();
     this.initPlanButtons();
     this.initWorkflowSection();
-    this.keepHeroImageInMemory();
     this.initFooter();
     this.initPillarGridObserver();
     this.initWorkflowGridObserver();
@@ -64,14 +63,14 @@ const App = {
     this.initGenericAnimators();
     this.handleMobileMenuResize();
 
-    console.log("App.init() finished.");
+
   },
 
   /**
    * Caches frequently used DOM elements.
    */
   cacheDOMElements() {
-    console.log("Caching elements.");
+
     this.elements.desktopNav = document.getElementById("desktop-nav-container");
     this.elements.mobileNavContainer = document.getElementById(
       "mobile-nav-container"
@@ -86,10 +85,10 @@ const App = {
     try {
       if (window.lucide && typeof lucide.createIcons === "function") {
         lucide.createIcons();
-        console.log("lucide.createIcons() run successfully in App.init.");
+
       }
     } catch (err) {
-      console.warn("lucide.createIcons() failed in App.init:", err);
+
     }
   },
 
@@ -97,7 +96,7 @@ const App = {
    * Handles dynamic phrase animation in hero area.
    */
   initHeroAnimation() {
-    console.log("Initializing dynamic phrase animation.");
+
     const phrases = [
       "is widely recognized",
       "earns loyal customers",
@@ -107,7 +106,7 @@ const App = {
 
     const dynamicWordElement = document.getElementById("dynamic-word");
     if (!dynamicWordElement) {
-      console.warn("Dynamic word element not found.");
+
       return;
     }
     let phraseIndex = 0;
@@ -136,7 +135,7 @@ const App = {
    * Initializes mobile menu toggle and panel logic.
    */
   initMobileMenu() {
-    console.log("Initializing mobile menu logic.");
+
     const mobileMenuButton = document.getElementById("menu-toggle");
     const mobileMenuPanel = document.getElementById("mobile-menu");
 
@@ -144,7 +143,7 @@ const App = {
       mobileMenuButton.addEventListener("click", () => {
         const isExpanded =
           mobileMenuButton.getAttribute("aria-expanded") === "true";
-        console.log(`Mobile menu button clicked. Was expanded: ${isExpanded}`);
+
         this.toggleMobileMenu(!isExpanded);
       });
 
@@ -178,7 +177,7 @@ const App = {
         }
       });
     } else {
-      console.warn("Mobile menu elements not found.");
+
     }
   },
 
@@ -205,14 +204,14 @@ const App = {
    * Handles desktop and mobile navigation scroll effects.
    */
   initNavScroll() {
-    console.log("Initializing nav scroll effects.");
+
     const { desktopNav, mobileNavContainer, heroSection } = this.elements;
     const scrollThreshold = 10;
     const navLinks = document.querySelectorAll(".nav-link");
     const sections = document.querySelectorAll("section[id]");
 
     if (!desktopNav || !mobileNavContainer || !heroSection) {
-      console.warn("Nav scroll elements not found.");
+
       return;
     }
 
@@ -263,14 +262,14 @@ const App = {
    * Directs to checkout page on plan/course button clicks.
    */
   initPlanButtons() {
-    console.log("Initializing plan and course button click handlers.");
+
     const planButtons = document.querySelectorAll("[branding-plan]");
     const courseButtons = document.querySelectorAll("[courses-plan]");
 
     planButtons.forEach((button) => {
       button.addEventListener("click", () => {
         const branding = button.getAttribute("branding-plan");
-        console.log(`Branding plan button clicked: ${branding}`);
+
         if (branding) {
           window.location.href = `/checkout.html?branding=${branding}`;
         }
@@ -280,7 +279,7 @@ const App = {
     courseButtons.forEach((button) => {
       button.addEventListener("click", () => {
         const course = button.getAttribute("courses-plan");
-        console.log(`Course button clicked: ${course}`);
+
         if (course) {
           window.location.href = `/checkout.html?course=${course}`;
         }
@@ -289,35 +288,13 @@ const App = {
   },
 
   /**
-   * Ensures high-priority hero image stays in memory by drawing it to a 1x1 canvas.
-   */
-  keepHeroImageInMemory() {
-    const heroImage = document.querySelector('#home img[priority="high"]');
-    if (!heroImage) return;
-
-    const keepAlive = () => {
-      const canvas = document.createElement("canvas");
-      canvas.width = 1;
-      canvas.height = 1;
-      canvas.style.position = "fixed";
-      canvas.style.top = "-10px";
-      canvas.style.left = "-10px";
-      canvas.getContext("2d")?.drawImage(heroImage, 0, 0, 1, 1);
-    };
-
-    heroImage.complete
-      ? keepAlive()
-      : heroImage.addEventListener("load", keepAlive);
-  },
-
-  /**
    * Manages the interactive UI of the workflow/process section.
    */
   initWorkflowSection() {
-    console.log("Initializing workflow section.");
+
     const section = document.getElementById("workflow");
     if (!section) {
-      console.warn("Workflow section not found.");
+
       return;
     }
 
@@ -414,10 +391,10 @@ const App = {
    * Initializes the AI course popup, including form validation and visibility controls.
    */
   initCoursePopup() {
-    console.log("Initializing course popup.");
+
     const popup = document.getElementById("ai-course-popup");
     if (!popup) {
-      console.warn("Course popup not found.");
+
       return;
     }
 
@@ -499,18 +476,18 @@ const App = {
    * Triggers the course popup based on scroll position (when user is between hero and footer).
    */
   triggerCoursePopup() {
-    console.log("Initializing course popup trigger.");
+
     const popup = document.getElementById("ai-course-popup");
     const hero = document.getElementById("home");
     const footer = document.getElementById("footer");
 
     if (!popup || !hero || !footer) {
-      console.warn("Required elements for popup trigger not found.");
+
       return;
     }
 
     if (this.popupHasBeenDismissed) {
-      console.log("Popup has been dismissed, not initializing trigger.");
+
       return;
     }
 
@@ -565,7 +542,7 @@ const App = {
    * Initializes footer elements, such as the copyright year.
    */
   initFooter() {
-    console.log("Initializing footer.");
+
     this.updateCopyrightYear();
   },
 
@@ -581,10 +558,10 @@ const App = {
    * Sets up an IntersectionObserver to trigger animations for the pillar grid.
    */
   initPillarGridObserver() {
-    console.log("Initializing pillar grid observer.");
+
     const grid = document.querySelector(".pillar-grid");
     if (!grid) {
-      console.warn("Pillar grid not found for observer.");
+
       return;
     }
 
@@ -606,10 +583,10 @@ const App = {
    * Sets up an IntersectionObserver to trigger animations for the workflow grid.
    */
   initWorkflowGridObserver() {
-    console.log("Initializing workflow grid observer.");
+
     const wrapper = document.querySelector(".workflow-section-wrapper");
     if (!wrapper) {
-      console.warn("Workflow section wrapper not found for observer.");
+
       return;
     }
 
@@ -631,10 +608,10 @@ const App = {
    * Initializes a generic IntersectionObserver for all '.animate-on-scroll' elements.
    */
   initGenericAnimators() {
-    console.log("Initializing generic animators.");
+
     const elements = document.querySelectorAll(".animate-on-scroll");
     if (!elements.length) {
-      console.log("No elements found for generic animators.");
+
       return;
     }
 
@@ -660,7 +637,7 @@ const App = {
     const mobileMenuButton = document.getElementById("menu-toggle");
 
     if (!mobileMenuPanel || !mobileNavContainer || !mobileMenuButton) {
-      console.warn("Mobile menu elements not found for resize handler.");
+
       return;
     }
 
@@ -700,8 +677,8 @@ const App = {
  * Waits for the DOM to be ready, then initializes the App.
  */
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("DOM fully loaded and parsed. Initializing App.");
+
   App.init();
 });
 
-console.log("Reinmax Creative script finished loading.");
+
