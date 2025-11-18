@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Connection Lost</title>
+    <link rel="icon" href="/assets/ico/favicon.svg" type="image/svg+xml" />
+    <!-- Canonical Tag -->
+    <link rel="canonical" href="https://reinmax.vercel.app/offline.html" />
+    <!-- Stylesheets -->
+
+    <link rel="preload" href="/assets/fonts/Bricolage-Grotesque/bricolage-grotesque-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/Bricolage-Grotesque/bricolage-grotesque-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/Bricolage-Grotesque/bricolage-grotesque-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/Bricolage-Grotesque/bricolage-grotesque-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/Space-Grotesk/space-grotesk-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/Space-Grotesk/space-grotesk-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/Space-Grotesk/space-grotesk-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/styles/tailwind.css">
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/bitto.css">
+    
+    <style>
+      body {
+        --primary-color: #002828;
+        --secondary-color: #99cccc;
+        --background-color: #f2f4f4;
+      }
+      .content-wrapper {
+        animation: fadeIn 0.8s ease-out forwards;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body
+    class="bg-background text-primary flex min-h-screen items-center justify-center p-6 font-bricolage">
+    <div class="content-wrapper max-w-md text-center">
+      <svg class="mx-auto mb-6 h-20 w-20 text-primary" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke=""><g id="SVGRepo_bgCarrier" stroke-width="0"/><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/><g id="SVGRepo_iconCarrier"> <path d="M11.4361 11.436C9.91587 11.5582 8.43218 12.1989 7.27212 13.3589M20.6933 9.44446C18.0158 6.78263 14.4105 5.60524 10.9123 5.91229M6.94295 6.94292C5.62474 7.53387 4.38985 8.36771 3.30676 9.44446M4.00003 3.99994L18 17.9999M13 17.9999C13 18.5522 12.5523 18.9999 12 18.9999C11.4477 18.9999 11 18.5522 11 17.9999C11 17.4477 11.4477 16.9999 12 16.9999C12.5523 16.9999 13 17.4477 13 17.9999Z" stroke="#002828" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/> </g></svg>
+      <h1 class="mb-2 text-3xl font-bold">Connection Lost</h1>
+      <p class="text-gray-600 mb-8">
+        It seems you're offline. Please check your internet connection. Some
+        pages may still be available from the cache.
+      </p>
+      <button
+        onclick="window.location.reload()"
+        class="rounded-lg bg-[var(--primary-color)] px-6 py-3 font-semibold text-white transition-colors hover:bg-[var(--secondary-color)] hover:text-[var(--primary-color)]">
+        Try Again
+      </button>
+    </div>
+  </body>
+</html>

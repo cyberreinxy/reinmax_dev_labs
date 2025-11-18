@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" role="img" aria-label="Reinmax Creative Logo">
+  <title>Reinmax Creative Logo</title>
+  <defs>
+    <style type="text/css"><![CDATA[
+      /* Default: black for light mode */
+      .logo-fill { fill: #000; }
+
+      /* Switch to white when user prefers dark color scheme */
+      @media (prefers-color-scheme: dark) {
+        .logo-fill { fill: #fff; }
+      }
+    ]]></style>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <path class="logo-fill" d="M0,0v150h150V0H0ZM131.25,75h-56.25l56.25,56.25H18.75V18.75h112.5v56.25Z"/>
+  </g>
+</svg>

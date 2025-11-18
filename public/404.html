@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page Not Found</title>
+    <link rel="icon" href="/assets/ico/favicon.svg" type="image/svg+xml" />
+    <!-- Canonical Tag -->
+    <link rel="canonical" href="https://reinmax.vercel.app/404.html" />
+    <!-- Stylesheets -->
+
+    <link rel="preload" href="/assets/fonts/Bricolage-Grotesque/bricolage-grotesque-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/Bricolage-Grotesque/bricolage-grotesque-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/styles/main.css" />
+    <link rel="stylesheet" href="/styles/tailwind.css" />
+    <style>
+      body {
+        font-family: 'Bricolage Grotesque', sans-serif;
+        --primary-color: #002828;
+        --secondary-color: #99cccc;
+        --background-color: #f2f4f4;
+      }
+      .content-wrapper {
+        animation: fadeIn 0.8s ease-out forwards;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body
+    class="bg-background text-primary relative flex min-h-screen items-center justify-center p-6">
+    <!-- Main Centered Content -->
+    <div class="content-wrapper max-w-md text-center">
+      <svg fill="" viewBox="0 0 24 24" id="file-error" data-name="Line Color" xmlns="http://www.w3.org/2000/svg" class="mx-auto mb-6 h-20 w-20 text-primary" stroke=""><g id="SVGRepo_bgCarrier" stroke-width="0"/><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/><g id="SVGRepo_iconCarrier"><line id="secondary-upstroke" x1="18.95" y1="20.5" x2="19.05" y2="20.5" style="fill: none; stroke: #99cccc; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"/><line id="secondary" x1="19" y1="16" x2="19" y2="13" style="fill: none; stroke: #99cccc; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"/><path id="primary" d="M19,9V7L15,3H6A1,1,0,0,0,5,4V20a1,1,0,0,0,1,1h8" style="fill: none; stroke: #002828; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"/></g></svg>
+      <h1 class="mb-2 text-3xl font-bold">Page Not Found</h1>
+      <p class="text-gray-600 mb-8">
+        Sorry, we couldn't find the page you were looking for. It might have
+        been moved or deleted.
+      </p>
+      <a
+        href="/"
+        class="rounded-lg bg-[var(--primary-color)] px-6 py-3 font-semibold text-white transition-colors hover:bg-[var(--secondary-color)] hover:text-[var(--primary-color)]">
+        Go Home
+      </a>
+    </div>
+    <!-- Fixed Bottom Text -->
+    <p
+      class="absolute bottom-0 left-0 right-0 mb-8 text-center text-sm text-gray-500 leading-relaxed">
+      <span>Can't find what you're looking for?</span>
+      <span class="mt-1 block">
+        Please
+        <a href="mailto:mail@reinmaxcreative.com"
+          class="underline hover:text-primary ml-1">contact support</a>
+        <span class="mx-1">or</span>
+        <a href="https://github.com/cyberreinxy/reinmax_dev_labs/issues"
+          target="_blank" rel="noopener noreferrer"
+          class="underline hover:text-primary">report a broken link</a>.
+      </span>
+    </p>
+  </body>
+</html>

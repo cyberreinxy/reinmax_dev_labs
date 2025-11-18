@@ -1,0 +1,46 @@
+{
+  "name": "reinmax-dev-labs",
+  "version": "1.0.0",
+  "description": "The official source code for the Reinmax Creative and Design Agency. A modern web app with a Node.js backend and a Gemini-powered AI assistant.",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cyberreinxy/reinmax_dev_labs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cyberreinxy/reinmax_dev_labs/issues"
+  },
+  "homepage": "https://github.com/cyberreinxy/reinmax_dev_labs#readme",
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint .",
+    "start": "node -r dotenv/config server.js",
+    "build:css": "tailwindcss -i ./public/styles/input.css -o ./public/styles/tailwind.css --minify",
+    "watch:css": "tailwindcss -i ./public/styles/input.css -o ./public/styles/tailwind.css --watch",
+    "build": "npm run build:css",
+    "dev": "concurrently \"npm:watch:css\" \"cross-env NODE_ENV=development nodemon -r dotenv/config server.js\""
+  },
+  "keywords": [],
+  "author": "Reinhard Baraka <reinhardbaraka@gmail.com>",
+  "license": "MIT",
+  "type": "commonjs",
+  "dependencies": {
+    "compression": "^1.7.4",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.1.0",
+    "helmet": "^8.1.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.19",
+    "concurrently": "^9.2.1",
+    "cross-env": "^10.1.0",
+    "eslint": "^9.8.0",
+    "jest": "^30.2.0",
+    "nodemon": "^3.1.10",
+    "postcss": "^8.4.40",
+    "supertest": "^7.1.4",
+    "tailwindcss": "^3.4.7"
+  },
+  "_comment": "This is a comment section for notes."
+}

@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sitemap | Reinmax Creative</title>
+    <!-- Canonical Tag -->
+    <link rel="canonical" href="https://reinmax.vercel.app/sitemap.html" />
+    <!-- Load Local Tailwind CSS -->
+    <link href="/styles/tailwind.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/bitto.css">
+    <!-- Load Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preload" href="/assets/fonts/Bricolage-Grotesque/bricolage-grotesque-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/Bricolage-Grotesque/bricolage-grotesque-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/Bricolage-Grotesque/bricolage-grotesque-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/Bricolage-Grotesque/bricolage-grotesque-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/Space-Grotesk/space-grotesk-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/Space-Grotesk/space-grotesk-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/Space-Grotesk/space-grotesk-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  </head>
+
+  <body class="antialiased font-bricolage bg-background text-primary">
+    <!-- Floating Button Container (Fixed to Middle Bottom) -->
+    <div
+      class="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50 flex space-x-4"
+    >
+      <!-- Theme Toggle Button -->
+      <button
+        id="theme-toggle"
+        class="p-3 border rounded-xl shadow-2xl transition-all duration-300 focus:outline-none bg-white border border-gray-200 shadow-md hover:bg-hover-color hover:border-secondary group"
+        aria-label="Toggle Theme"
+      >
+        <!-- The <i> element is now defined here, but will be re-inserted by JS on theme change -->
+        <i data-lucide="sun" class="w-6 h-6 transition-colors duration-300"></i>
+      </button>
+
+      <!-- Home Icon -->
+      <a
+        href="/"
+        class="p-3 border rounded-xl shadow-2xl transition-all duration-300 focus:outline-none bg-white border border-gray-200 shadow-md hover:bg-hover-color hover:border-secondary group"
+        aria-label="Back to Home"
+      >
+        <i
+          data-lucide="home"
+          class="w-6 h-6 transition-colors duration-300"
+        ></i>
+      </a>
+    </div>
+
+    <div class="container mx-auto px-6 py-16 sm:py-24 max-w-4xl">
+      <div class="text-center mb-16">
+        <h1
+          class="text-4xl md:text-5xl font-bold mt-4"
+          style="color: var(--text-color)"
+        >
+          Sitemap
+        </h1>
+        <p class="text-lg mt-2" style="color: var(--text-muted-color)">
+          An overview of the Reinmax Creative website structure.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-2xl shadow-md border border-slate-200 p-6">
+          <h2 class="text-lg font-semibold text-primary border-b border-gray-200 pb-2 mb-4">
+            Main Pages
+          </h2>
+          <ul class="space-y-1">
+            <li>
+              <a href="/" class="group text-gray-600 hover:text-secondary transition-colors flex items-center px-2 py-1.5 rounded-lg"
+                ><i data-lucide="home" class="mr-3 w-4 h-4 flex-shrink-0 text-primary transition-colors group-hover:text-secondary"></i>Home</a
+              >
+            </li>
+            <li>
+              <a href="/booking.html" class="group text-gray-600 hover:text-secondary transition-colors flex items-center px-2 py-1.5 rounded-lg"
+                ><i data-lucide="calendar" class="mr-3 w-4 h-4 flex-shrink-0 text-primary transition-colors group-hover:text-secondary"></i>Booking</a
+              >
+            </li>
+            <li>
+              <a href="/contacts.html" class="group text-gray-600 hover:text-secondary transition-colors flex items-center px-2 py-1.5 rounded-lg"
+                ><i data-lucide="mail" class="mr-3 w-4 h-4 flex-shrink-0 text-primary transition-colors group-hover:text-secondary"></i>Contact Us</a
+              >
+            </li>
+            <li>
+              <a href="/academy.html" class="group text-gray-600 hover:text-secondary transition-colors flex items-center px-2 py-1.5 rounded-lg"
+                ><i data-lucide="book-open" class="mr-3 w-4 h-4 flex-shrink-0 text-primary transition-colors group-hover:text-secondary"></i>Academy</a
+              >
+            </li>
+            <li>
+              <a href="/blog.html" class="group text-gray-600 hover:text-secondary transition-colors flex items-center px-2 py-1.5 rounded-lg"
+                ><i data-lucide="newspaper" class="mr-3 w-4 h-4 flex-shrink-0 text-primary transition-colors group-hover:text-secondary"></i>Blog</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <!-- Utility Pages -->
+        <div class="bg-white rounded-2xl shadow-md border border-slate-200 p-6">
+          <h2 class="text-lg font-semibold text-primary border-b border-gray-200 pb-2 mb-4">
+            Utility Pages
+          </h2>
+          <ul class="space-y-1">
+            <li>
+              <a href="/offline.html" class="group text-gray-600 hover:text-secondary transition-colors flex items-center px-2 py-1.5 rounded-lg"
+                ><i data-lucide="wifi-off" class="mr-3 w-4 h-4 flex-shrink-0 text-primary transition-colors group-hover:text-secondary"></i>Offline Page</a
+              >
+            </li>
+            <li>
+              <a href="/404.html" class="group text-gray-600 hover:text-secondary transition-colors flex items-center px-2 py-1.5 rounded-lg"
+                ><i data-lucide="alert-circle" class="mr-3 w-4 h-4 flex-shrink-0 text-primary transition-colors group-hover:text-secondary"></i>Error Page</a
+              >
+            </li>
+            <li>
+              <a href="/sitemap.html" class="group text-gray-600 hover:text-secondary transition-colors flex items-center px-2 py-1.5 rounded-lg"
+                ><i data-lucide="map" class="mr-3 w-4 h-4 flex-shrink-0 text-primary transition-colors group-hover:text-secondary"></i>Sitemap</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <!-- Home Page Sections (Full Width) -->
+        <div class="bg-white rounded-2xl shadow-md border border-slate-200 p-6 md:col-span-2">
+          <h2 class="text-lg font-semibold text-primary border-b border-gray-200 pb-2 mb-4">
+            Homepage Sections
+          </h2>
+          <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1">
+            <li>
+              <a href="/#home" class="group text-gray-600 hover:text-secondary transition-colors flex items-center px-2 py-1.5 rounded-lg"
+                ><i data-lucide="home" class="mr-3 w-4 h-4 flex-shrink-0 text-primary transition-colors group-hover:text-secondary"></i>Hero Section</a
+              >
+            </li>
+            <li>
+              <a href="/#cores" class="group text-gray-600 hover:text-secondary transition-colors flex items-center px-2 py-1.5 rounded-lg"
+                ><i data-lucide="gem" class="mr-3 w-4 h-4 flex-shrink-0 text-primary transition-colors group-hover:text-secondary"></i>Our Philosophy</a
+              >
+            </li>
+            <li>
+              <a href="/#services" class="group text-gray-600 hover:text-secondary transition-colors flex items-center px-2 py-1.5 rounded-lg"
+                ><i data-lucide="box" class="mr-3 w-4 h-4 flex-shrink-0 text-primary transition-colors group-hover:text-secondary"></i>Creative Solutions</a
+              >
+            </li>
+            <li>
+              <a href="/#workflow" class="group text-gray-600 hover:text-secondary transition-colors flex items-center px-2 py-1.5 rounded-lg"
+                ><i data-lucide="workflow" class="mr-3 w-4 h-4 flex-shrink-0 text-primary transition-colors group-hover:text-secondary"></i>Creative Workflow</a
+              >
+            </li>
+            <li>
+              <a href="/#team" class="group text-gray-600 hover:text-secondary transition-colors flex items-center px-2 py-1.5 rounded-lg"
+                ><i data-lucide="users" class="mr-3 w-4 h-4 flex-shrink-0 text-primary transition-colors group-hover:text-secondary"></i>Our Team</a
+              >
+            </li>
+            <li>
+              <a href="/#projects" class="group text-gray-600 hover:text-secondary transition-colors flex items-center px-2 py-1.5 rounded-lg"
+                ><i data-lucide="layout-grid" class="mr-3 w-4 h-4 flex-shrink-0 text-primary transition-colors group-hover:text-secondary"></i>Creative Work</a
+              >
+            </li>
+            <li>
+              <a href="/#pricing" class="group text-gray-600 hover:text-secondary transition-colors flex items-center px-2 py-1.5 rounded-lg"
+                ><i data-lucide="credit-card" class="mr-3 w-4 h-4 flex-shrink-0 text-primary transition-colors group-hover:text-secondary"></i>Branding & Academy Plans</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <footer
+        class="text-center mt-20 text-sm text-gray-600"
+      >
+        <p>
+          &copy; <span id="copyright-year"></span> Reinmax Creative. All Rights
+          Reserved.
+        </p>
+      </footer>
+    </div>
+    <script>
+      // Use an IIFE for scope isolation and a tiny bit of clean code vibe
+      (() => {
+        const html = document.documentElement;
+        const toggleButton = document.getElementById('theme-toggle');
+        const themeKey = 'reinmax-theme';
+
+        /**
+         * Sets the application theme (light or dark) and updates the toggle icon.
+         * It forces the re-render of the Lucide icon by recreating the <i> element.
+         * @param {string} theme - 'light' or 'dark'.
+         */
+        const setTheme = (theme) => {
+          const iconName = theme === 'dark' ? 'sun' : 'moon';
+
+          // 1. Set the theme class on the HTML element
+          if (theme === 'dark') {
+            html.classList.add('dark');
+          } else {
+            html.classList.remove('dark');
+          }
+
+          // 2. Force Lucide icon update by replacing the button's content
+          // This reliably works because the old SVG is removed and a new <i> tag is ready for processing.
+          toggleButton.innerHTML = '';
+          const newIcon = document.createElement('i');
+          newIcon.setAttribute('data-lucide', iconName);
+          newIcon.className = 'w-6 h-6 transition-colors duration-300';
+          toggleButton.appendChild(newIcon);
+
+          // 3. Render all Lucide icons on the page
+          lucide.createIcons();
+
+          // 4. Store the preference
+          localStorage.setItem(themeKey, theme);
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+          // 1. Initialize Theme on Load
+          const storedTheme = localStorage.getItem(themeKey);
+
+          // Initial theme: Use stored theme, otherwise default to 'light'
+          const initialTheme = storedTheme || 'light';
+
+          // Apply initial theme
+          setTheme(initialTheme);
+
+          // 2. Add Toggle Functionality
+          toggleButton.addEventListener('click', () => {
+            // Determine current state based on class list
+            const currentTheme = html.classList.contains('dark')
+              ? 'dark'
+              : 'light';
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+          });
+
+          // Set copyright year
+          document.getElementById('copyright-year').textContent =
+            new Date().getFullYear();
+        });
+      })(); // End of IIFE
+    </script>
+  </body>
+</html>

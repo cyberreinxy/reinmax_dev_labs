@@ -1,0 +1,644 @@
+:root {
+  --primary-color: #002828;
+  --secondary-color: #99cccc;
+  --tertiary-color: #003333;
+  --accent-color: #004d4d;
+  --color-white: #ffffff;
+  --background-color: #f2f4f4;
+  --card-glass-bg: rgba(255, 255, 255, 1);
+  --border-color: rgba(148, 163, 163, 0.2);
+  --shadow-color: rgba(0, 0, 0, 0.2);
+  --danger-color: #ef4444;
+  --text-muted: #5a7070;
+  --edge-margin: 1.25rem;
+  --cool-ease: cubic-bezier(0.65, 0, 0.35, 1);
+  --smooth-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --pop-ease: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ai-chat-bubble-color: #e9ecef;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Bricolage Grotesque", sans-serif;
+}
+
+.bitto-popup-wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 102;
+  pointer-events: none;
+}
+
+.bitto-popup-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 26, 26, 0.4);
+  opacity: 0;
+  transition: opacity 0.3s var(--smooth-ease),
+    backdrop-filter 0.3s var(--smooth-ease);
+  pointer-events: none;
+  backdrop-filter: blur(0px);
+}
+
+.bitto-popup-wrapper.is-card-visible .bitto-popup-overlay {
+  opacity: 1;
+  pointer-events: auto;
+  backdrop-filter: blur(2px);
+}
+
+.bitto-popup-card {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  width: 26rem;
+  max-width: calc(100vw - 3rem);
+  height: 32rem;
+  max-height: calc(100vh - 120px);
+  background: var(--color-white);
+  border-radius: 1.25rem;
+  box-shadow: 0 25px 50px -12px var(--shadow-color);
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+  transition: transform 0.25s var(--pop-ease), opacity 0.25s var(--smooth-ease);
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.bitto-popup-wrapper.is-card-visible .bitto-popup-card {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+#bitto-chat-pane {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.bitto-chat-header {
+  padding: 1.25rem 1.75rem;
+  border-bottom: 1px solid var(--border-color);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bitto-chat-header-left h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  letter-spacing: -0.5px;
+}
+
+.bitto-chat-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Header icon buttons */
+.bitto-header-icon-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Delete button with light red hover */
+#bitto-delete-chat-btn {
+  transition: all 0.2s var(--smooth-ease);
+}
+
+#bitto-delete-chat-btn:hover {
+  background-color: #fee;
+  color: var(--danger-color);
+}
+
+/* Close button with red circle and rotating icon */
+#bitto-close-btn {
+  background-color: var(--ai-chat-bubble-color);
+  border-radius: 50%;
+  transition: background-color 0s, border-radius 0s, color 0s;
+}
+
+#bitto-close-btn svg {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#bitto-close-btn:hover {
+  background-color: var(--danger-color);
+  color: white;
+  border-radius: 50%;
+}
+
+#bitto-close-btn:hover svg {
+  transform: rotate(360deg);
+}
+
+.bitto-header-icon-btn svg {
+  width: 24px;
+  height: 24px;
+  stroke-width: 2;
+}
+
+.bitto-chat-history {
+  flex-grow: 1;
+  padding: 1.25rem 1.75rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-height: 0;
+}
+
+.bitto-chat-message {
+  display: flex;
+  gap: 0.75rem;
+  animation: slideInFade 0.25s ease backwards;
+  align-items: flex-start;
+}
+
+@keyframes slideInFade {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.bitto-chat-message p {
+  max-width: 80%;
+  padding: 0.75rem 1rem;
+  border-radius: 1rem;
+  line-height: 1.5;
+  font-size: 0.9rem;
+  word-wrap: break-word;
+}
+
+.bitto-ai-message p {
+  background-color: var(--ai-chat-bubble-color);
+  color: var(--primary-color);
+  border-bottom-left-radius: 0.25rem;
+}
+
+.bitto-ai-message p strong {
+  color: var(--tertiary-color);
+  font-weight: 600;
+}
+
+.bitto-ai-message p a {
+  color: var(--primary-color);
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.bitto-ai-message.bitto-error-message p {
+  background-color: #fff0f0;
+  color: var(--danger-color);
+}
+
+.bitto-user-message {
+  justify-content: flex-end;
+}
+
+.bitto-user-message p {
+  background-color: var(--primary-color);
+  color: var(--color-white);
+  border-bottom-right-radius: 0.25rem;
+}
+
+.bitto-typing-indicator p {
+  color: var(--text-muted);
+  background-color: var(--ai-chat-bubble-color);
+  border-bottom-left-radius: 0.25rem;
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+}
+
+.bitto-typing-indicator span {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--text-muted);
+  animation: bounce 0.8s infinite;
+}
+
+.bitto-typing-indicator span:nth-child(2) {
+  animation-delay: 0.08s;
+}
+
+.bitto-typing-indicator span:nth-child(3) {
+  animation-delay: 0.16s;
+}
+
+@keyframes bounce {
+  0%,
+  80%,
+  100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+.bitto-chat-input-area {
+  padding: 1.25rem 1.75rem;
+  border-top: 1px solid var(--border-color);
+  flex-shrink: 0;
+}
+
+.bitto-quick-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  animation: fadeIn 0.3s ease 0.2s backwards;
+}
+
+.bitto-quick-action-btn {
+  font-family: "Bricolage Grotesque", sans-serif;
+  background: none;
+  border: 1px solid var(--border-color);
+  border-radius: 99px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s var(--smooth-ease);
+  color: var(--text-muted);
+  transform: translateY(0);
+}
+
+.bitto-quick-action-btn:hover {
+  background-color: var(--background-color);
+  border: 1px solid var(--text-muted);
+  color: var(--primary-color);
+}
+
+.bitto-quick-action-btn:active {
+  transform: translateY(0);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.bitto-chat-input-form {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+#bitto-chat-input {
+  flex-grow: 1;
+  border: 1px solid var(--border-color);
+  border-radius: 99px;
+  padding: 0.65rem 2.5rem 0.65rem 1.125rem;
+  font-family: "Bricolage Grotesque", sans-serif;
+  transition: all 0.15s var(--smooth-ease);
+  font-size: 0.9rem;
+  color: var(--primary-color);
+}
+
+#bitto-chat-input::placeholder {
+  color: var(--text-muted);
+}
+
+#bitto-chat-input:focus {
+  outline: none;
+  border-color: var(--tertiary-color);
+  box-shadow: 0 0 0 3px rgba(153, 204, 204, 0.3);
+}
+
+#bitto-chat-input:disabled {
+  background-color: #f8f9fa;
+  cursor: not-allowed;
+}
+
+#bitto-send-btn {
+  background-color: var(--primary-color);
+  border: none;
+  color: var(--color-white);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.15s var(--smooth-ease);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0;
+}
+
+#bitto-send-btn:hover:not(:disabled) {
+  background-color: var(--tertiary-color);
+}
+
+#bitto-send-btn:active:not(:disabled) {
+  transform: translateY(-50%);
+}
+
+#bitto-send-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+#bitto-send-btn svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2;
+}
+
+.bitto-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: var(--color-white);
+  border-radius: 50%;
+  display: none;
+  box-sizing: border-box;
+  animation: rotation 0.8s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+#bitto-send-btn.is-loading .bitto-spinner {
+  display: inline-block;
+}
+
+#bitto-send-btn.is-loading svg {
+  display: none;
+}
+
+.bitto-popup-fab {
+  position: fixed;
+  bottom: var(--edge-margin);
+  right: var(--edge-margin);
+  width: 48px;
+  height: 48px;
+  background-color: var(--secondary-color);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 25px -5px var(--shadow-color);
+  outline: none;
+  opacity: 0;
+  transform: translateY(calc(100% + var(--edge-margin))) scale(1);
+  transition: transform 0.4s var(--smooth-ease), opacity 0.3s var(--smooth-ease),
+    background-color 0.15s ease, box-shadow 0.15s ease,
+    bottom 0.4s var(--smooth-ease);
+  pointer-events: none;
+  z-index: 101;
+  color: var(--primary-color);
+  padding: 0;
+}
+
+.bitto-popup-fab.is-shifted-up {
+  bottom: calc(var(--edge-margin) + 56px);
+}
+
+.bitto-popup-wrapper.is-fab-visible .bitto-popup-fab {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.bitto-popup-fab:hover {
+  background-color: var(--tertiary-color);
+  box-shadow: 0 15px 35px -5px var(--shadow-color);
+  transform: translateY(0) scale(1.1);
+  color: var(--color-white);
+}
+
+.bitto-popup-fab:active {
+  transform: translateY(0) scale(0.95);
+}
+
+.bitto-popup-fab:hover .bitto-fab-icon {
+  color: var(--color-white);
+}
+
+.bitto-fab-icon {
+  width: 24px;
+  height: 24px;
+  stroke-width: 2;
+  flex-shrink: 0;
+}
+
+.bitto-fab-icon-chat {
+  transition: opacity 0.2s ease;
+}
+
+/* Styles for the separate Back to Top button */
+.back-to-top-btn {
+  position: fixed;
+  bottom: var(--edge-margin);
+  right: var(--edge-margin);
+  width: 48px;
+  height: 48px;
+  background-color: var(--secondary-color);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 25px -5px var(--shadow-color);
+  outline: none;
+  z-index: 101;
+  color: var(--primary-color);
+  padding: 0;
+  opacity: 0;
+  transform: translateY(20px) scale(0.9);
+  pointer-events: none;
+  transition: opacity 0.3s var(--smooth-ease), transform 0.3s var(--smooth-ease);
+}
+
+.back-to-top-btn.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.back-to-top-btn:hover {
+  background-color: var(--tertiary-color);
+  color: var(--color-white);
+}
+
+.back-to-top-btn:active {
+  transform: scale(0.95);
+}
+
+body.bitto-chat-open .back-to-top-btn {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(20px) scale(0.9);
+}
+
+body.bitto-chat-open {
+  overflow: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 163, 0.4);
+}
+
+@media (min-width: 769px) {
+  .bitto-popup-fab,
+  .back-to-top-btn {
+    right: 0.75rem;
+  }
+}
+
+.bitto-popup-fab,
+.back-to-top-btn {
+  right: 0.75rem;
+}
+
+@media (max-width: 640px) {
+  .bitto-popup-card {
+    bottom: 1rem;
+    right: 1rem;
+    left: 1rem;
+    width: calc(100% - 2rem);
+    max-width: none;
+    height: 85vh;
+    max-height: 85vh;
+  }
+
+  .bitto-chat-header {
+    padding: 1rem 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .bitto-chat-history {
+    padding: 1rem 1.5rem;
+    min-height: 0;
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  .bitto-chat-input-area {
+    padding: 1rem 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .bitto-quick-action-btn {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.75rem;
+  }
+
+  .bitto-popup-fab {
+    width: 48px;
+    height: 48px;
+  }
+
+  .bitto-popup-fab,
+  .back-to-top-btn {
+    right: 1.5rem;
+  }
+}
+
+/* Hides the footer and the AI course popup when the Bitto keyboard is active */
+.bitto-keyboard-active #footer,
+.bitto-keyboard-active #ai-course-popup {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .bitto-keyboard-active .bitto-popup-card {
+    bottom: 0; /* Position at the bottom */
+    height: 100%; /* Take full available height */
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 2rem);
+    max-width: none;
+    border-radius: 0;
+    box-shadow: none;
+    transition: bottom 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+@media (max-width: 640px) {
+  .bitto-keyboard-active #bitto-chat-pane {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .bitto-keyboard-active .bitto-chat-header {
+    flex: 0 0 auto;
+  }
+
+  .bitto-keyboard-active .bitto-chat-history {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    min-height: 0;
+  }
+
+  .bitto-keyboard-active .bitto-chat-input-area {
+    flex: 0 0 auto;
+  }
+}

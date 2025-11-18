@@ -1,0 +1,1329 @@
+/* 1. SETUP & CORE STYLES */
+
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("/assets/fonts/Bricolage-Grotesque/bricolage-grotesque-latin-200-normal.woff2")
+    format("woff2");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("/assets/fonts/Bricolage-Grotesque/bricolage-grotesque-latin-300-normal.woff2")
+    format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("/assets/fonts/Bricolage-Grotesque/bricolage-grotesque-latin-400-normal.woff2")
+    format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("/assets/fonts/Bricolage-Grotesque/bricolage-grotesque-latin-500-normal.woff2")
+    format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("/assets/fonts/Bricolage-Grotesque/bricolage-grotesque-latin-600-normal.woff2")
+    format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("/assets/fonts/Bricolage-Grotesque/bricolage-grotesque-latin-700-normal.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("/assets/fonts/Bricolage-Grotesque/bricolage-grotesque-latin-800-normal.woff2")
+    format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/assets/fonts/Space-Grotesk/space-grotesk-latin-300-normal.woff2")
+    format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/assets/fonts/Space-Grotesk/space-grotesk-latin-400-normal.woff2")
+    format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/assets/fonts/Space-Grotesk/space-grotesk-latin-500-normal.woff2")
+    format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/assets/fonts/Space-Grotesk/space-grotesk-latin-600-normal.woff2")
+    format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/assets/fonts/Space-Grotesk/space-grotesk-latin-700-normal.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Variables */
+:root {
+  /* Color Palette */
+  --primary-color: #002828;
+  --secondary-color: #99cccc;
+  --tertiary-color: #003333;
+  --quaternary-color: #efeeee;
+  --color-white: #ffffff;
+  --brand-accent: #004d4d;
+  --hero-bg: #e5f0f0;
+  --background-color: #f2f4f4;
+  --background-footer: #001a1a;
+  --border-color: rgba(148, 163, 163, 0.2);
+
+  /* Typography */
+  --text-light: #e0eaea;
+  --text-muted: #94a3a3;
+  --text-muted-2: #6b7e7e;
+
+  /* UI States */
+  --hover-color: #e6f5f5;
+  --icons-bg-color: #ebeeee;
+  --menu-hover-bg: var(--hover-color);
+  --card-glass-bg: rgba(255, 255, 255, 0.95);
+  --shadow-color: rgba(0, 0, 0, 0.15);
+
+  /* Sizing */
+  --header-height: 4rem;
+}
+
+/* Dark Mode Overrides */
+html.dark {
+  --primary-color: #e5e5e5;
+  --secondary-color: #8ab4f8; /* Google Blue-ish highlight */
+  --tertiary-color: #003333; /* Keep as is or adjust for dark mode */
+  --quaternary-color: #efeeee; /* Keep as is or adjust for dark mode */
+  --color-white: #ffffff; /* Keep as is or adjust for dark mode */
+  --brand-accent: #004d4d; /* Keep as is or adjust for dark mode */
+  --hero-bg: #1a1a1a; /* Darker hero background */
+  --background-color: #0d1117;
+  --background-footer: #001a1a; /* Keep as is or adjust for dark mode */
+  --border-color: rgba(255, 255, 255, 0.1);
+
+  --text-light: #e0eaea; /* Keep as is or adjust for dark mode */
+  --text-muted: #94a3a3;
+  --text-muted-2: #6b7e7e; /* Keep as is or adjust for dark mode */
+
+  --hover-color: #2a2a2a; /* Darker hover color */
+  --icons-bg-color: #1c1c1c; /* Darker icon background */
+  --menu-hover-bg: var(--hover-color);
+  --card-glass-bg: rgba(30, 41, 59, 0.5);
+  --shadow-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Base & Body */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Scrollbar */
+body {
+  font-family: "Bricolage Grotesque", "Space Grotesk", sans-serif;
+  background-color: var(--background-color, #fff);
+  color: var(--primary-color, #000);
+  position: relative;
+  overflow-y: scroll;
+  /* Reserve space for the scrollbar to prevent layout shift */
+  scrollbar-gutter: stable;
+}
+
+/* Webkit (Chrome, Safari, Edge) scrollbar styling */
+body::-webkit-scrollbar {
+  width: 6px;
+  background: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 40, 40, 0.35);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+/* On hover, make the scrollbar slightly more prominent */
+body::-webkit-scrollbar-thumb:hover {
+  width: 12px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+@supports (scrollbar-color: auto) {
+  body:hover {
+    /* Firefox scrollbar styling */
+    scrollbar-color: rgba(0, 40, 40, 0.5) transparent;
+  }
+}
+
+/* 2. LAYOUT & UTILITIES */
+
+/* Layout */
+section[id] {
+  scroll-margin-top: var(--header-height);
+}
+
+/* Utilities */
+.is-hidden {
+  visibility: hidden;
+}
+
+.text-secondary {
+  color: var(--secondary-color);
+}
+.bg-primary {
+  background-color: var(--primary-color);
+}
+.bg-secondary {
+  background-color: var(--secondary-color);
+}
+
+/* 3. GLOBAL COMPONENTS */
+
+/* Footer */
+.footer-link {
+  position: relative;
+  display: inline-block;
+  color: var(--text-muted);
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer-link:hover {
+  color: var(--secondary-color);
+}
+.footer-link::after {
+  display: none;
+}
+
+.footer-with-overlay {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.footer-with-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: url("/assets/webp/design.webp");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.05;
+}
+
+@media (max-width: 768px) {
+  .footer-with-overlay::before {
+    background-position: 75% center;
+  }
+}
+
+/* 4. SECTION-SPECIFIC COMPONENTS */
+
+/* Home Section */
+#home {
+  --grid-opacity: 0.035;
+  background-color: var(--hero-bg);
+  position: relative;
+  overflow: hidden;
+}
+
+#dynamic-word {
+  display: inline-block;
+  white-space: nowrap;
+  opacity: 0;
+  color: var(--secondary-color);
+  transform: translateY(100%);
+  animation-duration: 950ms;
+  animation-fill-mode: forwards;
+  transition: color 0.4s;
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutUp {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  to {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+
+@keyframes slideOutDown {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  to {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+/* Animation classes used by script.js */
+.slide-in-up-anim {
+  animation-name: slideInUp;
+}
+
+.slide-out-down-anim {
+  animation-name: slideOutDown;
+  animation-duration: 750ms; /* A slightly faster exit feels better */
+}
+
+/* Rotating hero word styles */
+.rotating-word-wrapper {
+  display: inline-block;
+  vertical-align: baseline;
+  width: auto; /* JS may set a ch-based width based on longest phrase */
+  max-width: 100%;
+  overflow: visible; /* allow ascenders/descenders to be visible during animation */
+  white-space: nowrap;
+  text-align: left;
+  position: relative;
+  font-size: inherit; /* match surrounding text */
+  line-height: inherit; /* match surrounding text */
+}
+
+/* Accessibility helper to visually hide elements but keep them for screen readers */
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Inner wrapper for rotating words animation */
+.rotating-word-inner {
+  display: block;
+  transition: transform 0.6s ease-in-out;
+  will-change: transform;
+}
+
+.rotating-word {
+  display: block;
+  text-align: left;
+  opacity: 1; /* Words are always visible, the wrapper moves them */
+  height: 1em; /* Ensure each word has a consistent height */
+  line-height: 1em; /* Align text vertically within its block */
+}
+
+/* When user hovers or focuses the wrapper we pause visual movement (JS will honor) */
+.rotating-word-wrapper:focus-within,
+.rotating-word-wrapper:hover {
+  outline: none;
+}
+
+/* Static safety styles for rotating phrases (used before JS injects runtime styles) */
+#rotating-phrase-wrapper {
+  position: relative;
+  display: inline-block;
+  overflow: visible; /* critical to avoid clipping */
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+/* Base (hidden) state for each phrase */
+.rotating-phrase {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%) translateY(12%) scale(0.985) rotateX(6deg);
+  opacity: 0;
+  display: inline-block;
+  white-space: nowrap;
+  will-change: transform, opacity, filter;
+  color: var(--primary-color);
+  background: none;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: initial;
+  filter: blur(1px);
+  transition: transform 520ms cubic-bezier(0.2, 0.8, 0.2, 1), opacity 420ms ease,
+    filter 420ms ease;
+}
+
+/* Visible (active) phrase: gradient text, crisp, and in-place */
+.rotating-phrase.is-active {
+  transform: translateY(-50%) translateY(0) scale(1) rotateX(0deg);
+  opacity: 1;
+  filter: blur(0);
+  background: var(
+    --rotating-gradient,
+    linear-gradient(90deg, #06b6d4, #7c3aed)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.02);
+}
+
+/* Exit state for upward movement */
+.rotating-phrase.exit-up {
+  transform: translateY(-50%) translateY(-12%) scale(0.985) rotateX(-6deg);
+  opacity: 0;
+  filter: blur(1px);
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .rotating-phrase {
+    transition: opacity 200ms linear;
+    transform: translateY(-50%) translateY(0) scale(1) !important;
+    filter: none !important;
+  }
+  .rotating-phrase.exit-up {
+    opacity: 0;
+  }
+}
+
+/* Additional enter/active helpers for a snappy entrance effect (JS can use these if desired) */
+.rotating-phrase.enter-up {
+  transform: translateY(-50%) translateY(110%) scale(0.96) rotateX(6deg);
+  opacity: 0;
+  filter: blur(1.2px) saturate(0.9);
+}
+.rotating-phrase.enter-active {
+  transform: translateY(-50%) translateY(0) scale(1) rotateX(0deg);
+  opacity: 1;
+  filter: blur(0px) saturate(1);
+}
+
+/* Mobile: keep phrases absolutely stacked but center horizontally so they
+   occupy the exact same space (hidden ones won't affect layout) */
+@media (max-width: 640px) {
+  #rotating-phrase-wrapper {
+    display: block;
+    text-align: center;
+    width: 100%;
+    margin-top: 0.2rem;
+    /* wrapper remains position: relative (set globally) so absolute children
+       will position correctly; JS sets min-height to avoid clipping */
+    white-space: nowrap;
+  }
+
+  /* Keep absolute positioning but center each phrase horizontally */
+  #rotating-phrase-wrapper .rotating-phrase {
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    opacity: 0 !important;
+    display: inline-block !important;
+    margin: 0 !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+    transition: opacity 360ms ease, transform 360ms ease, filter 360ms ease;
+  }
+
+  #rotating-phrase-wrapper .rotating-phrase.is-active {
+    opacity: 1 !important;
+    transform: translate(-50%, -50%) !important;
+  }
+
+  #rotating-phrase-wrapper .rotating-phrase.exit-up {
+    opacity: 0 !important;
+    transform: translate(-50%, -60%) !important; /* slight upward exit */
+  }
+}
+
+/* Strong mobile override to ensure centering even if JS injects inline styles */
+@media (max-width: 640px) {
+  #rotating-phrase-wrapper.rotating-word-wrapper {
+    display: block !important;
+    text-align: center !important;
+    width: 100% !important;
+    margin: 0.25rem 0 0 0 !important;
+    white-space: nowrap !important;
+    position: relative !important; /* ensure container is positioned for absolute children */
+  }
+
+  /* Force absolute stacking and horizontal centering even if JS sets inline styles */
+  #rotating-phrase-wrapper.rotating-word-wrapper .rotating-phrase {
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    opacity: 0 !important;
+    display: inline-block !important;
+    margin: 0 !important;
+    text-align: center !important;
+    white-space: nowrap !important;
+  }
+
+  #rotating-phrase-wrapper.rotating-word-wrapper .rotating-phrase.is-active {
+    opacity: 1 !important;
+    transform: translate(-50%, -50%) !important;
+  }
+}
+
+/* Tune hero headline and intro sizes for visual balance */
+#home h1 {
+  font-size: clamp(1.75rem, 5.4vw, 2.5rem); /* slightly larger for emphasis */
+  line-height: 1.02;
+}
+
+#home .pyramid-text {
+  font-size: clamp(
+    0.95rem,
+    1.6vw,
+    1.05rem
+  ); /* a touch larger for readability */
+}
+
+#home::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-repeat: repeat;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 100%;
+  opacity: var(--grid-opacity);
+  /* Disable animation for performance: keep the grid fixed */
+  background-attachment: fixed;
+}
+
+#home > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Hero Badge */
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 0.25px solid #10b981;
+  padding: 0.5rem 1rem;
+  border-radius: 100px;
+  color: #10b981;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  letter-spacing: 0.05em;
+}
+
+.badge-dot {
+  width: 6px;
+  height: 6px;
+  background: #10b981;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Services Section */
+.service-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* Create an isolated 3D context so child transforms don't affect siblings */
+.service-card-wrapper {
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+
+.service-card-image-container {
+  height: 160px;
+  position: relative;
+  overflow: hidden; /* ensure images are masked inside their container */
+  border-top-left-radius: 1rem; /* match card rounding */
+  border-top-right-radius: 1rem; /* match card rounding */
+  isolation: isolate; /* contain transformed children to this stacking context */
+}
+
+.service-card-image-container img {
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  transform: scale(1);
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* make sure image covers container and is cropped cleanly */
+  transform-origin: center center; /* scale from center */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  will-change: transform; /* hint for performant scaling */
+}
+
+/* Extra safety: ensure the image cannot paint outside rounded corners on some browsers
+   by applying a matching border-radius & mask to the image itself. This prevents
+   subpixel leakage when the image scales. */
+.service-card-image-container img {
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+  -webkit-mask-image: -webkit-radial-gradient(
+    white,
+    black
+  ); /* fallback mask to force clipping */
+  mask-image: radial-gradient(white, black);
+}
+
+.service-card-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  padding-top: 3rem;
+}
+
+#services .bg-gray-50 {
+  flex-grow: 1;
+}
+
+.service-card-icon {
+  position: absolute;
+  top: 160px;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  width: 3rem;
+  height: 3rem;
+  background-color: var(--icons-bg-color);
+  border-radius: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Prevent icons from scaling when their parent card is hovered. Only images should scale. */
+.service-card-wrapper:hover .service-card-icon,
+.service-card-wrapper:focus-within .service-card-icon {
+  transform: translate3d(-50%, -50%, 0); /* keep icon centered and unchanged */
+  transition: none !important; /* ensure no transition/animation runs on the icon */
+  z-index: 5; /* keep icon above the image */
+}
+
+/* More strict locking to avoid subpixel or rotation artifacts: use 3D translate and a higher z-index */
+
+/* Scale only the image on hover/focus of the card */
+.service-card-wrapper:hover .service-card-image-container img,
+.service-card-wrapper:focus-within .service-card-image-container img {
+  transform: scale(1.06); /* subtle zoom */
+}
+
+#services .bg-gray-50:hover {
+  transform: translateY(0);
+}
+
+/* Workflow Section */
+#workflow {
+  --card-bg-active: #e5f0f0;
+  --border-color-active: #c0d8d8;
+  --primary-color: #002828;
+  --secondary-color-hover: #99cccc;
+  --border-color: #e2e8f0;
+  --icon-bg-color: #f7fafa;
+  --text-color-light: #4a5568;
+}
+
+/* Workflow Layout */
+.workflow-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .workflow-grid {
+    grid-template-columns: 3fr 2fr;
+    gap: 4rem;
+  }
+}
+
+/* Workflow Process Steps */
+.process-steps-list {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .process-steps-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.process-step {
+  background-color: #ffffff;
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+}
+
+.process-step-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  cursor: pointer;
+}
+
+@media (min-width: 1024px) {
+  .process-step-header {
+    padding-top: 1.75rem;
+    padding-bottom: 1.75rem;
+  }
+  .process-step:hover {
+    border-color: var(--border-color-active);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+}
+
+.process-step.is-active {
+  background-color: var(--card-bg-active);
+  border-color: var(--border-color-active);
+}
+
+@media (min-width: 1024px) {
+  .process-step.is-active {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  }
+}
+
+.step-icon-wrapper {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.75rem;
+  background-color: var(--icon-bg-color);
+  transition: background-color 0.4s ease;
+}
+
+.step-icon,
+.step-number {
+  grid-area: 1 / 1;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.step-icon {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.step-icon svg {
+  width: 24px;
+  height: 24px;
+  color: var(--primary-color);
+  display: block;
+}
+
+.step-number {
+  opacity: 0;
+  transform: scale(0.7);
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.process-step.is-active .step-icon-wrapper {
+  background-color: var(--primary-color);
+}
+
+.process-step.is-active .step-icon {
+  opacity: 0;
+  transform: scale(0.7);
+}
+
+.process-step.is-active .step-number {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.step-title {
+  color: var(--primary-color);
+  font-weight: 600;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.cta-arrow {
+  color: var(--primary-color);
+  transition: all 0.3s ease;
+}
+.process-step-header.group:hover .cta-arrow {
+  color: var(--secondary-color-hover);
+}
+
+/* Workflow Visual Preview (Desktop) */
+.visual-preview-area {
+  display: none; /* Hidden on mobile */
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .visual-preview-area {
+    display: block;
+    position: sticky;
+    top: 6rem;
+  }
+}
+
+.visual-preview-area .image-container {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 1rem;
+  overflow: hidden;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: height 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-color);
+}
+
+@media (min-width: 1024px) {
+  .visual-preview-area .image-container {
+    aspect-ratio: unset;
+  }
+}
+
+.desktop-image-area {
+  position: relative;
+  flex-grow: 1;
+  min-height: 0;
+}
+
+.visual-preview-area .preview-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.6s ease-in-out;
+}
+
+.visual-preview-area .preview-image.is-active {
+  opacity: 1;
+}
+
+.visual-preview-area .description-container {
+  background-color: #ffffff;
+  padding: 1rem 1.5rem;
+  display: grid;
+  flex-shrink: 0;
+  border-top: 1px solid var(--border-color);
+}
+
+.visual-preview-area .preview-description {
+  grid-area: 1 / 1;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  color: var(--primary-color);
+  font-size: 0.9rem; /* Reduced font size */
+  line-height: 1.6;
+}
+
+.visual-preview-area .preview-description.is-active {
+  opacity: 1;
+}
+
+.visual-preview-area .image-container.is-default-state .description-container {
+  display: none;
+}
+
+/* Workflow Mobile Accordion */
+.step-toggle-icon {
+  flex-shrink: 0;
+  position: relative;
+  width: 24px;
+  height: 24px;
+}
+
+.step-toggle-icon span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 2px;
+  background-color: var(--primary-color);
+  transform-origin: center;
+  transition: transform 0.4s ease;
+}
+.step-toggle-icon span:first-child {
+  transform: translate(-50%, -50%) rotate(0deg);
+}
+.step-toggle-icon span:last-child {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+.process-step.is-active .step-toggle-icon span:first-child {
+  transform: translate(-50%, -50%) rotate(180deg);
+}
+.process-step.is-active .step-toggle-icon span:last-child {
+  transform: translate(-50%, -50%) rotate(180deg);
+}
+
+@media (min-width: 1024px) {
+  .step-toggle-icon {
+    display: none;
+  }
+}
+
+.mobile-preview-container {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s ease-out;
+}
+.process-step.is-active .mobile-preview-container {
+  grid-template-rows: 1fr;
+}
+
+.mobile-preview-content {
+  overflow: hidden;
+}
+
+.mobile-image-wrapper {
+  padding: 0.5rem;
+}
+
+.mobile-image-wrapper .image-content {
+  border-radius: 0.75rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-color);
+  background-color: #ffffff;
+}
+
+.mobile-image-wrapper img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.mobile-image-wrapper .description-container {
+  background-color: #ffffff;
+  color: var(--primary-color);
+  line-height: 1.6;
+  padding: 1rem 1.25rem;
+  font-size: 0.9rem; /* Reduced font size */
+  border-top: 1px solid var(--border-color);
+}
+
+@media (min-width: 1024px) {
+  .mobile-preview-container {
+    display: none;
+  }
+}
+
+/* AI Course Popup */
+#ai-course-popup {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(110%);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+  background-color: var(--primary-color);
+}
+
+@media (min-width: 1024px) {
+  #ai-course-popup {
+    left: max(1.5rem, calc(50% - 40rem + 1.5rem));
+    right: auto;
+    transform: translateX(-110%);
+  }
+}
+
+#ai-course-popup.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) translateX(0);
+}
+
+#ai-course-popup-close-btn svg {
+  transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+}
+#ai-course-popup-close-btn:hover svg {
+  transform: rotate(1turn);
+}
+
+.ai-course-popup-placeholder-red::placeholder {
+  color: #ef4444;
+}
+
+.ai-course-popup-form-shake {
+  animation: ai-course-popup-form-shake 0.6s ease-out;
+}
+
+@keyframes ai-course-popup-form-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  15% {
+    transform: translateX(-7px) rotate(-1deg);
+  }
+  30% {
+    transform: translateX(5px) rotate(1deg);
+  }
+  45% {
+    transform: translateX(-4px) rotate(-1deg);
+  }
+  60% {
+    transform: translateX(2px) rotate(1deg);
+  }
+  75% {
+    transform: translateX(-1px) rotate(0);
+  }
+}
+
+/* Contact Page Specific Styles */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .contact-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 3rem;
+  }
+}
+
+.contact-info-card,
+.contact-form-card {
+  background-color: var(--card-glass-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  box-shadow: 0 4px 12px var(--shadow-color);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-info-card:hover,
+.contact-form-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px var(--shadow-color);
+}
+
+.contact-info-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 0;
+}
+
+.contact-info-icon {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background-color: var(--icons-bg-color);
+  color: var(--primary-color);
+}
+
+.social-links a {
+  color: var(--primary-color);
+  background-color: var(--icons-bg-color);
+  border-radius: 50%;
+  padding: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+  background-color: var(--secondary-color);
+  color: var(--color-white);
+  transform: scale(1.1);
+}
+
+.map-container {
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  height: 250px;
+}
+
+/* 5. ANIMATIONS & EFFECTS */
+
+/* Global Fade-in */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered Fade-in (for workflow items) */
+.workflow-fade-in {
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.workflow-section-wrapper.visible .workflow-fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.workflow-section-wrapper.visible .workflow-fade-in:nth-child(1) {
+  transition-delay: 0.2s;
+}
+.workflow-section-wrapper.visible .workflow-fade-in:nth-child(2) {
+  transition-delay: 0.3s;
+}
+.workflow-section-wrapper.visible .workflow-fade-in:nth-child(3) {
+  transition-delay: 0.4s;
+}
+.workflow-section-wrapper.visible .workflow-fade-in:nth-child(4) {
+  transition-delay: 0.5s;
+}
+.workflow-section-wrapper.visible .workflow-fade-in:nth-child(6) {
+  transition-delay: 0.7s;
+}
+
+/* Image Fade-in */
+.animate-on-scroll img,
+.pillar-grid img {
+  opacity: 0;
+}
+
+.animate-on-scroll.visible img,
+.pillar-grid.visible img {
+  animation: imageFadeIn 0.8s ease-out 0.2s forwards;
+}
+
+@keyframes imageFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Cores Section */
+#cores {
+  position: relative;
+}
+
+/* 6. NAVIGATION */
+
+#desktop-nav-container {
+  background-color: transparent;
+}
+
+#mobile-nav-container {
+  background-color: transparent;
+}
+
+.logomark-text,
+.nav-link,
+.cta-text {
+  color: var(--primary-color);
+}
+
+.logo-path {
+  fill: var(--primary-color);
+}
+
+#desktop-nav-container.scrolled,
+#mobile-nav-container.scrolled,
+#mobile-nav-container.menu-is-open {
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgb(229 229 229);
+}
+
+/* Mobile navigation styles */
+#mobile-menu {
+  padding-top: var(--header-height);
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+}
+
+#mobile-menu.open {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+#mobile-menu .nav-link {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+#mobile-menu.open .nav-link {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered transitions for nav links */
+#mobile-menu.is-opening .nav-link:nth-child(1) {
+  transition-delay: 0.1s;
+}
+#mobile-menu.is-opening .nav-link:nth-child(2) {
+  transition-delay: 0.15s;
+}
+#mobile-menu.is-opening .nav-link:nth-child(3) {
+  transition-delay: 0.2s;
+}
+#mobile-menu.is-opening .nav-link:nth-child(4) {
+  transition-delay: 0.25s;
+}
+#mobile-menu.is-opening .nav-link:nth-child(5) {
+  transition-delay: 0.3s;
+}
+#mobile-menu.is-opening .nav-link:nth-child(6) {
+  transition-delay: 0.35s;
+}
+
+.nav-link.active {
+  color: var(--secondary-color);
+}
+
+/* Navigation links hover */
+.nav-link:hover {
+  color: var(--secondary-color);
+}
+
+/* CTA text hover (targets the child text when the parent 'group' is hovered) */
+.group:hover .cta-text {
+  color: var(--secondary-color);
+}
+
+/* On click (active), scale down the width even more */
+.menu-toggle:active svg rect {
+  transform: scaleX(0.5);
+  transition-duration: 0.015s;
+}
+
+/* 7. MISCELLANEOUS STYLES */
+@keyframes subtle-gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Disable gradient and animation for elements that use this class */
+a.animate-subtle-gradient {
+  background-image: none !important;
+  animation: none !important;
+}
+
+/*
+ * 8. PERFORMANCE & BROWSER HINTS
+ *
+ * Provides hints to the browser for optimizing rendering performance.
+ */
+
+/**
+ * Hint to the browser that the hero image's transform property is expected to change.
+ * This can help prevent the image from being discarded on memory-constrained
+ * devices or when switching tabs by promoting it to its own layer.
+ * This is a replacement for the old 'keepHeroImageInMemory' JavaScript hack.
+ */
+#home img[priority="high"] {
+  will-change: transform;
+}

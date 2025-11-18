@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title id="page-title">Blog Post | Reinmax Creative</title>
+    <link rel="icon" href="/assets/ico/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/assets/ico/favicon.ico" type="image/x-icon" />
+    <!-- Canonical Tag (will be updated by JS) -->
+    <link rel="canonical" href="https://reinmax.vercel.app/blog-post.html" />
+
+    <link rel="preload" href="/assets/fonts/Bricolage-Grotesque/bricolage-grotesque-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/Bricolage-Grotesque/bricolage-grotesque-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/Space-Grotesk/space-grotesk-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/styles/tailwind.css">
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/bitto.css">
+    <style>
+        .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
+            color: var(--primary-color);
+        }
+        .prose p {
+            color: #374151;
+            line-height: 1.75;
+        }
+        .prose a {
+            color: var(--secondary-color);
+        }
+        .prose a:hover {
+            color: var(--primary-color);
+        }
+        .prose h2 {
+            margin-top: 2.5em;
+            margin-bottom: 1.5em;
+        }
+        .prose h3 {
+            margin-top: 2em;
+            margin-bottom: 1em;
+        }
+    </style>
+</head>
+
+<body class="antialiased font-bricolage bg-background text-primary">
+    <main id="page-content">
+        <section id="home" class="hidden"></section>
+        <!-- ============================================= -->
+        <!-- =                HEADER SECTION             = -->
+        <!-- ============================================= -->
+        <header>
+            <div id="desktop-nav-container"
+                class="hidden lg:fixed top-0 left-0 w-full h-20 z-50 lg:block">
+                <div
+                    class="w-full h-full max-w-screen-xl mx-auto flex items-center justify-between px-6">
+
+                    <div class="flex-1 flex justify-start">
+                        <a href="/" class="flex items-center">
+                            <svg data-name="Layer 1"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 120 120"
+                                class="h-10 w-10">
+                                <path class="logo-path"
+                                    d="M0 0v120h120V0zm105 60H60l45 45H15V15h90z" />
+                            </svg>
+                        </a>
+                    </div>
+
+                    <nav class="flex items-center gap-x-1 lg:gap-x-4">
+                        <a href="/#home"
+                            class="nav-link relative isolate text-lg font-semibold leading-6 px-2 py-1.5">Home</a>
+                        <a href="/#cores"
+                            class="nav-link relative isolate text-lg font-semibold leading-6 px-2 py-1.5">Studio</a>
+                        <a href="/#services"
+                            class="nav-link relative isolate text-lg font-semibold leading-6 px-2 py-1.5">Services</a>
+                        <a href="/#projects"
+                            class="nav-link relative isolate text-lg font-semibold leading-6 px-2 py-1.5">Projects</a>
+                        <a href="/#pricing"
+                            class="nav-link relative isolate text-lg font-semibold leading-6 px-2 py-1.5">Packages</a>
+                        <a href="/blog.html"
+                            class="nav-link relative isolate text-lg font-semibold leading-6 px-2 py-1.5">Blog</a>
+                    </nav>
+
+                    <div class="flex-1 flex justify-end">
+
+                        <a href="/academy.html"
+                            class="text-lg font-semibold leading-6 bg-soft rounded-xl px-4 py-3">Academy</a>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <div id="mobile-nav-container"
+                class="lg:hidden fixed top-0 left-0 w-full z-50">
+                <div id="mobile-header-bar"
+                    class="w-full h-16 flex items-center justify-between px-6">
+                    <div class="flex items-center">
+                        <a href="/" class="flex items-center">
+                            <svg data-name="Layer 1"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 120 120"
+                                class="h-8 w-8">
+                                <path class="logo-path"
+                                    d="M0 0v120h120V0zm105 60H60l45 45H15V15h90z" />
+                            </svg>
+                        </a>
+                    </div>
+
+                    <button id="menu-toggle"
+                        class="menu-toggle flex items-center justify-center">
+                        <svg width="32" height="16" viewBox="0 0 32 16"
+                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect y="14" width="32" height="2"
+                                style="transform-origin: center; transition: transform 0.3s ease;"
+                                fill="currentColor"></rect>
+                            <rect width="32" height="2"
+                                style="transform-origin: center; transition: transform 0.3s ease;"
+                                fill="currentColor"></rect>
+                        </svg>
+                    </button>
+                </div>
+
+            </div>
+        </header>
+                    <div id="mobile-menu"
+                        class="bg-white border-b border-gray-200 lg:hidden fixed top-0 left-0 w-full z-40">
+                        <nav
+                            class="flex flex-col px-6 py-4 space-y-4 text-2xl font-semibold leading-6">
+                            <a href="/#home" class="nav-link py-3">Home</a>
+                            <a href="/#cores" class="nav-link py-3">Studio</a>
+                            <a href="/#services"
+                                class="nav-link py-3">Services</a>
+                            <a href="/#projects"
+                                class="nav-link py-3">Portfolio</a>
+                            <a href="/#pricing"
+                                class="nav-link py-3">Packages</a>
+                            <a href="/blog.html"
+                                class="nav-link py-3">Blog</a>
+                            <a href="/academy.html"
+                                class="nav-link py-3">Academy</a>
+                        </nav>
+                    </div>
+        <div id="blog-post-container" class="pt-20">
+            <p id="loading-message" class="text-center text-gray-500 py-20">Loading blog post...</p>
+            <p id="error-message" class="text-center text-red-500 py-20 hidden">Failed to load blog post. Please try again later.</p>
+            <p id="not-found-message" class="text-center text-gray-500 py-20 hidden">Blog post not found.</p>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const blogPostContainer = document.getElementById('blog-post-container');
+            const loadingMessage = document.getElementById('loading-message');
+            const errorMessage = document.getElementById('error-message');
+            const notFoundMessage = document.getElementById('not-found-message');
+            const pageTitle = document.getElementById('page-title');
+            const canonicalLink = document.querySelector('link[rel="canonical"]');
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const slug = urlParams.get('slug');
+
+            if (!slug) {
+                loadingMessage.style.display = 'none';
+                notFoundMessage.style.display = 'block';
+                pageTitle.textContent = 'Post Not Found | Reinmax Creative';
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/blog/${slug}`);
+                if (response.status === 404) {
+                    loadingMessage.style.display = 'none';
+                    notFoundMessage.style.display = 'block';
+                    pageTitle.textContent = 'Post Not Found | Reinmax Creative';
+                    return;
+                }
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const post = await response.json();
+
+                loadingMessage.style.display = 'none';
+
+                const tagsHtml = post.tags.map(tag => `<span class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm font-semibold">${tag}</span>`).join(' ');
+
+                blogPostContainer.innerHTML = `
+                    <article>
+                        <header class="relative h-[60vh] flex items-center justify-center text-white">
+                            <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+                            <img src="${post.image}" alt="${post.title}" class="absolute inset-0 w-full h-full object-cover -z-10">
+                            <div class="relative max-w-4xl mx-auto text-center px-6">
+                                <div class="flex flex-wrap justify-center gap-2 mb-4">
+                                    ${tagsHtml}
+                                </div>
+                                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">${post.title}</h1>
+                                <div class="flex justify-center items-center space-x-4 text-gray-200">
+                                    <span>By ${post.author}</span>
+                                    <span class="hidden md:inline">|</span>
+                                    <span>${new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                                    <span class="hidden md:inline">|</span>
+                                    <span>${post.readingTime}</span>
+                                </div>
+                            </div>
+                        </header>
+
+                        <div id="post-content-wrapper" class="prose prose-lg max-w-4xl mx-auto py-12 px-6">
+                            ${post.content}
+                        </div>
+                    </article>
+                `;
+                pageTitle.textContent = `${post.title} | Reinmax Creative`;
+                canonicalLink.href = `https://reinmax.vercel.app/blog-post.html?slug=${post.slug}`;
+
+            } catch (error) {
+                console.error('Error fetching blog post:', error);
+                loadingMessage.style.display = 'none';
+                errorMessage.style.display = 'block';
+                pageTitle.textContent = 'Error | Reinmax Creative';
+            }
+        });
+    </script>
+    <script src="/scripts/script.js"></script>
+    <script src="/scripts/register-sw.js"></script>
+</body>
+
+</html>

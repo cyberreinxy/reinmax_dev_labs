@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog | Reinmax Creative</title>
+    <link rel="icon" href="/assets/ico/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/assets/ico/favicon.ico" type="image/x-icon" />
+    <!-- Canonical Tag -->
+    <link rel="canonical" href="https://reinmax.vercel.app/blog.html" />
+
+    <link rel="preload" href="/assets/fonts/Bricolage-Grotesque/bricolage-grotesque-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/Bricolage-Grotesque/bricolage-grotesque-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/Space-Grotesk/space-grotesk-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/styles/tailwind.css">
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/bitto.css">
+    <style>
+        .pagination-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .line-clamp-3 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body class="antialiased font-bricolage bg-background text-primary">
+    <main id="page-content">
+        <section id="home" class="hidden"></section>
+
+            <!-- ============================================= -->
+            <!-- =                HEADER SECTION             = -->
+            <!-- ============================================= -->
+            <header>
+                <div id="desktop-nav-container"
+                    class="hidden lg:fixed top-0 left-0 w-full h-20 z-50 lg:block">
+                    <div
+                        class="w-full h-full max-w-screen-xl mx-auto flex items-center justify-between px-6">
+
+                        <div class="flex-1 flex justify-start">
+                            <a href="/" class="flex items-center">
+                                <svg data-name="Layer 1"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 120 120"
+                                    class="h-10 w-10">
+                                    <path class="logo-path"
+                                        d="M0 0v120h120V0zm105 60H60l45 45H15V15h90z" />
+                                </svg>
+                            </a>
+                        </div>
+
+                        <nav class="flex items-center gap-x-1 lg:gap-x-4">
+                            <a href="/#home"
+                                class="nav-link relative isolate text-lg font-semibold leading-6 px-2 py-1.5">Home</a>
+                            <a href="/#cores"
+                                class="nav-link relative isolate text-lg font-semibold leading-6 px-2 py-1.5">Studio</a>
+                            <a href="/#services"
+                                class="nav-link relative isolate text-lg font-semibold leading-6 px-2 py-1.5">Services</a>
+                            <a href="/#projects"
+                                class="nav-link relative isolate text-lg font-semibold leading-6 px-2 py-1.5">Projects</a>
+                            <a href="/#pricing"
+                                class="nav-link relative isolate text-lg font-semibold leading-6 px-2 py-1.5">Packages</a>
+                            <a href="/blog.html"
+                                class="nav-link relative isolate text-lg font-semibold leading-6 px-2 py-1.5">Blog</a>
+                        </nav>
+
+                        <div class="flex-1 flex justify-end">
+
+                            <a href="/academy.html"
+                                class="text-lg font-semibold leading-6 bg-soft rounded-xl px-4 py-3">Academy</a>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Mobile Navigation -->
+                <div id="mobile-nav-container"
+                    class="lg:hidden fixed top-0 left-0 w-full z-50">
+                    <div id="mobile-header-bar"
+                        class="w-full h-16 flex items-center justify-between px-6">
+                        <div class="flex items-center">
+                            <a href="/" class="flex items-center">
+                                <svg data-name="Layer 1"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 120 120"
+                                    class="h-8 w-8">
+                                    <path class="logo-path"
+                                        d="M0 0v120h120V0zm105 60H60l45 45H15V15h90z" />
+                                </svg>
+                            </a>
+                        </div>
+
+                        <button id="menu-toggle"
+                            class="menu-toggle flex items-center justify-center">
+                            <svg width="32" height="16" viewBox="0 0 32 16"
+                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect y="14" width="32" height="2"
+                                    style="transform-origin: center; transition: transform 0.3s ease;"
+                                    fill="currentColor"></rect>
+                                <rect width="32" height="2"
+                                    style="transform-origin: center; transition: transform 0.3s ease;"
+                                    fill="currentColor"></rect>
+                            </svg>
+                        </button>
+                    </div>
+
+                </div>
+            </header>
+            <div id="mobile-menu"
+                class="bg-white border-b border-gray-200 lg:hidden fixed top-0 left-0 w-full z-40">
+                <nav
+                    class="flex flex-col px-6 py-4 space-y-4 text-2xl font-semibold leading-6">
+                    <a href="/#home" class="nav-link py-3">Home</a>
+                    <a href="/#cores" class="nav-link py-3">Studio</a>
+                    <a href="/#services"
+                        class="nav-link py-3">Services</a>
+                    <a href="/#projects"
+                        class="nav-link py-3">Portfolio</a>
+                    <a href="/#pricing"
+                        class="nav-link py-3">Packages</a>
+                    <a href="/blog.html"
+                        class="nav-link py-3">Blog</a>
+                    <a href="/academy.html"
+                        class="nav-link py-3">Academy</a>
+                </nav>
+            </div>
+
+        <section class="pt-32 pb-16 px-6 max-w-7xl mx-auto">
+            <h1 class="text-4xl lg:text-5xl font-bold mb-6 text-center">Our Blog & Insights</h1>
+            <p class="text-lg text-gray-600 mb-12 text-center max-w-3xl mx-auto">Stay updated with the latest in design, branding, and creative strategies. Discover our insights and analysis.</p>
+
+            <div id="blog-posts-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Blog posts will be loaded here by JavaScript -->
+                <p id="loading-message" class="text-center text-gray-500 col-span-full">Loading blog posts...</p>
+                <p id="error-message" class="text-center text-red-500 col-span-full hidden">Failed to load blog posts. Please try again later.</p>
+            </div>
+
+            <div id="pagination-container" class="flex justify-center items-center mt-12 space-x-4">
+                <!-- Pagination buttons will be added here -->
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const blogPostsContainer = document.getElementById('blog-posts-container');
+            const loadingMessage = document.getElementById('loading-message');
+            const errorMessage = document.getElementById('error-message');
+            const paginationContainer = document.getElementById('pagination-container');
+
+            const postsPerPage = 8;
+            let currentPage = 1;
+            let allPosts = [];
+
+            const renderPosts = () => {
+                blogPostsContainer.innerHTML = '';
+                const startIndex = (currentPage - 1) * postsPerPage;
+                const endIndex = startIndex + postsPerPage;
+                const postsToRender = allPosts.slice(startIndex, endIndex);
+
+                postsToRender.forEach(post => {
+                    const postCard = document.createElement('a'); // Changed back to 'a'
+                    postCard.href = `/blog-post.html?slug=${post.slug}`; // Set href for the whole card
+                    postCard.classList.add('blog-post-card', 'group', 'bg-white', 'rounded-xl', 'shadow-md', 'overflow-hidden', 'flex', 'flex-col', 'cursor-pointer', 'hover:bg-gray-50', 'hover:shadow-lg', 'transition-all', 'duration-300');
+
+                    // Tag processing logic
+                    const tagMap = {
+                        'ui': 'UI/UX',
+                        'ux': 'UI/UX',
+                    };
+                    let processedTags = post.tags.map(tag => {
+                        const lowerCaseTag = tag.toLowerCase();
+                        return tagMap[lowerCaseTag] || tag;
+                    });
+                    processedTags = [...new Set(processedTags)]; // Remove duplicates
+                    const tagsToShow = processedTags.slice(0, 2);
+                    const tagsHtml = tagsToShow.map(tag => `<span class="bg-gray-200 text-gray-700 px-2 py-1 rounded-full text-xs font-semibold">${tag}</span>`).join(' ');
+
+                    const summary = post.summary; // Removed JS truncation
+
+                    postCard.innerHTML = `
+                        <div class="overflow-hidden">
+                            <img src="${post.image}" alt="${post.title}" class="w-full h-36 object-cover" loading="lazy">
+                        </div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <div class="flex-grow">
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    ${tagsHtml}
+                                </div>
+                                <h2 class="text-xl font-bold text-primary mb-2 line-clamp-2">
+                                    ${post.title}
+                                </h2>
+                                <p class="text-gray-600 text-sm mb-4 line-clamp-3">${summary}</p>
+                            </div>
+                            <div class="flex justify-between items-center text-xs text-gray-500 mt-4">
+                                <span>${new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                                <span>${post.readingTime}</span>
+                            </div>
+                        </div>
+                    `;
+                    blogPostsContainer.appendChild(postCard);
+                });
+            };
+
+            const renderPagination = () => {
+                paginationContainer.innerHTML = '';
+                const totalPages = Math.ceil(allPosts.length / postsPerPage);
+
+                if (totalPages <= 1) return;
+
+                const backButton = document.createElement('button');
+                backButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>';
+                backButton.classList.add('pagination-btn', 'p-2', 'rounded-full', 'bg-white', 'shadow-md', 'hover:bg-gray-100', 'transition-colors');
+                if (currentPage === 1) {
+                    backButton.classList.add('disabled');
+                }
+                backButton.addEventListener('click', () => {
+                    if (currentPage > 1) {
+                        currentPage--;
+                        renderPosts();
+                        renderPagination();
+                    }
+                });
+                paginationContainer.appendChild(backButton);
+
+                const pageInfo = document.createElement('span');
+                pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+                pageInfo.classList.add('text-gray-600');
+                paginationContainer.appendChild(pageInfo);
+
+                const nextButton = document.createElement('button');
+                nextButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>';
+                nextButton.classList.add('pagination-btn', 'p-2', 'rounded-full', 'bg-white', 'shadow-md', 'hover:bg-gray-100', 'transition-colors');
+                if (currentPage === totalPages) {
+                    nextButton.classList.add('disabled');
+                }
+                nextButton.addEventListener('click', () => {
+                    if (currentPage < totalPages) {
+                        currentPage++;
+                        renderPosts();
+                        renderPagination();
+                    }
+                });
+                paginationContainer.appendChild(nextButton);
+            };
+
+            try {
+                const response = await fetch('/api/blog');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                allPosts = await response.json();
+
+                loadingMessage.style.display = 'none';
+
+                if (allPosts.length === 0) {
+                    blogPostsContainer.innerHTML = '<p class="text-center text-gray-500 col-span-full">No blog posts found.</p>';
+                    return;
+                }
+
+                renderPosts();
+                renderPagination();
+
+            } catch (error) {
+                console.error('Error fetching blog posts:', error);
+                loadingMessage.style.display = 'none';
+                errorMessage.style.display = 'block';
+            }
+        });
+    </script>
+    <script src="/scripts/script.js"></script>
+    <script src="/scripts/register-sw.js"></script>
+</body>
+
+</html>

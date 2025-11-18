@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <!-- ============================================= -->
+    <!-- =                META & SEO                 = -->
+    <!-- ============================================= -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Contact Reinmax Creative for branding, design, and digital experience projects. Let's build something incredible together." />
+    <meta name="author" content="Reinhard Baraka, Reinmax Creative" />
+
+    <!-- Favicon Links -->
+    <link rel="icon" href="/assets/ico/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/assets/ico/favicon.ico" type="image/x-icon" />
+    <!-- Canonical Tag -->
+    <link rel="canonical" href="https://reinmax.vercel.app/contacts.html" />
+
+    <!-- Page Title -->
+    <title>Contact Us | Reinmax Creative</title>
+
+    <!-- ============================================= -->
+    <!-- =             FONTS & STYLESHEETS           = -->
+    <!-- ============================================= -->
+
+    <link rel="preload" href="/assets/fonts/Bricolage-Grotesque/bricolage-grotesque-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/Bricolage-Grotesque/bricolage-grotesque-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/Bricolage-Grotesque/bricolage-grotesque-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/Bricolage-Grotesque/bricolage-grotesque-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/Space-Grotesk/space-grotesk-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/Space-Grotesk/space-grotesk-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/Space-Grotesk/space-grotesk-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/styles/tailwind.css">
+    <link rel="stylesheet" href="/styles/main.css">
+
+    <style>
+        .content-wrapper {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .contact-card {
+            background-color: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .form-input {
+            background-color: rgba(255, 255, 255, 0.5);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            background-color: white;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px color-mix(in srgb, var(--secondary-color) 20%, transparent);
+            outline: none;
+        }
+    </style>
+</head>
+
+<body class="antialiased font-bricolage bg-background">
+
+<!-- Development Warning Banner -->
+<div id="dev-warning-banner" class="sticky top-0 z-50 bg-red-50 border-b border-red-200 p-4 text-sm text-red-800 relative">
+    <!-- Left back arrow -->
+    <button onclick="history.back()" title="Go back" class="absolute left-4 top-1/2 -translate-y-1/2 p-1 rounded-full hover:bg-red-100 transition-colors" aria-label="Go back">
+        <i data-lucide="arrow-left" class="w-5 h-5 text-red-800"></i>
+    </button>
+
+
+        <!-- Message -->
+        <p class="text-center">
+            <strong>Maintenance alert:</strong> This page is a work in progress. The form is temporarily disabled.
+        </p>
+        <!-- Right close button -->
+        <button id="close-warning-btn" class="absolute right-4 top-1/2 -translate-y-1/2 p-1 rounded-full hover:bg-red-100 transition-colors" aria-label="Dismiss warning">
+            <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+    </div>
+</div>
+
+    <main id="page-content" class="min-h-screen flex items-center justify-center py-24 px-6">
+
+        <div class="content-wrapper w-full max-w-6xl mx-auto">
+            <!-- Header -->
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-bold text-primary">Get in Touch</h1>
+                <p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
+                    Have a project in mind or just want to say hello? We'd love to hear from you. Fill out the form or use the contact details below.
+                </p>
+            </div>
+
+            <!-- Two-column Layout -->
+            <div class="grid lg:grid-cols-2 gap-12 items-start">
+                <!-- Left Column: Contact Form -->
+                <div class="contact-card border border-slate-200 rounded-2xl p-8 w-full">
+                    <h2 class="text-2xl font-semibold text-primary mb-6">Send us a Message</h2>
+                    <form action="mailto:mail@reinmaxcreative.com" method="POST" enctype="text/plain" class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-primary mb-2">Full Name</label>
+                            <input type="text" id="name" name="name" required class="form-input w-full rounded-lg p-3" placeholder="Your Name">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-primary mb-2">Email Address</label>
+                            <input type="email" id="email" name="email" required class="form-input w-full rounded-lg p-3" placeholder="you@example.com">
+                        </div>
+                        <div>
+                            <label for="subject" class="block text-sm font-medium text-primary mb-2">Subject</label>
+                            <input type="text" id="subject" name="subject" required class="form-input w-full rounded-lg p-3" placeholder="What can we help with?">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-primary mb-2">Message</label>
+                            <textarea id="message" name="message" rows="5" required class="form-input w-full rounded-lg p-3" placeholder="Tell us more about your project..."></textarea>
+                        </div>
+                        <div>
+                            <button type="submit" class="w-full py-3 px-6 rounded-lg bg-primary text-white font-semibold hover:bg-tertiary transition-all duration-300 ease-in-out disabled:bg-gray-400 disabled:cursor-not-allowed" disabled>
+                                Send Message
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Right Column: Contact Details & Map -->
+                <div class="space-y-8">
+                    <div class="contact-card border border-slate-200 rounded-2xl p-8">
+                        <h3 class="text-xl font-semibold text-primary mb-4">Contact Information</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4">
+                                <i data-lucide="mail" class="w-6 h-6 text-primary"></i>
+                                <div>
+                                    <p class="font-semibold">Email</p>
+                                    <a href="mailto:mail@reinmaxcreative.com" class="text-primary hover:underline">mail@reinmaxcreative.com</a>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <i data-lucide="phone" class="w-6 h-6 text-primary"></i>
+                                <div>
+                                    <p class="font-semibold">Phone</p>
+                                    <a href="tel:+1234567890" class="text-primary hover:underline">+1 (234) 567-890</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-card border border-slate-200 rounded-2xl p-8">
+                        <h3 class="text-xl font-semibold text-primary mb-4">Follow Us</h3>
+                        <div class="flex gap-4">
+                            <a href="#" class="p-3 rounded-full bg-gray-100 hover:bg-secondary transition-colors"><i data-lucide="twitter" class="w-6 h-6 text-primary"></i></a>
+                            <a href="#" class="p-3 rounded-full bg-gray-100 hover:bg-secondary transition-colors"><i data-lucide="instagram" class="w-6 h-6 text-primary"></i></a>
+                            <a href="#" class="p-3 rounded-full bg-gray-100 hover:bg-secondary transition-colors"><i data-lucide="linkedin" class="w-6 h-6 text-primary"></i></a>
+                        </div>
+                    </div>
+                    <div class="contact-card border border-slate-200 rounded-2xl p-4 h-64">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.086209943101!2d-122.4194154846813!3d37.77492957975817!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085808c1c002d11%3A0x8b0f299b0e34a283!2sSan%20Francisco%2C%20CA%2C%20USA!5e0!3m2!1sen!2s!4v1620000000000!5m2!1sen!2s" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" class="rounded-lg"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        lucide.createIcons();
+
+        // Handle the dismissal of the development warning banner
+        const warningBanner = document.getElementById('dev-warning-banner');
+        const closeWarningBtn = document.getElementById('close-warning-btn');
+
+        if (warningBanner && closeWarningBtn) {
+            closeWarningBtn.addEventListener('click', () => {
+                warningBanner.style.display = 'none';
+            });
+        }
+
+        // Copy to clipboard functionality
+        const copyEmailBtn = document.getElementById('copy-email-btn');
+        if (copyEmailBtn) {
+            copyEmailBtn.addEventListener('click', () => {
+                const email = 'mail@reinmaxcreative.com';
+                navigator.clipboard.writeText(email).then(() => {
+                    const icon = copyEmailBtn.querySelector('i');
+                    icon.setAttribute('data-lucide', 'check');
+                    lucide.createIcons();
+                    copyEmailBtn.title = 'Copied!';
+
+                    setTimeout(() => {
+                        icon.setAttribute('data-lucide', 'copy');
+                        lucide.createIcons();
+                        copyEmailBtn.title = 'Copy email address';
+                    }, 2000);
+                });
+            });
+        }
+    </script>
+</body>
+
+</html>

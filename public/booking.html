@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Book your branding, design, or digital experience project with Reinmax Creative. Secure your spot today." />
+    <meta name="author" content="Reinhard Baraka, Reinmax Creative" />
+
+    <link rel="icon" href="/assets/ico/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/assets/ico/favicon.ico" type="image/x-icon" />
+    <!-- Canonical Tag -->
+    <link rel="canonical" href="https://reinmax.vercel.app/booking.html" />
+
+    <title>Book a Service | Reinmax Creative</title>
+
+    <link rel="preload" href="/assets/fonts/Bricolage-Grotesque/bricolage-grotesque-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/Bricolage-Grotesque/bricolage-grotesque-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/Bricolage-Grotesque/bricolage-grotesque-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/Bricolage-Grotesque/bricolage-grotesque-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/Space-Grotesk/space-grotesk-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/Space-Grotesk/space-grotesk-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="/assets/fonts/Space-Grotesk/space-grotesk-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="/styles/tailwind.css">
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/booking.css">
+
+</head>
+
+<body class="antialiased font-bricolage bg-background">
+
+    <main id="page-content" class="min-h-screen flex items-center justify-center py-24 px-6">
+
+        <div class="content-wrapper w-full max-w-lg mx-auto">
+            <div class="text-center mb-10">
+                <h1 class="text-4xl font-bold text-primary">Book a Service</h1>
+                <p class="mt-3 text-lg text-gray-600">
+                    Let's get your project on the calendar.
+                </p>
+            </div>
+
+            <div class="booking-card border border-slate-200 rounded-2xl p-8 w-full">
+                <form id="booking-form" class="space-y-6">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-primary mb-2">Full Name</label>
+                        <input type="text" id="name" name="name" required class="form-input w-full rounded-lg p-3"
+                            placeholder="Your Name">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-primary mb-2">Email Address</label>
+                        <input type="email" id="email" name="email" required class="form-input w-full rounded-lg p-3"
+                            placeholder="you@example.com">
+                    </div>
+                    <div>
+                        <label for="service" class="block text-sm font-medium text-primary mb-2">Service</label>
+                        <select id="service" name="service" required class="form-input w-full rounded-lg p-3">
+                            <option value="" disabled selected>Select a service</option>
+                            <option value="branding">Branding & Identity</option>
+                            <option value="design">Web Design & Development</option>
+                            <option value="digital-experience">Digital Experience</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="date" class="block text-sm font-medium text-primary mb-2">Preferred Date</label>
+                        <input type="date" id="date" name="date" required class="form-input w-full rounded-lg p-3">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-primary mb-2">Additional
+                            Notes</label>
+                        <textarea id="message" name="message" rows="4" class="form-input w-full rounded-lg p-3"
+                            placeholder="Tell us anything else that might be helpful."></textarea>
+                    </div>
+                    <div>
+                        <button type="submit"
+                            class="w-full py-3 px-6 rounded-lg bg-primary text-white font-semibold hover:bg-tertiary transition-all duration-300 ease-in-out">
+                            Request Booking
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="/scripts/booking.js"></script>
+</body>
+
+</html>
